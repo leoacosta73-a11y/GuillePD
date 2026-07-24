@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f6f7a">
+<title>GuillePD 1.2</title>
+<style>
+:root{--bg:#f4f8fa;--card:#fff;--ink:#17323a;--muted:#6d858d;--brand:#0f6f7a;--brand2:#1c9aaa;--ok:#16845b;--danger:#c94040;--line:#d8e6ea;--shadow:0 8px 28px rgba(18,65,75,.10)}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}button,input,select,textarea{font:inherit}.app{max-width:760px;margin:auto;min-height:100vh;padding-bottom:86px}header{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;padding:18px;box-shadow:0 3px 16px rgba(0,0,0,.14)}.brand{display:flex;align-items:center;justify-content:space-between;gap:12px}.brand h1{font-size:25px;margin:0}.brand small{opacity:.9}main{padding:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}.hero{display:grid;grid-template-columns:1fr 1fr;gap:12px}.metric{background:#f6fbfc;border:1px solid var(--line);border-radius:16px;padding:14px}.metric strong{display:block;font-size:25px;margin-top:4px}.metric small{color:var(--muted)}.countdown{grid-column:1/-1;text-align:center;background:#eaf8f7}.countdown strong{font-size:38px}.btn{border:0;border-radius:14px;padding:14px 16px;font-weight:700;cursor:pointer}.btn-primary{background:var(--brand);color:#fff;width:100%;font-size:18px}.btn-secondary{background:#e8f2f4;color:var(--ink)}.btn-danger{background:#ffe9e9;color:#9e2626}.btn-row{display:flex;gap:10px;flex-wrap:wrap}.btn-row .btn{flex:1}h2{font-size:20px;margin:0 0 12px}label{display:block;font-size:13px;font-weight:700;margin:0 0 6px;color:#4e6971}input,select,textarea{width:100%;border:1px solid #c9dce1;border-radius:12px;padding:12px;background:#fff;color:var(--ink)}textarea{min-height:84px;resize:vertical}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.field{margin-bottom:12px}.target{background:#eefafa;border:2px solid #a8dfe4;border-radius:18px;padding:18px;text-align:center;margin:12px 0}.target strong{font-size:42px;display:block;color:var(--brand)}.target small{color:var(--muted);font-weight:800}.kpi{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:10px 0}.kpi:first-child{border-top:0}.kpi b{font-size:18px}.tabs{display:flex;gap:8px;margin-bottom:12px}.tab{flex:1;border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px;font-weight:700}.tab.active{background:var(--brand);color:#fff}.record{border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px}.record-top{display:flex;justify-content:space-between;gap:10px}.uf-pos{color:var(--ok);font-weight:800}.uf-neg{color:var(--danger);font-weight:800}.muted{color:var(--muted)}.hidden{display:none!important}.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:center;z-index:30;padding-bottom:env(safe-area-inset-bottom)}.bottom-nav .inner{max-width:760px;width:100%;display:grid;grid-template-columns:repeat(4,1fr)}.navbtn{border:0;background:#fff;padding:11px 4px;color:#587078;font-size:12px}.navbtn.active{color:var(--brand);font-weight:800}.notice{font-size:12px;color:#6e7f85;line-height:1.4}.progress{height:12px;background:#e6eef0;border-radius:999px;overflow:hidden}.progress>div{height:100%;background:linear-gradient(90deg,var(--brand),var(--brand2));width:0}.badge{display:inline-block;padding:5px 9px;border-radius:999px;background:#eef5f6;font-size:12px;font-weight:700}.modal{position:fixed;inset:0;background:rgba(10,30,36,.55);z-index:60;display:flex;align-items:flex-end;justify-content:center}.modal-box{background:#fff;width:100%;max-width:760px;max-height:92vh;overflow:auto;border-radius:24px 24px 0 0;padding:18px}.steps{display:flex;gap:8px;margin-bottom:14px}.stepdot{height:8px;background:#dfeaec;border-radius:999px;flex:1}.stepdot.on{background:var(--brand)}@media(max-width:560px){.grid2,.grid3{grid-template-columns:1fr}.hero{grid-template-columns:1fr 1fr}}@media print{header,.bottom-nav,.no-print{display:none!important}body{background:#fff}.app{max-width:none;padding:0}.card{box-shadow:none;break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="brand"><div><h1>💧 GuillePD</h1><small>Versión 1.2 · Registro de diálisis peritoneal</small></div><span class="badge" id="patientBadge">Guillermina</span></div></header>
+<main>
+<section id="screen-home">
+<div class="card hero">
+<div class="metric countdown"><small>PRÓXIMO DRENAJE</small><strong id="nextDrain">Sin lavado activo</strong><div class="muted" id="countdown">—</div></div>
+<div class="metric"><small>Lavados de hoy</small><strong id="todayCount">0</strong></div><div class="metric"><small>UF acumulada</small><strong id="todayUF">0 g</strong></div><div class="metric"><small>Total ingresado</small><strong id="todayIn">0 g</strong></div><div class="metric"><small>Total drenado</small><strong id="todayOut">0 g</strong></div>
+</div>
+<div class="card"><h2>Progreso del día</h2><div class="progress"><div id="dayProgress"></div></div><p class="muted" id="progressText">0 de 4 lavados registrados</p><button class="btn btn-primary" onclick="openNew()">＋ Nuevo lavado</button></div>
+<div class="card"><h2>Último registro</h2><div id="lastRecord" class="muted">Todavía no hay registros.</div></div>
+<div class="card"><h2>Controles de hoy</h2><div class="grid3"><div class="field"><label>Peso (kg)</label><input id="dailyWeight" type="number" step="0.1"></div><div class="field"><label>Presión sistólica</label><input id="dailySys" type="number"></div><div class="field"><label>Presión diastólica</label><input id="dailyDia" type="number"></div><div class="field"><label>Temperatura (°C)</label><input id="dailyTemp" type="number" step="0.1"></div><div class="field"><label>Diuresis (ml)</label><input id="dailyUrine" type="number"></div></div><button class="btn btn-secondary" onclick="saveDaily()">Guardar controles</button></div>
+</section>
+<section id="screen-history" class="hidden"><div class="card"><h2>Historial</h2><div id="historyList"></div></div></section>
+<section id="screen-summary" class="hidden"><div class="card"><h2>Resumen</h2><div class="tabs"><button class="tab active" onclick="setRange('day',this)">Día</button><button class="tab" onclick="setRange('week',this)">Semana</button><button class="tab" onclick="setRange('month',this)">Mes</button></div><div id="summaryBox"></div></div></section>
+<section id="screen-settings" class="hidden"><div class="card"><h2>Configuración</h2><div class="field"><label>Nombre del paciente</label><input id="patientName" value="Guillermina"></div><div class="field"><label>Lavados previstos por día</label><input id="plannedWashes" type="number" value="4" min="1" max="12"></div><button class="btn btn-primary" onclick="saveSettings()">Guardar configuración</button><button class="btn btn-secondary" style="margin-top:10px;width:100%" onclick="enableAlarms()">Activar alarma sonora</button></div><div class="card"><h2>Datos y respaldo</h2><div class="btn-row"><button class="btn btn-secondary" onclick="exportCSV()">Exportar CSV</button><button class="btn btn-secondary" onclick="exportJSON()">Descargar respaldo</button></div><p class="notice" id="backupStatus">Respaldo automático local activo.</p><div class="field" style="margin-top:12px"><label>Restaurar copia JSON</label><input id="restoreFile" type="file" accept=".json" onchange="restoreJSON(this)"></div><button class="btn btn-primary" onclick="sharePdfReport()">📄 Compartir informe PDF</button><button class="btn btn-secondary" style="margin-top:10px;width:100%" onclick="downloadPdfReport()">Guardar PDF en Archivos</button><button class="btn btn-danger" style="margin-top:12px;width:100%" onclick="clearAll()">Borrar todos los datos</button></div><div class="card notice">Herramienta de registro y cálculo. No reemplaza indicaciones médicas. La cantidad a infundir, la solución y el tiempo de permanencia deben seguir siempre la prescripción del equipo tratante.</div></section>
+</main></div>
+<nav class="bottom-nav no-print"><div class="inner"><button class="navbtn active" onclick="showScreen('home',this)">🏠<br>Inicio</button><button class="navbtn" onclick="showScreen('history',this)">🗂️<br>Historial</button><button class="navbtn" onclick="showScreen('summary',this)">📊<br>Resumen</button><button class="navbtn" onclick="showScreen('settings',this)">⚙️<br>Ajustes</button></div></nav>
+<div id="modal" class="modal hidden"><div class="modal-box"><div class="steps"><div class="stepdot on"></div><div class="stepdot"></div><div class="stepdot"></div><div class="stepdot"></div></div>
+<div id="step1"><h2>1. Ingreso</h2><div class="grid2"><div class="field"><label>Fecha y hora de ingreso</label><input id="dt" type="datetime-local"></div><div class="field"><label>Número de lavado</label><input id="washNo" type="number" min="1"></div><div class="field"><label>Solución</label><select id="solution"><option>1,5%</option><option>2,5%</option><option>4,25%</option><option>Otra</option></select></div><div class="field"><label>Tiempo de permanencia (min)</label><input id="dwell" type="number" value="120" min="0"></div><div class="field"><label>Peso bolsa llena (g)</label><input id="fullBag" type="number"></div><div class="field"><label>Cantidad indicada a infundir (g)</label><input id="prescribed" type="number" value="500"></div></div><div class="target"><small>CERRAR LOS CLAMPS CUANDO LA BOLSA PESE</small><strong id="targetWeight">—</strong></div><div class="target"><small>HORARIO PREVISTO DE DRENAJE</small><strong id="drainAt">—</strong><div id="drainDate" class="muted"></div></div><div class="btn-row"><button class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn btn-primary" onclick="goStep(2)">Continuar</button></div></div>
+<div id="step2" class="hidden"><h2>2. Peso real al cerrar</h2><div class="field"><label>Peso real de la bolsa al cerrar clamps (g)</label><input id="afterFill" type="number"></div><div class="target"><small>ENTRADA REAL</small><strong id="actualIn">—</strong></div><div class="btn-row"><button class="btn btn-secondary" onclick="goStep(1)">Atrás</button><button class="btn btn-primary" onclick="goStep(3)">Continuar</button></div></div>
+<div id="step3" class="hidden"><h2>3. Drenaje</h2><div class="grid2"><div class="field"><label>Peso bolsa de drenaje vacía (g)</label><input id="emptyDrain" type="number"></div><div class="field"><label>Peso bolsa de drenaje llena (g)</label><input id="fullDrain" type="number"></div></div><div class="grid2"><div class="target"><small>DRENADO</small><strong id="drained">—</strong></div><div class="target"><small>ULTRAFILTRACIÓN</small><strong id="uf">—</strong></div></div><div class="btn-row"><button class="btn btn-secondary" onclick="goStep(2)">Atrás</button><button class="btn btn-primary" onclick="goStep(4)">Continuar</button></div></div>
+<div id="step4" class="hidden"><h2>4. Observaciones</h2><div class="grid2"><div class="field"><label>Aspecto del líquido</label><select id="appearance"><option>Claro</option><option>Levemente turbio</option><option>Turbio</option><option>Con fibrina</option><option>Hemático</option></select></div><div class="field"><label>Temperatura (°C)</label><input id="temp" type="number" step="0.1"></div><div class="field"><label>Presión sistólica</label><input id="sys" type="number"></div><div class="field"><label>Presión diastólica</label><input id="dia" type="number"></div><div class="field"><label>Peso (kg)</label><input id="weight" type="number" step="0.1"></div></div><div class="field"><label>Observaciones</label><textarea id="notes"></textarea></div><div class="btn-row"><button class="btn btn-secondary" onclick="goStep(3)">Atrás</button><button class="btn btn-primary" onclick="saveWash()">Guardar lavado</button></div></div>
+</div></div>
+<script>
+const $=id=>document.getElementById(id),storeKey='guillepd_v1';let data=JSON.parse(localStorage.getItem(storeKey)||'null')||{settings:{patient:'Guillermina',planned:4},washes:[],daily:{}};let range='day';
+function persist(){
+localStorage.setItem(storeKey,JSON.stringify(data));
+const backups=JSON.parse(localStorage.getItem('guillepd_backups')||'[]');
+backups.unshift({created:new Date().toISOString(),data:JSON.parse(JSON.stringify(data))});
+localStorage.setItem('guillepd_backups',JSON.stringify(backups.slice(0,10)));
+const el=document.getElementById('backupStatus');
+if(el)el.textContent='Último respaldo automático local: '+new Date().toLocaleString('es-AR');
+}function num(id){const v=parseFloat($(id).value);return Number.isFinite(v)?v:null}function localDT(d=new Date()){const z=n=>String(n).padStart(2,'0');return `${d.getFullYear()}-${z(d.getMonth()+1)}-${z(d.getDate())}T${z(d.getHours())}:${z(d.getMinutes())}`}function sameDay(a,b=new Date()){return new Date(a).toDateString()===b.toDateString()}function fmtDate(v){return new Date(v).toLocaleDateString('es-AR',{day:'2-digit',month:'2-digit',year:'numeric'})}function fmtTime(v){return new Date(v).toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'})}function sum(a,k){return a.reduce((s,x)=>s+(Number(x[k])||0),0)}
+function calc(){const full=num('fullBag'),pres=num('prescribed'),after=num('afterFill'),empty=num('emptyDrain'),fd=num('fullDrain');$('targetWeight').textContent=(full!==null&&pres!==null)?`${Math.round(full-pres)} g`:'—';if($('dt').value&&num('dwell')!==null){const d=new Date($('dt').value);d.setMinutes(d.getMinutes()+num('dwell'));$('drainAt').textContent=fmtTime(d);$('drainDate').textContent=fmtDate(d)}else{$('drainAt').textContent='—';$('drainDate').textContent=''}const actual=(full!==null&&after!==null)?full-after:null;$('actualIn').textContent=actual!==null?`${Math.round(actual)} g`:'—';const drained=(empty!==null&&fd!==null)?fd-empty:null;$('drained').textContent=drained!==null?`${Math.round(drained)} g`:'—';const uf=(drained!==null&&actual!==null)?drained-actual:null;$('uf').textContent=uf!==null?`${uf>=0?'+':''}${Math.round(uf)} g`:'—';$('uf').className=uf!==null?(uf>=0?'uf-pos':'uf-neg'):''}
+['fullBag','prescribed','dt','dwell','afterFill','emptyDrain','fullDrain'].forEach(id=>$(id).addEventListener('input',calc));
+function openNew(){$('dt').value=localDT();$('washNo').value=data.washes.filter(w=>sameDay(w.datetime)).length+1;['fullBag','afterFill','emptyDrain','fullDrain','temp','sys','dia','weight','notes'].forEach(id=>$(id).value='');$('prescribed').value=500;$('dwell').value=120;$('solution').value='1,5%';$('appearance').value='Claro';goStep(1);$('modal').classList.remove('hidden');calc()}function closeModal(){$('modal').classList.add('hidden')}function goStep(n){for(let i=1;i<=4;i++){$('step'+i).classList.toggle('hidden',i!==n);document.querySelectorAll('.stepdot')[i-1].classList.toggle('on',i<=n)}}
+function saveWash(){const dt=$('dt').value,full=num('fullBag'),pres=num('prescribed'),after=num('afterFill'),empty=num('emptyDrain'),fd=num('fullDrain');if(!dt||full===null||pres===null||after===null||empty===null||fd===null){alert('Completá los pesos y horarios obligatorios.');return}const d=new Date(dt);d.setMinutes(d.getMinutes()+(num('dwell')||0));const actual=full-after,drained=fd-empty,uf=drained-actual;data.washes.push({id:Date.now(),datetime:dt,washNo:num('washNo')||1,solution:$('solution').value,dwell:num('dwell')||0,drainTime:d.toISOString(),fullBag:full,prescribed:pres,target:full-pres,afterFill:after,actualIn:actual,emptyDrain:empty,fullDrain:fd,drained,uf,appearance:$('appearance').value,temp:num('temp'),sys:num('sys'),dia:num('dia'),weight:num('weight'),notes:$('notes').value.trim()});persist();closeModal();renderAll()}
+function renderHome(){const today=data.washes.filter(w=>sameDay(w.datetime));$('todayCount').textContent=today.length;$('todayUF').textContent=`${sum(today,'uf')>=0?'+':''}${Math.round(sum(today,'uf'))} g`;$('todayIn').textContent=`${Math.round(sum(today,'actualIn'))} g`;$('todayOut').textContent=`${Math.round(sum(today,'drained'))} g`;const planned=Number(data.settings.planned)||4;$('dayProgress').style.width=Math.min(100,today.length/planned*100)+'%';$('progressText').textContent=`${today.length} de ${planned} lavados registrados`;const last=[...data.washes].sort((a,b)=>new Date(b.datetime)-new Date(a.datetime))[0];$('lastRecord').innerHTML=last?`<b>Lavado ${last.washNo}</b> · ${fmtDate(last.datetime)} ${fmtTime(last.datetime)}<br>Entrada ${Math.round(last.actualIn)} g · Drenado ${Math.round(last.drained)} g · <span class="${last.uf>=0?'uf-pos':'uf-neg'}">UF ${last.uf>=0?'+':''}${Math.round(last.uf)} g</span>`:'Todavía no hay registros.';const key=new Date().toISOString().slice(0,10),d=data.daily[key]||{};$('dailyWeight').value=d.weight??'';$('dailySys').value=d.sys??'';$('dailyDia').value=d.dia??'';$('dailyTemp').value=d.temp??'';$('dailyUrine').value=d.urine??'';updateCountdown()}
+let alarmEnabled=false,lastAlarmId=null;
+function enableAlarms(){
+alarmEnabled=true;
+try{
+ const A=window.AudioContext||window.webkitAudioContext;
+ const c=new A();const o=c.createOscillator();const g=c.createGain();
+ o.connect(g);g.connect(c.destination);g.gain.value=.0001;o.start();o.stop(c.currentTime+.02);
+ alert('Alarma sonora activada. Debe mantenerse la app abierta para que suene.');
+}catch(e){alert('Alarma visual activada. El navegador no permitió preparar el sonido.')}
+}
+function soundAlarm(){
+try{
+ const A=window.AudioContext||window.webkitAudioContext;const c=new A();
+ [0,0.45,0.9].forEach(t=>{const o=c.createOscillator(),g=c.createGain();o.frequency.value=880;o.connect(g);g.connect(c.destination);g.gain.setValueAtTime(.18,c.currentTime+t);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+t+.35);o.start(c.currentTime+t);o.stop(c.currentTime+t+.36)});
+}catch(e){}
+}
+function updateCountdown(){
+ const now=new Date();
+ const future=[...data.washes].filter(w=>new Date(w.drainTime)>now).sort((a,b)=>new Date(a.drainTime)-new Date(b.drainTime))[0];
+ const due=[...data.washes].filter(w=>new Date(w.drainTime)<=now && now-new Date(w.drainTime)<60000).sort((a,b)=>new Date(b.drainTime)-new Date(a.drainTime))[0];
+ if(due&&lastAlarmId!==due.id){lastAlarmId=due.id;$('nextDrain').textContent='¡HORA DE DRENAR!';$('countdown').textContent='Lavado '+due.washNo;if(alarmEnabled)soundAlarm();alert('GuillePD: es hora de drenar.');return}
+ if(!future){$('nextDrain').textContent='Sin lavado activo';$('countdown').textContent='—';return}
+ const d=new Date(future.drainTime),ms=d-now,h=Math.floor(ms/3600000),m=Math.floor(ms%3600000/60000),s=Math.floor(ms%60000/1000);
+ $('nextDrain').textContent=fmtTime(d);$('countdown').textContent=`Faltan ${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+setInterval(updateCountdown,1000);
+function renderHistory(){const sorted=[...data.washes].sort((a,b)=>new Date(b.datetime)-new Date(a.datetime));$('historyList').innerHTML=sorted.length?sorted.map(w=>`<div class="record"><div class="record-top"><b>Lavado ${w.washNo}</b><span class="badge">${fmtDate(w.datetime)}</span></div><div class="muted">Ingreso ${fmtTime(w.datetime)} · Drenaje ${fmtTime(w.drainTime)} · ${w.solution}</div><div class="kpi"><span>Entrada</span><b>${Math.round(w.actualIn)} g</b></div><div class="kpi"><span>Drenado</span><b>${Math.round(w.drained)} g</b></div><div class="kpi"><span>UF</span><b class="${w.uf>=0?'uf-pos':'uf-neg'}">${w.uf>=0?'+':''}${Math.round(w.uf)} g</b></div><div class="muted">${w.appearance}${w.notes?' · '+w.notes:''}</div><button class="btn btn-danger no-print" style="margin-top:10px" onclick="deleteWash(${w.id})">Eliminar</button></div>`).join(''):'<p class="muted">No hay registros.</p>'}function deleteWash(id){if(confirm('¿Eliminar este lavado?')){data.washes=data.washes.filter(w=>w.id!==id);persist();renderAll()}}
+function setRange(r,el){range=r;document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));el.classList.add('active');renderSummary()}function inRange(w){const d=new Date(w.datetime),now=new Date();if(range==='day')return sameDay(d,now);if(range==='week'){const s=new Date(now);s.setDate(now.getDate()-6);s.setHours(0,0,0,0);return d>=s}return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear()}function renderSummary(){const a=data.washes.filter(inRange);$('summaryBox').innerHTML=`<div class="kpi"><span>Lavados</span><b>${a.length}</b></div><div class="kpi"><span>Total ingresado</span><b>${Math.round(sum(a,'actualIn'))} g</b></div><div class="kpi"><span>Total drenado</span><b>${Math.round(sum(a,'drained'))} g</b></div><div class="kpi"><span>UF total</span><b class="${sum(a,'uf')>=0?'uf-pos':'uf-neg'}">${sum(a,'uf')>=0?'+':''}${Math.round(sum(a,'uf'))} g</b></div>`}
+function saveDaily(){const k=new Date().toISOString().slice(0,10);data.daily[k]={weight:num('dailyWeight'),sys:num('dailySys'),dia:num('dailyDia'),temp:num('dailyTemp'),urine:num('dailyUrine')};persist();alert('Controles guardados.')}function saveSettings(){data.settings.patient=$('patientName').value.trim()||'Guillermina';data.settings.planned=num('plannedWashes')||4;persist();renderAll();alert('Configuración guardada.')}function showScreen(name,btn){['home','history','summary','settings'].forEach(s=>$('screen-'+s).classList.toggle('hidden',s!==name));document.querySelectorAll('.navbtn').forEach(x=>x.classList.remove('active'));btn.classList.add('active')}
+
+
+function pdfEscape(s){
+ return String(s??'').replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)').replace(/\r?\n/g,' ');
+}
+function reportLines(){
+ const sorted=[...data.washes].sort((a,b)=>new Date(a.datetime)-new Date(b.datetime));
+ const lines=[];
+ lines.push({t:'GuillePD - Informe de dialisis peritoneal',size:17,bold:true});
+ lines.push({t:'Paciente: '+data.settings.patient,size:11,bold:true});
+ lines.push({t:'Fecha de emision: '+new Date().toLocaleString('es-AR'),size:9});
+ lines.push({t:'',size:8});
+ lines.push({t:'Resumen general',size:13,bold:true});
+ lines.push({t:'Lavados registrados: '+sorted.length,size:10});
+ lines.push({t:'Total ingresado: '+Math.round(sum(sorted,'actualIn'))+' g',size:10});
+ lines.push({t:'Total drenado: '+Math.round(sum(sorted,'drained'))+' g',size:10});
+ const totalUf=Math.round(sum(sorted,'uf'));
+ lines.push({t:'UF total: '+(totalUf>=0?'+':'')+totalUf+' g',size:10});
+ lines.push({t:'',size:7});
+ lines.push({t:'Detalle de lavados',size:13,bold:true});
+ if(!sorted.length){
+   lines.push({t:'No hay lavados registrados.',size:10});
+ }else{
+   sorted.forEach(w=>{
+     lines.push({t:fmtDate(w.datetime)+' '+fmtTime(w.datetime)+' | Lavado '+w.washNo+' | Solucion '+w.solution,size:9,bold:true});
+     lines.push({t:'Entrada '+Math.round(w.actualIn)+' g | Drenado '+Math.round(w.drained)+' g | UF '+(w.uf>=0?'+':'')+Math.round(w.uf)+' g',size:9});
+     lines.push({t:'Aspecto: '+w.appearance+(w.notes?' | Obs.: '+w.notes:''),size:8});
+     if(w.weight||w.sys||w.dia||w.temp){
+       lines.push({t:'Peso '+(w.weight??'-')+' kg | PA '+(w.sys??'-')+'/'+(w.dia??'-')+' | Temp. '+(w.temp??'-')+' C',size:8});
+     }
+     lines.push({t:'',size:5});
+   });
+ }
+ lines.push({t:'Documento generado a partir de datos cargados por el usuario. No reemplaza la historia clinica ni las indicaciones del equipo tratante.',size:7});
+ return lines;
+}
+function makePdfBlob(){
+ const all=reportLines();
+ const pages=[];
+ let page=[], used=0;
+ all.forEach(line=>{
+   const h=(line.size||10)+5;
+   if(used+h>735 && page.length){pages.push(page);page=[];used=0}
+   page.push(line);used+=h;
+ });
+ if(page.length)pages.push(page);
+
+ const objects=[];
+ const add=o=>{objects.push(o);return objects.length};
+ const fontRegular=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>');
+ const fontBold=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>');
+ const pageIds=[], contentIds=[];
+
+ pages.forEach(lines=>{
+   let y=800;
+   let stream='BT\n';
+   lines.forEach(line=>{
+     const size=line.size||10;
+     const font=line.bold?'F2':'F1';
+     y-=size+5;
+     stream+=`/${font} ${size} Tf\n1 0 0 1 45 ${y} Tm\n(${pdfEscape(line.t)}) Tj\n`;
+   });
+   stream+='ET';
+   const contentId=add(`<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`);
+   contentIds.push(contentId);
+   const pageId=add('');
+   pageIds.push(pageId);
+ });
+
+ const pagesId=add('');
+ const catalogId=add(`<< /Type /Catalog /Pages ${pagesId} 0 R >>`);
+
+ pageIds.forEach((pid,i)=>{
+   objects[pid-1]=`<< /Type /Page /Parent ${pagesId} 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 ${fontRegular} 0 R /F2 ${fontBold} 0 R >> >> /Contents ${contentIds[i]} 0 R >>`;
+ });
+ objects[pagesId-1]=`<< /Type /Pages /Kids [${pageIds.map(id=>id+' 0 R').join(' ')}] /Count ${pageIds.length} >>`;
+
+ let pdf='%PDF-1.4\n';
+ const offsets=[0];
+ objects.forEach((obj,i)=>{
+   offsets.push(pdf.length);
+   pdf+=`${i+1} 0 obj\n${obj}\nendobj\n`;
+ });
+ const xref=pdf.length;
+ pdf+=`xref\n0 ${objects.length+1}\n0000000000 65535 f \n`;
+ for(let i=1;i<offsets.length;i++)pdf+=String(offsets[i]).padStart(10,'0')+' 00000 n \n';
+ pdf+=`trailer\n<< /Size ${objects.length+1} /Root ${catalogId} 0 R >>\nstartxref\n${xref}\n%%EOF`;
+ return new Blob([pdf],{type:'application/pdf'});
+}
+async function sharePdfReport(){
+ const blob=makePdfBlob();
+ const file=new File([blob],`GuillePD_${data.settings.patient}_${new Date().toISOString().slice(0,10)}.pdf`,{type:'application/pdf'});
+ try{
+   if(navigator.share && (!navigator.canShare || navigator.canShare({files:[file]}))){
+     await navigator.share({
+       title:'Informe GuillePD',
+       text:'Informe de dialisis peritoneal de '+data.settings.patient,
+       files:[file]
+     });
+   }else{
+     download(file.name,blob);
+     alert('El navegador no permite compartir archivos directamente. El PDF se descargó para que puedas enviarlo por WhatsApp desde Archivos.');
+   }
+ }catch(e){
+   if(e && e.name!=='AbortError'){
+     download(file.name,blob);
+     alert('No se pudo abrir el menu de compartir. El PDF se descargó.');
+   }
+ }
+}
+function downloadPdfReport(){
+ const blob=makePdfBlob();
+ download(`GuillePD_${data.settings.patient}_${new Date().toISOString().slice(0,10)}.pdf`,blob);
+}
+
+function exportCSV(){const h=['Fecha_hora_ingreso','Hora_drenaje','Lavado','Solucion','Permanencia_min','Bolsa_llena_g','Indicado_g','Objetivo_g','Bolsa_al_cerrar_g','Entrada_real_g','Bolsa_drenaje_vacia_g','Bolsa_drenaje_llena_g','Drenado_g','UF_g','Aspecto','Temperatura','Sistolica','Diastolica','Peso_kg','Observaciones'],rows=data.washes.map(w=>[w.datetime,w.drainTime,w.washNo,w.solution,w.dwell,w.fullBag,w.prescribed,w.target,w.afterFill,w.actualIn,w.emptyDrain,w.fullDrain,w.drained,w.uf,w.appearance,w.temp??'',w.sys??'',w.dia??'',w.weight??'',w.notes??'']),csv=[h,...rows].map(r=>r.map(v=>`"${String(v).replaceAll('"','""')}"`).join(',')).join('\n');download('GuillePD_registros.csv',new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}))}function exportJSON(){download('GuillePD_respaldo.json',new Blob([JSON.stringify(data,null,2)],{type:'application/json'}))}function download(n,b){const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=n;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}function restoreJSON(input){const f=input.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{data=JSON.parse(r.result);persist();renderAll();alert('Copia restaurada.')}catch(e){alert('Archivo inválido.')}};r.readAsText(f)}function clearAll(){if(confirm('Esto eliminará todos los registros guardados en este navegador.')){localStorage.removeItem(storeKey);location.reload()}}function renderAll(){$('patientName').value=data.settings.patient;$('plannedWashes').value=data.settings.planned;$('patientBadge').textContent=data.settings.patient;renderHome();renderHistory();renderSummary()}renderAll();
+
+document.addEventListener('DOMContentLoaded',()=>{
+ document.querySelectorAll('.navbtn').forEach(btn=>{
+   btn.addEventListener('click',()=>{});
+ });
+});
+</script>
+</body></html>
