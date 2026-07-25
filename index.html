@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0f6f7a">
-<title>GuillePD 1.8</title>
+<title>GuillePD 1.9</title>
 <style>
 :root{--bg:#f4f8fa;--card:#fff;--ink:#17323a;--muted:#6d858d;--brand:#0f6f7a;--brand2:#1c9aaa;--ok:#16845b;--danger:#c94040;--line:#d8e6ea;--shadow:0 8px 28px rgba(18,65,75,.10)}
 *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}button,input,select,textarea{font:inherit}.app{max-width:760px;margin:auto;min-height:100vh;padding-bottom:86px}header{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;padding:18px;box-shadow:0 3px 16px rgba(0,0,0,.14)}.brand{display:flex;align-items:center;justify-content:space-between;gap:12px}.brand h1{font-size:25px;margin:0}.brand small{opacity:.9}main{padding:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}.hero{display:grid;grid-template-columns:1fr 1fr;gap:12px}.metric{background:#f6fbfc;border:1px solid var(--line);border-radius:16px;padding:14px}.metric strong{display:block;font-size:25px;margin-top:4px}.metric small{color:var(--muted)}.countdown{grid-column:1/-1;text-align:center;background:#eaf8f7}.countdown strong{font-size:38px}.btn{border:0;border-radius:14px;padding:14px 16px;font-weight:700;cursor:pointer}.btn-primary{background:var(--brand);color:#fff;width:100%;font-size:18px}.btn-secondary{background:#e8f2f4;color:var(--ink)}.btn-danger{background:#ffe9e9;color:#9e2626}.btn-row{display:flex;gap:10px;flex-wrap:wrap}.btn-row .btn{flex:1}h2{font-size:20px;margin:0 0 12px}label{display:block;font-size:13px;font-weight:700;margin:0 0 6px;color:#4e6971}input,select,textarea{width:100%;border:1px solid #c9dce1;border-radius:12px;padding:12px;background:#fff;color:var(--ink)}textarea{min-height:84px;resize:vertical}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.field{margin-bottom:12px}.target{background:#eefafa;border:2px solid #a8dfe4;border-radius:18px;padding:18px;text-align:center;margin:12px 0}.target strong{font-size:42px;display:block;color:var(--brand)}.target small{color:var(--muted);font-weight:800}.kpi{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:10px 0}.kpi:first-child{border-top:0}.kpi b{font-size:18px}.tabs{display:flex;gap:8px;margin-bottom:12px}.tab{flex:1;border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px;font-weight:700}.tab.active{background:var(--brand);color:#fff}.record{border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px}.record-top{display:flex;justify-content:space-between;gap:10px}.uf-pos{color:var(--ok);font-weight:800}.uf-neg{color:var(--danger);font-weight:800}.uf-zero{color:var(--muted);font-weight:800}.muted{color:var(--muted)}.hidden{display:none!important}.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:center;z-index:30;padding-bottom:env(safe-area-inset-bottom)}.bottom-nav .inner{max-width:760px;width:100%;display:grid;grid-template-columns:repeat(4,1fr)}.navbtn{border:0;background:#fff;padding:11px 4px;color:#587078;font-size:12px}.navbtn.active{color:var(--brand);font-weight:800}.notice{font-size:12px;color:#6e7f85;line-height:1.4}.progress{height:12px;background:#e6eef0;border-radius:999px;overflow:hidden}.progress>div{height:100%;background:linear-gradient(90deg,var(--brand),var(--brand2));width:0}.badge{display:inline-block;padding:5px 9px;border-radius:999px;background:#eef5f6;color:#17323a;font-size:12px;font-weight:700}.modal{position:fixed;inset:0;background:rgba(10,30,36,.55);z-index:60;display:flex;align-items:flex-end;justify-content:center}.modal-box{background:#fff;width:100%;max-width:760px;max-height:92vh;overflow:auto;border-radius:24px 24px 0 0;padding:18px}.steps{display:flex;gap:8px;margin-bottom:14px}.stepdot{height:8px;background:#dfeaec;border-radius:999px;flex:1}.stepdot.on{background:var(--brand)}@media(max-width:560px){.grid2,.grid3{grid-template-columns:1fr}.hero{grid-template-columns:1fr 1fr}}@media print{header,.bottom-nav,.no-print{display:none!important}body{background:#fff}.app{max-width:none;padding:0}.card{box-shadow:none;break-inside:avoid}}
@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="app">
-<header><div class="brand"><div><h1>💧 GuillePD</h1><small>Versión 1.8 · Registro de diálisis peritoneal</small></div><span class="badge" id="patientBadge" style="background:#fff;color:#0f6f7a">Guillermina</span></div></header>
+<header><div class="brand"><div><h1>💧 GuillePD</h1><small>Versión 1.9 · Registro de diálisis peritoneal</small></div><span class="badge" id="patientBadge" style="background:#fff;color:#0f6f7a">Guillermina</span></div></header>
 <main>
 <section id="screen-home">
 <div class="card hero">
@@ -27,8 +27,8 @@
 <section id="screen-summary" class="hidden"><div class="card"><h2>Resumen</h2><div class="tabs"><button class="tab active" onclick="setRange('day',this)">Día</button><button class="tab" onclick="setRange('week',this)">Semana</button><button class="tab" onclick="setRange('month',this)">Mes</button></div><div id="summaryBox"></div></div></section>
 <section id="screen-settings" class="hidden"><div class="card"><h2>Configuración</h2><div class="field"><label>Nombre del paciente</label><input id="patientName" value="Guillermina"></div>
 <div class="grid2">
-<div class="field"><label>Identificación</label><select id="idType"><option value="HC">Historia clínica (HC)</option><option value="DNI">DNI</option></select></div>
-<div class="field"><label>Número</label><input id="idNumber" inputmode="numeric" placeholder="Opcional"></div>
+<div class="field"><label>Historia clínica (HC)</label><input id="hcNumber" inputmode="numeric" placeholder="Opcional"></div>
+<div class="field"><label>DNI</label><input id="dniNumber" inputmode="numeric" placeholder="Opcional"></div>
 </div>
 <div class="field"><label>Lavados previstos por día</label><input id="plannedWashes" type="number" value="4" min="1" max="12"></div><button class="btn btn-primary" onclick="saveSettings()">Guardar configuración</button><button class="btn btn-secondary" style="margin-top:10px;width:100%" onclick="enableAlarms()">Activar alarma sonora</button></div><div class="card"><h2>Datos y respaldo</h2><div class="btn-row"><button class="btn btn-secondary" onclick="exportCSV()">Exportar CSV</button><button class="btn btn-secondary" onclick="exportJSON()">Descargar respaldo</button></div><p class="notice" id="backupStatus">Respaldo automático local activo.</p><div class="field" style="margin-top:12px"><label>Restaurar copia JSON</label><input id="restoreFile" type="file" accept=".json" onchange="restoreJSON(this)"></div>
 <div class="field" style="margin-top:14px">
@@ -56,15 +56,15 @@
 </div></div>
 <script>
 const $=id=>document.getElementById(id),storeKey='guillepd_v1',backupKey='guillepd_backups';
-const defaultData=()=>({settings:{patient:'Guillermina',planned:4,idType:'HC',idNumber:''},washes:[],daily:{}});
+const defaultData=()=>({settings:{patient:'Guillermina',planned:4,hc:'',dni:''},washes:[],daily:{}});
 function safeParse(v,fallback=null){try{return v?JSON.parse(v):fallback}catch(e){return fallback}}
 function normalizeData(v){
  const d=(v&&typeof v==='object')?v:defaultData();
  d.settings=d.settings||{};
  d.settings.patient=d.settings.patient||'Guillermina';
  d.settings.planned=Number(d.settings.planned)||4;
- d.settings.idType=d.settings.idType||'HC';
- d.settings.idNumber=d.settings.idNumber||'';
+ if(d.settings.hc===undefined)d.settings.hc=(d.settings.idType==='HC'?d.settings.idNumber:'')||'';
+ if(d.settings.dni===undefined)d.settings.dni=(d.settings.idType==='DNI'?d.settings.idNumber:'')||'';
  d.washes=Array.isArray(d.washes)?d.washes:[];
  d.daily=(d.daily&&typeof d.daily==='object')?d.daily:{};
  return d;
@@ -261,7 +261,7 @@ function renderHistory(){
 }
 function deleteWash(id){if(confirm('¿Eliminar este lavado?')){data.washes=data.washes.filter(w=>w.id!==id);persist();renderAll()}}
 function setRange(r,el){range=r;document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));el.classList.add('active');renderSummary()}function inRange(w){const d=new Date(w.datetime),now=new Date();if(range==='day')return sameDay(d,now);if(range==='week'){const s=new Date(now);s.setDate(now.getDate()-6);s.setHours(0,0,0,0);return d>=s}return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear()}function renderSummary(){const a=data.washes.filter(inRange);$('summaryBox').innerHTML=`<div class="kpi"><span>Lavados</span><b>${a.length}</b></div><div class="kpi"><span>Total ingresado</span><b>${Math.round(sum(a,'actualIn'))} g</b></div><div class="kpi"><span>Total drenado</span><b>${Math.round(sum(a,'drained'))} g</b></div><div class="kpi"><span>Balance total</span><b class="${balanceClass(sum(a,'uf'))}">${balanceText(sum(a,'uf'))}</b></div>`}
-function saveDaily(){const k=new Date().toISOString().slice(0,10);data.daily[k]={weight:num('dailyWeight'),sys:num('dailySys'),dia:num('dailyDia'),temp:num('dailyTemp'),urine:num('dailyUrine')};persist();alert('Controles guardados.')}function saveSettings(){data.settings.patient=$('patientName').value.trim()||'Guillermina';data.settings.planned=num('plannedWashes')||4;persist();renderAll();alert('Configuración guardada.')}function showScreen(name,btn){['home','history','summary','settings'].forEach(s=>$('screen-'+s).classList.toggle('hidden',s!==name));document.querySelectorAll('.navbtn').forEach(x=>x.classList.remove('active'));btn.classList.add('active')}
+function saveDaily(){const k=new Date().toISOString().slice(0,10);data.daily[k]={weight:num('dailyWeight'),sys:num('dailySys'),dia:num('dailyDia'),temp:num('dailyTemp'),urine:num('dailyUrine')};persist();alert('Controles guardados.')}function saveSettings(){data.settings.patient=$('patientName').value.trim()||'Guillermina';data.settings.planned=num('plannedWashes')||4;data.settings.hc=$('hcNumber').value.trim();data.settings.dni=$('dniNumber').value.trim();persist();renderAll();alert('Configuración guardada.')}function showScreen(name,btn){['home','history','summary','settings'].forEach(s=>$('screen-'+s).classList.toggle('hidden',s!==name));document.querySelectorAll('.navbtn').forEach(x=>x.classList.remove('active'));btn.classList.add('active')}
 
 
 function pdfEscape(s){
@@ -304,92 +304,58 @@ function reportWashes(){
    .sort((a,b)=>new Date(a.datetime)-new Date(b.datetime));
 }
 
-function reportLines(){
- const sorted=reportWashes();
- const period=reportPeriod();
- const lines=[];
- lines.push({t:'GuillePD - Informe de dialisis peritoneal',size:17,bold:true});
- lines.push({t:'Paciente: '+data.settings.patient,size:11,bold:true});
- if(data.settings.idNumber)lines.push({t:(data.settings.idType||'HC')+': '+data.settings.idNumber,size:10});
- lines.push({t:'Periodo informado: '+period.label,size:10,bold:true});
- lines.push({t:'Fecha de emision: '+new Date().toLocaleString('es-AR'),size:9});
- lines.push({t:'',size:8});
- lines.push({t:'Resumen general',size:13,bold:true});
- lines.push({t:'Lavados registrados: '+sorted.length,size:10});
- lines.push({t:'Total ingresado: '+Math.round(sum(sorted,'actualIn'))+' g',size:10});
- lines.push({t:'Total drenado: '+Math.round(sum(sorted,'drained'))+' g',size:10});
- const totalUf=Math.round(sum(sorted,'uf'));
- lines.push({t:'Balance total: '+(totalUf>0?'+':'')+totalUf+' g',size:10});
- lines.push({t:'',size:7});
- lines.push({t:'Detalle de lavados',size:13,bold:true});
- if(!sorted.length){
-   lines.push({t:'No hay lavados registrados.',size:10});
- }else{
-   sorted.forEach(w=>{
-     lines.push({t:fmtDate(w.datetime)+' '+fmtTime(w.datetime)+' | Lavado '+w.washNo+' | Solucion '+w.solution,size:9,bold:true});
-     lines.push({t:'Entrada '+Math.round(w.actualIn)+' g | Drenado '+Math.round(w.drained)+' g | Balance '+(w.uf>0?'+':'')+Math.round(w.uf)+' g',size:9});
-     lines.push({t:'Aspecto: '+w.appearance+(w.notes?' | Obs.: '+w.notes:''),size:8});
-     if(w.weight||w.sys||w.dia||w.temp){
-       lines.push({t:'Peso '+(w.weight??'-')+' kg | PA '+(w.sys??'-')+'/'+(w.dia??'-')+' | Temp. '+(w.temp??'-')+' C',size:8});
-     }
-     lines.push({t:'',size:5});
-   });
- }
- lines.push({t:'Documento generado a partir de datos cargados por el usuario. No reemplaza la historia clinica ni las indicaciones del equipo tratante.',size:7});
- return lines;
-}
+
+function pdfText(s,x,y,t,z=8,b=false){return s+`BT /${b?'F2':'F1'} ${z} Tf 1 0 0 1 ${x} ${y} Tm (${pdfEscape(String(t??''))}) Tj ET\n`}
+function pdfLine(s,x1,y1,x2,y2,w=.6){return s+`${w} w ${x1} ${y1} m ${x2} ${y2} l S\n`}
+function shortText(t,n){t=String(t??'');return t.length>n?t.slice(0,n-1)+'…':t}
 function makePdfBlob(){
- const all=reportLines();
- const pages=[];
- let page=[], used=0;
- all.forEach(line=>{
-   const h=(line.size||10)+5;
-   if(used+h>735 && page.length){pages.push(page);page=[];used=0}
-   page.push(line);used+=h;
+ const all=reportWashes(),period=reportPeriod(),W=842,H=595,M=24,rowH=35,perPage=11;
+ const groups=[];if(!all.length)groups.push([]);else for(let i=0;i<all.length;i+=perPage)groups.push(all.slice(i,i+perPage));
+ const objs=[],add=o=>(objs.push(o),objs.length),f1=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>'),f2=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>');
+ const pids=[],cids=[];let acum=0;
+ groups.forEach((rows,pi)=>{
+  let s='';
+  s=pdfText(s,247,568,'HOJA DE BALANCE DE DIÁLISIS PERITONEAL',15,true);
+  s=pdfText(s,M,546,'Paciente: '+data.settings.patient,10,true);
+  if(data.settings.hc)s=pdfText(s,330,546,'H. Clínica: '+data.settings.hc,9,true);
+  if(data.settings.dni)s=pdfText(s,580,546,'DNI: '+data.settings.dni,9,true);
+  s=pdfText(s,M,530,'Período: '+period.label,9,true);
+  s=pdfText(s,330,530,'Peso pre diálisis: __________________',8);
+  s=pdfText(s,575,530,'Peso post diálisis: __________________',8);
+  const top=510,widths=[36,78,64,66,74,64,76,105,231],xs=[M];
+  widths.forEach(w=>xs.push(xs[xs.length-1]+w));
+  const heads=[['Nº'],['Fecha / hora','ingreso'],['Volumen','ingreso'],['Tiempo de','contacto'],['Hora de','salida'],['Volumen','egreso'],['Balance','parcial'],['Solución diálisis'],['Observaciones']];
+  s=pdfLine(s,M,top,xs.at(-1),top,1);s=pdfLine(s,M,top-rowH,xs.at(-1),top-rowH,1);xs.forEach(x=>s=pdfLine(s,x,top,x,top-rowH,1));
+  heads.forEach((a,i)=>a.forEach((t,j)=>s=pdfText(s,xs[i]+4,top-13-j*10,t,7,true)));
+  let y=top-rowH;
+  rows.forEach((w,i)=>{
+   const b=y-rowH,dr=w.drainTime?new Date(w.drainTime):new Date(new Date(w.datetime).getTime()+(Number(w.dwell)||0)*60000);
+   const bal=Number(w.uf)||0;acum+=bal;const sign=n=>(n>0?'+':'')+Math.round(n);
+   s=pdfLine(s,M,b,xs.at(-1),b,.5);xs.forEach(x=>s=pdfLine(s,x,y,x,b,.5));
+   s=pdfText(s,xs[0]+12,y-20,w.washNo||i+1,8,true);
+   s=pdfText(s,xs[1]+4,y-13,fmtDate(w.datetime),7);s=pdfText(s,xs[1]+4,y-25,fmtTime(w.datetime),8,true);
+   s=pdfText(s,xs[2]+10,y-20,Math.round(Number(w.actualIn)||0)+' g',8);
+   s=pdfText(s,xs[3]+10,y-20,(Number(w.dwell)||0)+' min',8);
+   s=pdfText(s,xs[4]+12,y-20,fmtTime(dr),8);
+   s=pdfText(s,xs[5]+10,y-20,Math.round(Number(w.drained)||0)+' g',8);
+   s=pdfText(s,xs[6]+7,y-13,sign(bal)+' g',8,true);s=pdfText(s,xs[6]+7,y-26,'Acum. '+sign(acum)+' g',7);
+   s=pdfText(s,xs[7]+5,y-13,shortText(w.solution,18),8,true);s=pdfText(s,xs[7]+5,y-26,shortText(w.appearance?'Aspecto: '+w.appearance:'',21),7);
+   const obs=[];if(w.notes)obs.push(w.notes);if(w.weight)obs.push('Peso '+w.weight+' kg');if(w.sys||w.dia)obs.push('PA '+(w.sys||'-')+'/'+(w.dia||'-'));if(w.temp)obs.push('Temp. '+w.temp+' C');
+   s=pdfText(s,xs[8]+5,y-13,shortText(obs.join(' | '),52),7);y=b;
+  });
+  for(let i=rows.length;i<perPage;i++){const b=y-rowH;s=pdfLine(s,M,b,xs.at(-1),b,.4);xs.forEach(x=>s=pdfLine(s,x,y,x,b,.4));y=b}
+  const ti=Math.round(sum(all,'actualIn')),to=Math.round(sum(all,'drained')),tb=Math.round(sum(all,'uf'));
+  s=pdfText(s,M,55,'Resumen del período',9,true);
+  s=pdfText(s,M,41,`Lavados: ${all.length} | Total ingreso: ${ti} g | Total egreso: ${to} g | Balance total: ${tb>0?'+':''}${tb} g`,8,true);
+  s=pdfText(s,720,20,`Página ${pi+1} de ${groups.length}`,7);
+  cids.push(add(`<< /Length ${s.length} >>\nstream\n${s}\nendstream`));pids.push(add(''));
  });
- if(page.length)pages.push(page);
-
- const objects=[];
- const add=o=>{objects.push(o);return objects.length};
- const fontRegular=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>');
- const fontBold=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>');
- const pageIds=[], contentIds=[];
-
- pages.forEach(lines=>{
-   let y=800;
-   let stream='BT\n';
-   lines.forEach(line=>{
-     const size=line.size||10;
-     const font=line.bold?'F2':'F1';
-     y-=size+5;
-     stream+=`/${font} ${size} Tf\n1 0 0 1 45 ${y} Tm\n(${pdfEscape(line.t)}) Tj\n`;
-   });
-   stream+='ET';
-   const contentId=add(`<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`);
-   contentIds.push(contentId);
-   const pageId=add('');
-   pageIds.push(pageId);
- });
-
- const pagesId=add('');
- const catalogId=add(`<< /Type /Catalog /Pages ${pagesId} 0 R >>`);
-
- pageIds.forEach((pid,i)=>{
-   objects[pid-1]=`<< /Type /Page /Parent ${pagesId} 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 ${fontRegular} 0 R /F2 ${fontBold} 0 R >> >> /Contents ${contentIds[i]} 0 R >>`;
- });
- objects[pagesId-1]=`<< /Type /Pages /Kids [${pageIds.map(id=>id+' 0 R').join(' ')}] /Count ${pageIds.length} >>`;
-
- let pdf='%PDF-1.4\n';
- const offsets=[0];
- objects.forEach((obj,i)=>{
-   offsets.push(pdf.length);
-   pdf+=`${i+1} 0 obj\n${obj}\nendobj\n`;
- });
- const xref=pdf.length;
- pdf+=`xref\n0 ${objects.length+1}\n0000000000 65535 f \n`;
- for(let i=1;i<offsets.length;i++)pdf+=String(offsets[i]).padStart(10,'0')+' 00000 n \n';
- pdf+=`trailer\n<< /Size ${objects.length+1} /Root ${catalogId} 0 R >>\nstartxref\n${xref}\n%%EOF`;
- return new Blob([pdf],{type:'application/pdf'});
+ const pages=add(''),catalog=add(`<< /Type /Catalog /Pages ${pages} 0 R >>`);
+ pids.forEach((p,i)=>objs[p-1]=`<< /Type /Page /Parent ${pages} 0 R /MediaBox [0 0 842 595] /Resources << /Font << /F1 ${f1} 0 R /F2 ${f2} 0 R >> >> /Contents ${cids[i]} 0 R >>`);
+ objs[pages-1]=`<< /Type /Pages /Kids [${pids.map(x=>x+' 0 R').join(' ')}] /Count ${pids.length} >>`;
+ let pdf='%PDF-1.4\n',offs=[0];objs.forEach((o,i)=>{offs.push(pdf.length);pdf+=`${i+1} 0 obj\n${o}\nendobj\n`});
+ const xr=pdf.length;pdf+=`xref\n0 ${objs.length+1}\n0000000000 65535 f \n`;for(let i=1;i<offs.length;i++)pdf+=String(offs[i]).padStart(10,'0')+' 00000 n \n';
+ pdf+=`trailer\n<< /Size ${objs.length+1} /Root ${catalog} 0 R >>\nstartxref\n${xr}\n%%EOF`;return new Blob([pdf],{type:'application/pdf'})
 }
 async function sharePdfReport(){
  const blob=makePdfBlob();
@@ -424,8 +390,8 @@ function downloadPdfReport(){
 function exportCSV(){const h=['Fecha_hora_ingreso','Hora_drenaje','Lavado','Solucion','Permanencia_min','Bolsa_llena_g','Indicado_g','Objetivo_g','Bolsa_al_cerrar_g','Entrada_real_g','Bolsa_drenaje_vacia_g','Bolsa_drenaje_llena_g','Drenado_g','Balance_g','Aspecto','Temperatura','Sistolica','Diastolica','Peso_kg','Observaciones'],rows=data.washes.map(w=>[w.datetime,w.drainTime,w.washNo,w.solution,w.dwell,w.fullBag,w.prescribed,w.target,w.afterFill,w.actualIn,w.emptyDrain,w.fullDrain,w.drained,w.uf,w.appearance,w.temp??'',w.sys??'',w.dia??'',w.weight??'',w.notes??'']),csv=[h,...rows].map(r=>r.map(v=>`"${String(v).replaceAll('"','""')}"`).join(',')).join('\n');download('GuillePD_registros.csv',new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}))}function exportJSON(){download('GuillePD_respaldo.json',new Blob([JSON.stringify(data,null,2)],{type:'application/json'}))}function download(n,b){const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=n;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}function restoreJSON(input){const f=input.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const restored=JSON.parse(r.result);if(!restored||!Array.isArray(restored.washes))throw new Error('Formato inválido');data=normalizeData(restored);persist();renderAll();alert('Copia restaurada correctamente.')}catch(e){alert('Archivo inválido o incompatible.')}};r.readAsText(f)}function clearAll(){if(confirm('Esto eliminará todos los registros guardados en este navegador.')){localStorage.removeItem(storeKey);location.reload()}}function renderAll(){
  $('patientName').value=data.settings.patient;
  $('plannedWashes').value=data.settings.planned;
- $('idType').value=data.settings.idType||'HC';
- $('idNumber').value=data.settings.idNumber||'';
+ $('hcNumber').value=data.settings.hc||'';
+ $('dniNumber').value=data.settings.dni||'';
  $('patientBadge').textContent=data.settings.patient;
  renderHome();renderHistory();renderSummary();
 }
