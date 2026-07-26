@@ -889,9 +889,12 @@ header{
 </div></div>
 <script>
 function openWashModal(){
-  if(typeof openModal==='function'){openModal();return;}
-  const modal=document.getElementById('modal');
-  if(modal)modal.classList.add('show');
+ if(typeof openNew==='function'){
+  openNew();
+  return;
+ }
+ const modal=document.getElementById('modal');
+ if(modal)modal.classList.remove('hidden');
 }
 
 const $=id=>document.getElementById(id),storeKey='guilledp_v3',legacyStoreKey='guillepd_v1',backupKey='guilledp_backups';
@@ -994,7 +997,36 @@ function selectedSolution(){
  return base==='Otra'?(detail||'Otra'):base;
 }
 function openNew(){
- editingId=null;$('dt').value=localDT();$('washNo').value=data.washes.filter(w=>sameDay(w.datetime)).length+1;['fullBag','afterFill','emptyDrain','fullDrain','temp','sys','dia','weight','notes'].forEach(id=>$(id).value='');$('prescribed').value=500;$('dwell').value=120;$('solution').value='1,5%';$('otherSolution').value='';toggleOtherSolution();$('appearance').value='Claro';goStep(1);$('modal').classList.remove('hidden');calc()}function closeModal(){$('modal').classList.add('hidden')}function goStep(n){for(let i=1;i<=4;i++){$('step'+i).classList.toggle('hidden',i!==n);document.querySelectorAll('.stepdot')[i-1].classList.toggle('on',i<=n)}}
+ editingId=null;
+ $('dt').value=localDT();
+
+ const today=dateKey(new Date());
+ const todayWashes=(data.washes||[]).filter(w=>dateKey(w.datetime)===today);
+ const usedNumbers=todayWashes.map(w=>Number(w.washNo)||0);
+ $('washNo').value=usedNumbers.length?Math.max(...usedNumbers)+1:1;
+
+ ['fullBag','afterFill','emptyDrain','fullDrain','temp','sys','dia','weight','notes'].forEach(id=>{
+  const el=$(id);
+  if(el)el.value='';
+ });
+
+ $('prescribed').value=data.settings.usualVolume||500;
+ $('dwell').value=120;
+ $('solution').value='1,5%';
+ $('otherSolution').value='';
+ toggleOtherSolution();
+ $('appearance').value='Claro';
+
+ goStep(1);
+ $('modal').classList.remove('hidden');
+ document.body.style.overflow='hidden';
+ calc();
+}
+
+function closeModal(){
+ $('modal').classList.add('hidden');
+ document.body.style.overflow='';
+}function closeModal(){$('modal').classList.add('hidden');document.body.style.overflow=''}function goStep(n){for(let i=1;i<=4;i++){$('step'+i).classList.toggle('hidden',i!==n);document.querySelectorAll('.stepdot')[i-1].classList.toggle('on',i<=n)}}
 
 let editingId=null;
 
@@ -2219,6 +2251,12 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 window.addEventListener('error',event=>{
  console.error('GuillePD:',event.error||event.message);
+});
+
+
+document.addEventListener('click',function(event){
+ const modal=$('modal');
+ if(modal && event.target===modal)closeModal();
 });
 
 </script>
