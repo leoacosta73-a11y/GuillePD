@@ -1679,7 +1679,7 @@ function drawLineChart(s,x,y,w,h,title,series,defs,subtitle=''){
 }
 function makePdfBlob(){
  const all=reportWashes(),period=reportPeriod(),W=842,H=595,M=20;
- const rowH=35,headerY=505,tableBottom=126,perPage=10;
+ const rowH=35,headerY=474,tableBottom=89,perPage=10;
  const pagesData=[];
 
  if(!all.length)pagesData.push([]);
@@ -1715,20 +1715,48 @@ function makePdfBlob(){
   s=pdfStroke(s,.78,.83,.85);
   s=pdfRoundRect(s,6,6,W-12,H-12,4,false,true,.7);
 
-  // Logo/identidad
-  s=pdfFill(s,.03,.22,.46);
-  s=pdfText(s,22,557,'Gui',28,true);
-  s=pdfFill(s,.12,.66,.65);
-  s=pdfText(s,72,557,'LLePD',28,true);
-  s=pdfFill(s,.03,.22,.46);
-  s=pdfText(s,25,535,'Peritoneal Dialysis Companion',8);
-  s=pdfStroke(s,.14,.68,.67);
-  s=pdfLine(s,25,548,187,548,1.2);
-  s=pdfLine(s,25,531,187,531,1.2);
+  // Identidad visual GuillePD: Gui + dos riñones formando las “LL” + ePD.
+  s=pdfFill(s,.03,.20,.45);
+  s=pdfText(s,22,550,'Gui',27,true);
+
+  // Riñón izquierdo
+  s=pdfStroke(s,.10,.66,.64);
+  s+='2.5 w 82 567 m 76 569 70 563 70 552 c 70 539 77 530 87 530 c 94 530 97 536 95 543 c 93 549 88 552 86 558 c 84 563 85 566 82 567 c S\n';
+  s+='1.8 w 86 557 m 91 556 93 552 92 548 c S\n';
+
+  // Riñón derecho
+  s+='2.5 w 107 567 m 113 569 119 563 119 552 c 119 539 112 530 102 530 c 95 530 92 536 94 543 c 96 549 101 552 103 558 c 105 563 104 566 107 567 c S\n';
+  s+='1.8 w 103 557 m 98 556 96 552 97 548 c S\n';
+
+  // Gota central
+  s=pdfFill(s,.10,.66,.64);
+  s+='94 529 m 90 523 89 519 92 516 c 95 513 99 516 99 520 c 99 523 96 527 94 529 c f\n';
+
+  // Catéter integrado hacia PD
+  s=pdfStroke(s,.10,.66,.64);
+  s+='2.2 w 106 533 m 117 523 128 519 141 520 c 151 521 158 526 165 531 c S\n';
+  s+='1.4 w 143 519 m 148 519 l 149 523 l 144 523 l h S\n';
+
+  s=pdfFill(s,.03,.20,.45);
+  s=pdfText(s,124,550,'e',27,true);
+  s=pdfFill(s,.10,.66,.64);
+  s=pdfText(s,143,550,'PD',27,true);
+
+  // Gota dentro de la D
+  s=pdfStroke(s,.10,.66,.64);
+  s+='1.2 w 183 550 m 180 545 179 542 181 540 c 183 538 186 540 186 543 c 186 546 184 548 183 550 c S\n';
+
+  s=pdfFill(s,.03,.20,.45);
+  s=pdfText(s,25,518,'Peritoneal Dialysis Companion',8);
+  s=pdfStroke(s,.10,.66,.64);
+  s=pdfLine(s,25,527,187,527,1.1);
+  s=pdfLine(s,25,514,187,514,1.1);
+
   s=pdfStroke(s,.82,.86,.88);
-  s=pdfLine(s,210,532,210,579,.7);
+  s=pdfLine(s,210,492,210,579,.7);
 
   const colX=[228,420,610];
+
   // Paciente / DNI
   s=pdfFill(s,.02,.26,.35);
   s=pdfText(s,colX[0],566,'Paciente:',8,true);
@@ -1739,7 +1767,7 @@ function makePdfBlob(){
   s=pdfFill(s,.08,.14,.20);
   s=pdfText(s,colX[0],522,shortText(idValue,31),9);
 
-  // Fecha / tipo
+  // Fecha / tipo / peso
   s=pdfFill(s,.02,.26,.35);
   s=pdfText(s,colX[1],566,'Fecha del informe:',8,true);
   s=pdfFill(s,.08,.14,.20);
@@ -1748,26 +1776,30 @@ function makePdfBlob(){
   s=pdfText(s,colX[1],535,'Tipo de informe:',8,true);
   s=pdfFill(s,.08,.14,.20);
   s=pdfText(s,colX[1],522,reportTypeLabel,9);
+  s=pdfFill(s,.02,.26,.35);
+  s=pdfText(s,colX[1],505,'Peso actual:',8,true);
+  s=pdfFill(s,.08,.14,.20);
+  s=pdfText(s,colX[1],492,currentWeight,9);
 
-  // Modalidad / peso
+  // Modalidad / centro / médico tratante
   s=pdfFill(s,.02,.26,.35);
   s=pdfText(s,colX[2],566,'Modalidad:',8,true);
   s=pdfFill(s,.08,.14,.20);
   s=pdfText(s,colX[2],553,shortText(modality,34),8);
   s=pdfFill(s,.02,.26,.35);
   s=pdfText(s,colX[2],535,'Centro asistencial:',8,true);
-  s=pdfText(s,colX[2],522,shortText(center,34),8);
-  s=pdfText(s,colX[2],505,'Nefrólogo/a:',8,true);
-  s=pdfText(s,colX[2],492,shortText(nephro,34),8);
-  s=pdfText(s,colX[1],505,'Peso actual:',8,true);
   s=pdfFill(s,.08,.14,.20);
-  s=pdfText(s,colX[1],492,currentWeight,9);
+  s=pdfText(s,colX[2],522,shortText(center,34),8);
+  s=pdfFill(s,.02,.26,.35);
+  s=pdfText(s,colX[2],505,'Médico tratante:',8,true);
+  s=pdfFill(s,.08,.14,.20);
+  s=pdfText(s,colX[2],492,shortText(nephro,34),8);
 
+  // Línea inferior del encabezado, por debajo de todos los datos.
   s=pdfStroke(s,.58,.68,.72);
-  s=pdfLine(s,20,512,W-20,512,.8);
+  s=pdfLine(s,20,482,W-20,482,.8);
   return s;
  }
-
  function tableHeader(s){
   const widths=[36,104,74,74,76,76,98,112,132];
   const xs=[M];
@@ -1861,19 +1893,22 @@ function makePdfBlob(){
   // Resumen inferior
   s=pdfFill(s,.98,.99,1);
   s=pdfStroke(s,.78,.83,.85);
-  s=pdfRoundRect(s,20,69,356,45,4,true,true,.6);
+  s=pdfRoundRect(s,20,51,356,32,4,true,true,.6);
   s=pdfFill(s,.02,.26,.35);
-  s=pdfText(s,30,99,'Resumen del período',9,true);
-  s=pdfText(s,30,82,`Lavados: ${all.length}  |  Total ingreso: ${ti} g  |  Total egreso: ${to} g  |  Balance total: ${tb>0?'+':''}${tb} g`,7.7);
+  s=pdfText(s,30,72,'Resumen del período',8.5,true);
+  s=pdfText(s,30,58,`Lavados: ${all.length}  |  Total ingreso: ${ti} g  |  Total egreso: ${to} g  |  Balance total: ${tb>0?'+':''}${tb} g`,7.4);
 
   s=pdfFill(s,.06,.12,.24);
-  s=pdfText(s,740,82,`Página ${pi+1} de ${pagesData.length}`,7);
+  s=pdfText(s,740,60,`Página ${pi+1} de ${pagesData.length}`,7);
 
   // Frase y ondas inferiores
-  s=pdfFill(s,.03,.22,.46);
-  s=pdfText(s,310,31,'Every record helps ',12,true);
-  s=pdfFill(s,.12,.66,.65);
-  s=pdfText(s,417,31,'care for a kidney.',12,true);
+  s=pdfFill(s,.03,.20,.45);
+  s=pdfText(s,302,27,'Every record helps ',11,true);
+  s=pdfFill(s,.10,.66,.64);
+  s=pdfText(s,410,27,'care for a kidney.',11,true);
+  // Corazón de la identidad visual
+  s=pdfStroke(s,.10,.66,.64);
+  s+='1.2 w 525 30 m 521 34 516 31 516 27 c 516 22 525 17 525 17 c 525 17 534 22 534 27 c 534 31 529 34 525 30 c S\n';
 
   s=pdfFill(s,.16,.70,.68);
   s+=`0 0 m 0 52 l 120 15 l 300 0 l h f\n`;
