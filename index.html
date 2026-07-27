@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="GuillePD">
-<title>GuillePD v3.2.11 Controles pre y postdiálisis</title>
+<title>GuillePD v3.2.12 Flujo pre/post corregido</title>
 <style>
 :root{--bg:#f4f8fa;--card:#fff;--ink:#17323a;--muted:#6d858d;--brand:#0f6f7a;--brand2:#1c9aaa;--ok:#16845b;--danger:#c94040;--line:#d8e6ea;--shadow:0 8px 28px rgba(18,65,75,.10)}
 *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}button,input,select,textarea{font:inherit}.app{max-width:760px;margin:auto;min-height:100vh;padding-bottom:86px}header{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;padding:18px;box-shadow:0 3px 16px rgba(0,0,0,.14)}.brand{display:flex;align-items:center;justify-content:space-between;gap:12px}.brand h1{font-size:25px;margin:0}.brand small{opacity:.9}main{padding:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}.hero{display:grid;grid-template-columns:1fr 1fr;gap:12px}.metric{background:#f6fbfc;border:1px solid var(--line);border-radius:16px;padding:14px}.metric strong{display:block;font-size:25px;margin-top:4px}.metric small{color:var(--muted)}.countdown{grid-column:1/-1;text-align:center;background:#eaf8f7}.countdown strong{font-size:38px}.btn{border:0;border-radius:14px;padding:14px 16px;font-weight:700;cursor:pointer}.btn-primary{background:var(--brand);color:#fff;width:100%;font-size:18px}.btn-secondary{background:#e8f2f4;color:var(--ink)}.btn-danger{background:#ffe9e9;color:#9e2626}.btn-row{display:flex;gap:10px;flex-wrap:wrap}.btn-row .btn{flex:1}h2{font-size:20px;margin:0 0 12px}label{display:block;font-size:13px;font-weight:700;margin:0 0 6px;color:#4e6971}input,select,textarea{width:100%;border:1px solid #c9dce1;border-radius:12px;padding:12px;background:#fff;color:var(--ink)}textarea{min-height:84px;resize:vertical}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.field{margin-bottom:12px}.target{background:#eefafa;border:2px solid #a8dfe4;border-radius:18px;padding:18px;text-align:center;margin:12px 0}.target strong{font-size:42px;display:block;color:var(--brand)}.target small{color:var(--muted);font-weight:800}.kpi{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:10px 0}.kpi:first-child{border-top:0}.kpi b{font-size:18px}.tabs{display:flex;gap:8px;margin-bottom:12px}.tab{flex:1;border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px;font-weight:700}.tab.active{background:var(--brand);color:#fff}.record{border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px}.control-card{border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px;background:#fbfdfe}.control-pre{border-left:5px solid #2f7dd1}.control-post{border-left:5px solid #27a06f}.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.compare-item{background:#f6fbfc;border:1px solid var(--line);border-radius:14px;padding:12px}.compare-item small{display:block;color:var(--muted);font-weight:700;margin-bottom:4px}.compare-item b{font-size:16px}.record-top{display:flex;justify-content:space-between;gap:10px}.uf-pos{color:var(--ok);font-weight:800}.uf-neg{color:var(--danger);font-weight:800}.uf-zero{color:var(--muted);font-weight:800}.muted{color:var(--muted)}.hidden{display:none!important}.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:center;z-index:30;padding-bottom:env(safe-area-inset-bottom)}.bottom-nav .inner{max-width:760px;width:100%;display:grid;grid-template-columns:repeat(4,1fr)}.navbtn{border:0;background:#fff;padding:11px 4px;color:#587078;font-size:12px}.navbtn.active{color:var(--brand);font-weight:800}.notice{font-size:12px;color:#6e7f85;line-height:1.4}.progress{height:12px;background:#e6eef0;border-radius:999px;overflow:hidden}.progress>div{height:100%;background:linear-gradient(90deg,var(--brand),var(--brand2));width:0}.badge{display:inline-block;padding:5px 9px;border-radius:999px;background:#eef5f6;color:#17323a;font-size:12px;font-weight:700}.modal{position:fixed;inset:0;background:rgba(10,30,36,.55);z-index:60;display:flex;align-items:flex-end;justify-content:center}.modal-box{background:#fff;width:100%;max-width:760px;max-height:92vh;overflow:auto;border-radius:24px 24px 0 0;padding:18px}.steps{display:flex;gap:8px;margin-bottom:14px}.stepdot{height:8px;background:#dfeaec;border-radius:999px;flex:1}.stepdot.on{background:var(--brand)}@media(max-width:560px){.grid2,.grid3{grid-template-columns:1fr}.hero{grid-template-columns:1fr 1fr}}@media print{header,.bottom-nav,.no-print{display:none!important}body{background:#fff}.app{max-width:none;padding:0}.card{box-shadow:none;break-inside:avoid}}
@@ -482,6 +482,26 @@ header{
  .dialysis-control-grid{grid-template-columns:1fr 1fr}
 }
 
+
+/* ===== GuillePD v3.2.12 · Flujo pre/post corregido ===== */
+.pre-in-wash{margin:0 0 16px;padding:14px;border-radius:17px;background:linear-gradient(180deg,#f3f9fb,#edf7f7);border:1px solid #d5e7ea}
+.pre-in-wash-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:12px}
+.pre-in-wash-head h3{margin:4px 0;font-size:17px;color:var(--ink)}
+.pre-in-wash-head p{margin:0;color:var(--muted);font-size:10px;line-height:1.4}
+.pre-existing-notice{margin-top:4px;padding:9px 10px;border-radius:11px;background:#e4f5ed;color:#147251;font-size:10px;line-height:1.4}
+.daily-controls-history{display:grid;grid-template-columns:1fr;gap:10px;margin-top:14px}
+.daily-control-history{padding:13px;border:1px solid var(--line);border-radius:16px;background:#fbfdfd}
+.daily-control-history.pre{border-left:5px solid #2f7dd1}
+.daily-control-history.post{border-left:5px solid #27a06f}
+.daily-control-history-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:11px}
+.daily-control-history-head span{font-size:12px;font-weight:850;color:var(--ink)}
+.daily-control-history-head b{font-size:9px;text-transform:uppercase;padding:5px 8px;border-radius:999px;background:#edf3f4;color:#62777d}
+.daily-control-values{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.daily-control-values>div{padding:10px;border-radius:12px;background:#f4f8f9}
+.daily-control-values span{display:block;font-size:9px;color:var(--muted);margin-bottom:4px}
+.daily-control-values strong{display:block;font-size:12px;color:var(--ink)}
+@media(min-width:700px){.daily-controls-history{grid-template-columns:1fr 1fr}}
+
 </style>
 </head>
 <body>
@@ -504,47 +524,7 @@ header{
       </div>
       <div class="home-status-dot" id="homeStatusDot" aria-label="Estado actual"></div>
     </div>
-
-    <div class="card dialysis-control-card pre-dialysis-card">
-      <div class="dialysis-control-head">
-        <div>
-          <span class="eyebrow">Antes del primer lavado</span>
-          <h3>Control prediálisis</h3>
-          <p>Registrá los valores basales del día antes de comenzar.</p>
-        </div>
-        <div class="dialysis-control-icon" aria-hidden="true">🩺</div>
-      </div>
-
-      <div class="dialysis-control-grid">
-        <div class="field">
-          <label for="preWeight">Peso (kg)</label>
-          <input id="preWeight" type="number" step="0.1" inputmode="decimal">
-        </div>
-        <div class="field">
-          <label for="preSys">Presión sistólica</label>
-          <input id="preSys" type="number" inputmode="numeric">
-        </div>
-        <div class="field">
-          <label for="preDia">Presión diastólica</label>
-          <input id="preDia" type="number" inputmode="numeric">
-        </div>
-        <div class="field">
-          <label for="preTemp">Temperatura (°C)</label>
-          <input id="preTemp" type="number" step="0.1" inputmode="decimal">
-        </div>
-        <div class="field">
-          <label for="preUrine">Diuresis (ml)</label>
-          <input id="preUrine" type="number" inputmode="numeric">
-        </div>
-      </div>
-
-      <button class="btn btn-secondary dialysis-control-save" onclick="saveDailyControl('pre')">
-        Guardar control prediálisis
-      </button>
-      <p id="preControlStatus" class="dialysis-control-status">Todavía no se guardó el control de hoy.</p>
-    </div>
-
-    <div class="card dialysis-hero">
+<div class="card dialysis-hero">
       <div class="hero-top">
         <div>
           <span class="hero-kicker">Estado actual</span>
@@ -938,7 +918,26 @@ header{
 </main></div>
 <nav class="bottom-nav no-print"><div class="inner"><button class="navbtn active" onclick="showScreen('home',this)">🏠<br>Inicio</button><button class="navbtn" onclick="showScreen('history',this)">🗂️<br>Historial</button><button class="navbtn" onclick="showScreen('summary',this)">📊<br>Resumen</button><button class="navbtn" onclick="showScreen('settings',this)">⚙️<br>Ajustes</button></div></nav>
 <div id="modal" class="modal hidden"><div class="modal-box"><div class="steps"><div class="stepdot on"></div><div class="stepdot"></div><div class="stepdot"></div><div class="stepdot"></div></div>
-<div id="step1"><h2>1. Ingreso</h2><div class="grid2"><div class="field"><label>Fecha y hora de ingreso</label><input id="dt" type="datetime-local"></div><div class="field"><label>Número de lavado</label><input id="washNo" type="number" min="1"></div><div class="field"><label>Solución</label><select id="solution" onchange="toggleOtherSolution()"><option>1,5%</option><option>2,5%</option><option>4,25%</option><option>Otra</option></select></div><div class="field hidden" id="otherSolutionWrap"><label>Especificar solución, medicación o aditivo</label><input id="otherSolution" placeholder="Ej.: Heparina 500 UI"></div><div class="field"><label>Tiempo de permanencia (min)</label><input id="dwell" type="number" value="120" min="0"></div><div class="field"><label>Peso bolsa llena (g)</label><input id="fullBag" type="number"></div><div class="field"><label>Cantidad indicada a infundir (g)</label><input id="prescribed" type="number" value="500"></div></div><div class="target"><small>CERRAR LOS CLAMPS CUANDO LA BOLSA PESE</small><strong id="targetWeight">—</strong></div><div class="target"><small>HORARIO PREVISTO DE DRENAJE</small><strong id="drainAt">—</strong><div id="drainDate" class="muted"></div></div><div class="btn-row"><button class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn btn-primary" onclick="goStep(2)">Continuar</button></div></div>
+<div id="step1">
+<h2>1. Ingreso</h2>
+<div id="preDialysisInWash" class="pre-in-wash hidden">
+  <div class="pre-in-wash-head">
+    <div>
+      <span class="eyebrow">Primer lavado del día</span>
+      <h3>Control prediálisis</h3>
+      <p>Se guarda en el historial diario y no permanece visible en el Home.</p>
+    </div>
+    <div class="dialysis-control-icon" aria-hidden="true">🩺</div>
+  </div>
+  <div class="grid2">
+    <div class="field"><label for="preWeight">Peso (kg)</label><input id="preWeight" type="number" step="0.1" inputmode="decimal"></div>
+    <div class="field"><label for="preTemp">Temperatura (°C)</label><input id="preTemp" type="number" step="0.1" inputmode="decimal"></div>
+    <div class="field"><label for="preSys">Presión sistólica</label><input id="preSys" type="number" inputmode="numeric"></div>
+    <div class="field"><label for="preDia">Presión diastólica</label><input id="preDia" type="number" inputmode="numeric"></div>
+    <div class="field"><label for="preUrine">Diuresis (ml)</label><input id="preUrine" type="number" inputmode="numeric"></div>
+  </div>
+  <div id="preExistingNotice" class="pre-existing-notice hidden"></div>
+</div><div class="grid2"><div class="field"><label>Fecha y hora de ingreso</label><input id="dt" type="datetime-local"></div><div class="field"><label>Número de lavado</label><input id="washNo" type="number" min="1"></div><div class="field"><label>Solución</label><select id="solution" onchange="toggleOtherSolution()"><option>1,5%</option><option>2,5%</option><option>4,25%</option><option>Otra</option></select></div><div class="field hidden" id="otherSolutionWrap"><label>Especificar solución, medicación o aditivo</label><input id="otherSolution" placeholder="Ej.: Heparina 500 UI"></div><div class="field"><label>Tiempo de permanencia (min)</label><input id="dwell" type="number" value="120" min="0"></div><div class="field"><label>Peso bolsa llena (g)</label><input id="fullBag" type="number"></div><div class="field"><label>Cantidad indicada a infundir (g)</label><input id="prescribed" type="number" value="500"></div></div><div class="target"><small>CERRAR LOS CLAMPS CUANDO LA BOLSA PESE</small><strong id="targetWeight">—</strong></div><div class="target"><small>HORARIO PREVISTO DE DRENAJE</small><strong id="drainAt">—</strong><div id="drainDate" class="muted"></div></div><div class="btn-row"><button class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn btn-primary" onclick="goStep(2)">Continuar</button></div></div>
 <div id="step2" class="hidden"><h2>2. Peso real al cerrar</h2><div class="field"><label>Peso real de la bolsa al cerrar clamps (g)</label><input id="afterFill" type="number"></div><div class="target"><small>ENTRADA REAL</small><strong id="actualIn">—</strong></div><div class="btn-row"><button class="btn btn-secondary" onclick="goStep(1)">Atrás</button><button class="btn btn-secondary" onclick="savePartialWash()">Guardar ingreso</button><button class="btn btn-primary" onclick="goStep(3)">Continuar</button></div></div>
 <div id="step3" class="hidden"><h2>3. Drenaje</h2><div class="grid2"><div class="field"><label>Peso bolsa de drenaje vacía (g)</label><input id="emptyDrain" type="number"></div><div class="field"><label>Peso bolsa de drenaje llena (g)</label><input id="fullDrain" type="number"></div></div><div class="grid2"><div class="target"><small>DRENADO</small><strong id="drained">—</strong></div><div class="target"><small>BALANCE</small><strong id="uf">—</strong></div></div><div class="btn-row"><button class="btn btn-secondary" onclick="goStep(2)">Atrás</button><button class="btn btn-primary" onclick="goStep(4)">Continuar</button></div></div>
 <div id="step4" class="hidden">
@@ -1088,6 +1087,7 @@ function balanceText(v){
 }
 function calc(){const full=num('fullBag'),pres=num('prescribed'),after=num('afterFill'),empty=num('emptyDrain'),fd=num('fullDrain');$('targetWeight').textContent=(full!==null&&pres!==null)?`${Math.round(full-pres)} g`:'—';if($('dt').value&&num('dwell')!==null){const d=new Date($('dt').value);d.setMinutes(d.getMinutes()+num('dwell'));$('drainAt').textContent=fmtTime(d);$('drainDate').textContent=fmtDate(d)}else{$('drainAt').textContent='—';$('drainDate').textContent=''}const actual=(full!==null&&after!==null)?full-after:null;$('actualIn').textContent=actual!==null?`${Math.round(actual)} g`:'—';const drained=(empty!==null&&fd!==null)?fd-empty:null;$('drained').textContent=drained!==null?`${Math.round(drained)} g`:'—';const uf=(drained!==null&&actual!==null)?actual-drained:null;$('uf').textContent=uf!==null?`${uf>=0?'+':''}${Math.round(uf)} g`:'—';$('uf').className=uf!==null?(uf>=0?'uf-pos':'uf-neg'):''}
 ['fullBag','prescribed','dt','dwell','afterFill','emptyDrain','fullDrain'].forEach(id=>$(id).addEventListener('input',calc));
+$('dt').addEventListener('change',showPreDialysisForCurrentWash);
 function toggleOtherSolution(){
  const other=$('solution').value==='Otra';
  $('otherSolutionWrap').classList.toggle('hidden',!other);
@@ -1098,6 +1098,74 @@ function selectedSolution(){
  const detail=$('otherSolution').value.trim();
  return base==='Otra'?(detail||'Otra'):base;
 }
+
+function washDateKey(){
+ const value=$('dt')&&$('dt').value;
+ return value?dateKey(value):dateKey(new Date());
+}
+function getDailyControlForWash(){
+ const key=washDateKey();
+ if(!data.daily[key]||typeof data.daily[key]!=='object')data.daily[key]={pre:{},post:{}};
+ if(!data.daily[key].pre||typeof data.daily[key].pre!=='object')data.daily[key].pre={};
+ if(!data.daily[key].post||typeof data.daily[key].post!=='object')data.daily[key].post={};
+ return data.daily[key];
+}
+function showPreDialysisForCurrentWash(){
+ const wrap=$('preDialysisInWash');
+ const notice=$('preExistingNotice');
+ if(!wrap)return;
+
+ const key=washDateKey();
+ const day=(data.daily&&data.daily[key])||{pre:{},post:{}};
+ const pre=day.pre||{};
+ const sameDayWashes=(data.washes||[]).filter(w=>dateKey(w.datetime)===key);
+ const firstWash=!sameDayWashes.length||(editingId&&sameDayWashes.every(w=>w.id===editingId));
+ const saved=hasControl(pre);
+
+ if(!firstWash&&!saved){
+  wrap.classList.add('hidden');
+  return;
+ }
+
+ wrap.classList.remove('hidden');
+
+ if(saved){
+  setFieldValue('preWeight',pre.weight);
+  setFieldValue('preSys',pre.sys);
+  setFieldValue('preDia',pre.dia);
+  setFieldValue('preTemp',pre.temp);
+  setFieldValue('preUrine',pre.urine);
+  if(notice){
+   notice.textContent='El control prediálisis de este día ya está guardado. Podés corregirlo antes de continuar.';
+   notice.classList.remove('hidden');
+  }
+ }else{
+  ['preWeight','preSys','preDia','preTemp','preUrine'].forEach(id=>setFieldValue(id,''));
+  if(notice)notice.classList.add('hidden');
+ }
+}
+function savePreDialysisForWash(){
+ const wrap=$('preDialysisInWash');
+ if(!wrap||wrap.classList.contains('hidden'))return true;
+
+ const values={
+  weight:num('preWeight'),
+  sys:num('preSys'),
+  dia:num('preDia'),
+  temp:num('preTemp'),
+  urine:num('preUrine')
+ };
+
+ if(Object.values(values).every(v=>v===null)){
+  alert('Cargá al menos un dato del control prediálisis antes de continuar.');
+  return false;
+ }
+
+ const day=getDailyControlForWash();
+ day.pre={...values,savedAt:new Date().toISOString()};
+ return true;
+}
+
 function openNew(){
  editingId=null;
  $('dt').value=localDT();
@@ -1122,13 +1190,22 @@ function openNew(){
  goStep(1);
  $('modal').classList.remove('hidden');
  document.body.style.overflow='hidden';
+ showPreDialysisForCurrentWash();
  calc();
 }
 
 function closeModal(){
  $('modal').classList.add('hidden');
  document.body.style.overflow='';
-}function closeModal(){$('modal').classList.add('hidden');document.body.style.overflow=''}function goStep(n){for(let i=1;i<=4;i++){$('step'+i).classList.toggle('hidden',i!==n);document.querySelectorAll('.stepdot')[i-1].classList.toggle('on',i<=n)}}
+}
+
+function goStep(n){
+ if(n===2&&!savePreDialysisForWash())return;
+ for(let i=1;i<=4;i++){
+  $('step'+i).classList.toggle('hidden',i!==n);
+  document.querySelectorAll('.stepdot')[i-1].classList.toggle('on',i<=n);
+ }
+}
 
 let editingId=null;
 
@@ -1164,6 +1241,7 @@ function savePartialWash(){
    weight:null,
    notes:''
  };
+ if(!savePreDialysisForWash())return;
  const idx=data.washes.findIndex(w=>w.id===record.id);
  if(idx>=0)data.washes[idx]={...data.washes[idx],...record};
  else data.washes.push(record);
@@ -1193,6 +1271,7 @@ function editWash(id){
  $('postDia').value=w.dia??'';
  $('postWeight').value=w.weight??'';
  $('notes').value=w.notes??'';
+ showPreDialysisForCurrentWash();
  $('modal').classList.remove('hidden');
  goStep(w.status==='open'?3:1);
  calc();
@@ -1374,7 +1453,37 @@ function hasControl(c){return !!(c&&['postWeight','postSys','postDia','postTemp'
 function controlValue(v,suffix=''){return v===null||v===undefined||v===''?'—':`${v}${suffix}`}
 function pressureValue(c){return c&&(c.sys!==null&&c.sys!==undefined||c.dia!==null&&c.dia!==undefined)?`${c.sys??'—'}/${c.dia??'—'}`:'—'}
 function renderControlBlock(kind,c){const isPre=kind==='pre',title=isPre?'🔵 Control prediálisis':'🟢 Control posdiálisis',cls=isPre?'control-pre':'control-post';if(!hasControl(c))return `<div class="control-card ${cls}"><b>${title}</b><div class="muted" style="margin-top:8px">Sin datos guardados.</div></div>`;return `<div class="control-card ${cls}"><b>${title}</b><div class="kpi"><span>Peso</span><b>${controlValue(c.weight,' kg')}</b></div><div class="kpi"><span>Presión</span><b>${pressureValue(c)}</b></div><div class="kpi"><span>Temperatura</span><b>${controlValue(c.temp,' °C')}</b></div>${isPre?`<div class="kpi"><span>Diuresis</span><b>${controlValue(c.urine,' ml')}</b></div>`:''}</div>`}
-function renderComparison(pre,post,washes){const items=[];if(hasControl(pre)||hasControl(post)){items.push(`<div class="compare-item"><small>Peso</small><b>${controlValue(pre?.weight,' kg')} → ${controlValue(post?.weight,' kg')}</b></div>`);items.push(`<div class="compare-item"><small>Presión</small><b>${pressureValue(pre)} → ${pressureValue(post)}</b></div>`);items.push(`<div class="compare-item"><small>Temperatura</small><b>${controlValue(pre?.temp,' °C')} → ${controlValue(post?.temp,' °C')}</b></div>`);if(pre&&pre.urine!==null&&pre.urine!==undefined&&pre.urine!=='')items.push(`<div class="compare-item"><small>Diuresis inicial</small><b>${pre.urine} ml</b></div>`)}const completed=washes.filter(w=>w.status!=='open');items.push(`<div class="compare-item"><small>Balance total</small><b class="${balanceClass(sum(completed,'uf'))}">${balanceText(sum(completed,'uf'))}</b></div>`);return `<div class="control-card"><b>📊 Comparación del día</b><div class="compare-grid" style="margin-top:12px">${items.join('')}</div></div>`}
+function renderComparison(pre,post,washes){
+ const value=(v,suffix='')=>v!==null&&v!==undefined&&v!==''?`${v}${suffix}`:'—';
+ const pa=v=>(v.sys||v.dia)?`${v.sys??'—'}/${v.dia??'—'} mmHg`:'—';
+
+ return `<div class="daily-controls-history">
+   <div class="daily-control-history pre">
+     <div class="daily-control-history-head">
+       <span>Control prediálisis</span>
+       <b>${hasControl(pre)?'Registrado':'Sin datos'}</b>
+     </div>
+     <div class="daily-control-values">
+       <div><span>Peso</span><strong>${value(pre.weight,' kg')}</strong></div>
+       <div><span>Presión arterial</span><strong>${pa(pre)}</strong></div>
+       <div><span>Temperatura</span><strong>${value(pre.temp,' °C')}</strong></div>
+       <div><span>Diuresis</span><strong>${value(pre.urine,' ml')}</strong></div>
+     </div>
+   </div>
+
+   <div class="daily-control-history post">
+     <div class="daily-control-history-head">
+       <span>Control postdiálisis</span>
+       <b>${hasControl(post)?'Registrado':'Sin datos'}</b>
+     </div>
+     <div class="daily-control-values">
+       <div><span>Peso</span><strong>${value(post.weight,' kg')}</strong></div>
+       <div><span>Presión arterial</span><strong>${pa(post)}</strong></div>
+       <div><span>Temperatura</span><strong>${value(post.temp,' °C')}</strong></div>
+     </div>
+   </div>
+ </div>`;
+}
 function renderHistory(){
  const selected=$('historyDate').value;
  const sorted=[...data.washes].sort((a,b)=>new Date(b.datetime)-new Date(a.datetime));
@@ -1393,7 +1502,19 @@ function renderHistory(){
  const html=keys.map(k=>{
    const washes=sorted.filter(w=>dateKey(w.datetime)===k);
    const day=data.daily[k]||{pre:{},post:{}};
-   const pre=day.pre||{},post=day.post||{};
+   const pre=day.pre||{};
+   let post=day.post||{};
+   if(!hasControl(post)){
+    const lastClosed=[...washes].reverse().find(w=>w.status!=='open'&&(w.weight!=null||w.sys!=null||w.dia!=null||w.temp!=null));
+    if(lastClosed){
+     post={
+      weight:lastClosed.weight??null,
+      sys:lastClosed.sys??null,
+      dia:lastClosed.dia??null,
+      temp:lastClosed.temp??null
+     };
+    }
+   }
    if(!washes.length&&!hasControl(pre)&&!hasControl(post))return '';
 
    const completed=washes.filter(w=>w.status!=='open');
@@ -2332,21 +2453,6 @@ function renderAll(){
  setFieldValue('contactName',data.settings.contactName||'');
  setFieldValue('contactPhone',data.settings.contactPhone||'');
 
- const todayKey=dateKey(new Date());
- const todayControl=(data.daily&&data.daily[todayKey])||{pre:{},post:{}};
- const pre=todayControl.pre||{},post=todayControl.post||{};
- setFieldValue('preWeight',pre.weight);
- setFieldValue('preSys',pre.sys);
- setFieldValue('preDia',pre.dia);
- setFieldValue('preTemp',pre.temp);
- setFieldValue('preUrine',pre.urine);
-
- const preStatus=$('preControlStatus');
- if(preStatus){
-  const saved=hasControl(pre);
-  preStatus.textContent=saved?'Control prediálisis guardado para hoy.':'Todavía no se guardó el control de hoy.';
-  preStatus.className='dialysis-control-status '+(saved?'saved':'');
- }
 
 renderHome();
  renderHistory();
@@ -2404,7 +2510,7 @@ window.addEventListener('load',()=>{
 });
 
 
-const APP_VERSION='3.2.11 Controles pre y postdiálisis';
+const APP_VERSION='3.2.12 Flujo pre/post corregido';
 
 function showToast(message,type='info',duration=2600){
  const host=document.getElementById('toastHost');
@@ -2474,7 +2580,7 @@ document.addEventListener('click',function(event){
 
 <div id="toastHost" class="toast-host" aria-live="polite" aria-atomic="true"></div>
 <footer class="release-footer">
-  <span>GuillePD v3.2.11 Controles pre y postdiálisis</span>
+  <span>GuillePD v3.2.12 Flujo pre/post corregido</span>
   <small>Datos guardados localmente en este dispositivo</small>
 </footer>
 </body></html>
