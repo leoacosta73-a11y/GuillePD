@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="GuillePD">
-<title>GuillePD v3.2.12 Flujo pre/post corregido</title>
+<title>GuillePD v3.2.13 Historial cronológico</title>
 <style>
 :root{--bg:#f4f8fa;--card:#fff;--ink:#17323a;--muted:#6d858d;--brand:#0f6f7a;--brand2:#1c9aaa;--ok:#16845b;--danger:#c94040;--line:#d8e6ea;--shadow:0 8px 28px rgba(18,65,75,.10)}
 *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}button,input,select,textarea{font:inherit}.app{max-width:760px;margin:auto;min-height:100vh;padding-bottom:86px}header{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;padding:18px;box-shadow:0 3px 16px rgba(0,0,0,.14)}.brand{display:flex;align-items:center;justify-content:space-between;gap:12px}.brand h1{font-size:25px;margin:0}.brand small{opacity:.9}main{padding:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}.hero{display:grid;grid-template-columns:1fr 1fr;gap:12px}.metric{background:#f6fbfc;border:1px solid var(--line);border-radius:16px;padding:14px}.metric strong{display:block;font-size:25px;margin-top:4px}.metric small{color:var(--muted)}.countdown{grid-column:1/-1;text-align:center;background:#eaf8f7}.countdown strong{font-size:38px}.btn{border:0;border-radius:14px;padding:14px 16px;font-weight:700;cursor:pointer}.btn-primary{background:var(--brand);color:#fff;width:100%;font-size:18px}.btn-secondary{background:#e8f2f4;color:var(--ink)}.btn-danger{background:#ffe9e9;color:#9e2626}.btn-row{display:flex;gap:10px;flex-wrap:wrap}.btn-row .btn{flex:1}h2{font-size:20px;margin:0 0 12px}label{display:block;font-size:13px;font-weight:700;margin:0 0 6px;color:#4e6971}input,select,textarea{width:100%;border:1px solid #c9dce1;border-radius:12px;padding:12px;background:#fff;color:var(--ink)}textarea{min-height:84px;resize:vertical}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.field{margin-bottom:12px}.target{background:#eefafa;border:2px solid #a8dfe4;border-radius:18px;padding:18px;text-align:center;margin:12px 0}.target strong{font-size:42px;display:block;color:var(--brand)}.target small{color:var(--muted);font-weight:800}.kpi{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:10px 0}.kpi:first-child{border-top:0}.kpi b{font-size:18px}.tabs{display:flex;gap:8px;margin-bottom:12px}.tab{flex:1;border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px;font-weight:700}.tab.active{background:var(--brand);color:#fff}.record{border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px}.control-card{border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px;background:#fbfdfe}.control-pre{border-left:5px solid #2f7dd1}.control-post{border-left:5px solid #27a06f}.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.compare-item{background:#f6fbfc;border:1px solid var(--line);border-radius:14px;padding:12px}.compare-item small{display:block;color:var(--muted);font-weight:700;margin-bottom:4px}.compare-item b{font-size:16px}.record-top{display:flex;justify-content:space-between;gap:10px}.uf-pos{color:var(--ok);font-weight:800}.uf-neg{color:var(--danger);font-weight:800}.uf-zero{color:var(--muted);font-weight:800}.muted{color:var(--muted)}.hidden{display:none!important}.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:center;z-index:30;padding-bottom:env(safe-area-inset-bottom)}.bottom-nav .inner{max-width:760px;width:100%;display:grid;grid-template-columns:repeat(4,1fr)}.navbtn{border:0;background:#fff;padding:11px 4px;color:#587078;font-size:12px}.navbtn.active{color:var(--brand);font-weight:800}.notice{font-size:12px;color:#6e7f85;line-height:1.4}.progress{height:12px;background:#e6eef0;border-radius:999px;overflow:hidden}.progress>div{height:100%;background:linear-gradient(90deg,var(--brand),var(--brand2));width:0}.badge{display:inline-block;padding:5px 9px;border-radius:999px;background:#eef5f6;color:#17323a;font-size:12px;font-weight:700}.modal{position:fixed;inset:0;background:rgba(10,30,36,.55);z-index:60;display:flex;align-items:flex-end;justify-content:center}.modal-box{background:#fff;width:100%;max-width:760px;max-height:92vh;overflow:auto;border-radius:24px 24px 0 0;padding:18px}.steps{display:flex;gap:8px;margin-bottom:14px}.stepdot{height:8px;background:#dfeaec;border-radius:999px;flex:1}.stepdot.on{background:var(--brand)}@media(max-width:560px){.grid2,.grid3{grid-template-columns:1fr}.hero{grid-template-columns:1fr 1fr}}@media print{header,.bottom-nav,.no-print{display:none!important}body{background:#fff}.app{max-width:none;padding:0}.card{box-shadow:none;break-inside:avoid}}
@@ -501,6 +501,28 @@ header{
 .daily-control-values span{display:block;font-size:9px;color:var(--muted);margin-bottom:4px}
 .daily-control-values strong{display:block;font-size:12px;color:var(--ink)}
 @media(min-width:700px){.daily-controls-history{grid-template-columns:1fr 1fr}}
+
+
+/* ===== GuillePD v3.2.13 · Historial cronológico inverso ===== */
+.history-controls-grid,.history-washes-title,.daily-controls-history{display:none!important}
+.history-timeline{display:flex;flex-direction:column;gap:11px;margin-top:14px}
+.timeline-control-card{padding:14px;border:1px solid #dce8eb;border-radius:18px;background:#fbfdfd;position:relative;overflow:hidden}
+.timeline-control-card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px}
+.timeline-control-card.pre:before{background:#2f7dd1}
+.timeline-control-card.post:before{background:#27a06f}
+.timeline-control-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.timeline-control-title{display:flex;align-items:center;gap:9px}
+.timeline-control-title strong{font-size:14px;color:var(--ink)}
+.timeline-control-dot{width:15px;height:15px;border-radius:50%;display:block;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
+.timeline-control-card.pre .timeline-control-dot{background:#2f7dd1}
+.timeline-control-card.post .timeline-control-dot{background:#27a06f}
+.timeline-control-status{padding:6px 9px;border-radius:999px;font-size:9px;font-weight:850;text-transform:uppercase;letter-spacing:.35px}
+.timeline-control-status.saved{background:#e4f5ed;color:#147251}
+.timeline-control-status.empty{background:#edf3f4;color:#62777d}
+.timeline-control-values{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.timeline-control-values>div{padding:11px;border-radius:13px;background:#f4f8f9}
+.timeline-control-values span{display:block;font-size:9px;color:var(--muted);margin-bottom:4px}
+.timeline-control-values strong{display:block;font-size:12px;color:var(--ink)}
 
 </style>
 </head>
@@ -1453,41 +1475,34 @@ function hasControl(c){return !!(c&&['postWeight','postSys','postDia','postTemp'
 function controlValue(v,suffix=''){return v===null||v===undefined||v===''?'—':`${v}${suffix}`}
 function pressureValue(c){return c&&(c.sys!==null&&c.sys!==undefined||c.dia!==null&&c.dia!==undefined)?`${c.sys??'—'}/${c.dia??'—'}`:'—'}
 function renderControlBlock(kind,c){const isPre=kind==='pre',title=isPre?'🔵 Control prediálisis':'🟢 Control posdiálisis',cls=isPre?'control-pre':'control-post';if(!hasControl(c))return `<div class="control-card ${cls}"><b>${title}</b><div class="muted" style="margin-top:8px">Sin datos guardados.</div></div>`;return `<div class="control-card ${cls}"><b>${title}</b><div class="kpi"><span>Peso</span><b>${controlValue(c.weight,' kg')}</b></div><div class="kpi"><span>Presión</span><b>${pressureValue(c)}</b></div><div class="kpi"><span>Temperatura</span><b>${controlValue(c.temp,' °C')}</b></div>${isPre?`<div class="kpi"><span>Diuresis</span><b>${controlValue(c.urine,' ml')}</b></div>`:''}</div>`}
-function renderComparison(pre,post,washes){
+function renderTimelineControl(kind,control){
+ const isPre=kind==='pre';
+ const title=isPre?'Control prediálisis':'Control postdiálisis';
  const value=(v,suffix='')=>v!==null&&v!==undefined&&v!==''?`${v}${suffix}`:'—';
- const pa=v=>(v.sys||v.dia)?`${v.sys??'—'}/${v.dia??'—'} mmHg`:'—';
+ const pressure=(control.sys||control.dia)?`${control.sys??'—'}/${control.dia??'—'} mmHg`:'—';
+ const saved=hasControl(control);
 
- return `<div class="daily-controls-history">
-   <div class="daily-control-history pre">
-     <div class="daily-control-history-head">
-       <span>Control prediálisis</span>
-       <b>${hasControl(pre)?'Registrado':'Sin datos'}</b>
+ return `<article class="timeline-control-card ${kind}">
+   <div class="timeline-control-head">
+     <div class="timeline-control-title">
+       <span class="timeline-control-dot"></span>
+       <strong>${title}</strong>
      </div>
-     <div class="daily-control-values">
-       <div><span>Peso</span><strong>${value(pre.weight,' kg')}</strong></div>
-       <div><span>Presión arterial</span><strong>${pa(pre)}</strong></div>
-       <div><span>Temperatura</span><strong>${value(pre.temp,' °C')}</strong></div>
-       <div><span>Diuresis</span><strong>${value(pre.urine,' ml')}</strong></div>
-     </div>
+     <span class="timeline-control-status ${saved?'saved':'empty'}">${saved?'Registrado':'Sin datos'}</span>
    </div>
 
-   <div class="daily-control-history post">
-     <div class="daily-control-history-head">
-       <span>Control postdiálisis</span>
-       <b>${hasControl(post)?'Registrado':'Sin datos'}</b>
-     </div>
-     <div class="daily-control-values">
-       <div><span>Peso</span><strong>${value(post.weight,' kg')}</strong></div>
-       <div><span>Presión arterial</span><strong>${pa(post)}</strong></div>
-       <div><span>Temperatura</span><strong>${value(post.temp,' °C')}</strong></div>
-     </div>
+   <div class="timeline-control-values">
+     <div><span>Peso</span><strong>${value(control.weight,' kg')}</strong></div>
+     <div><span>Presión arterial</span><strong>${pressure}</strong></div>
+     <div><span>Temperatura</span><strong>${value(control.temp,' °C')}</strong></div>
+     ${isPre?`<div><span>Diuresis</span><strong>${value(control.urine,' ml')}</strong></div>`:''}
    </div>
- </div>`;
+ </article>`;
 }
 function renderHistory(){
  const selected=$('historyDate').value;
- const sorted=[...data.washes].sort((a,b)=>new Date(b.datetime)-new Date(a.datetime));
- const washKeys=new Set(sorted.map(w=>dateKey(w.datetime)));
+ const allWashes=[...data.washes].sort((a,b)=>new Date(b.datetime)-new Date(a.datetime));
+ const washKeys=new Set(allWashes.map(w=>dateKey(w.datetime)));
  const dailyKeys=new Set(Object.keys(data.daily||{}));
  let keys=showAllHistory?[...new Set([...washKeys,...dailyKeys])]:[selected];
  keys=keys.filter(Boolean).sort().reverse();
@@ -1495,102 +1510,98 @@ function renderHistory(){
  $('historyAllBtn').textContent=showAllHistory?'Ver fecha seleccionada':'Ver todos los días';
 
  if(!keys.length){
-   $('historyList').innerHTML='<div class="history-empty"><div>🗂️</div><b>No hay registros</b><span>Todavía no se cargaron datos en el historial.</span></div>';
-   return;
+  $('historyList').innerHTML='<div class="history-empty"><div>🗂️</div><b>No hay registros</b><span>Todavía no se cargaron datos en el historial.</span></div>';
+  return;
  }
 
  const html=keys.map(k=>{
-   const washes=sorted.filter(w=>dateKey(w.datetime)===k);
-   const day=data.daily[k]||{pre:{},post:{}};
-   const pre=day.pre||{};
-   let post=day.post||{};
-   if(!hasControl(post)){
-    const lastClosed=[...washes].reverse().find(w=>w.status!=='open'&&(w.weight!=null||w.sys!=null||w.dia!=null||w.temp!=null));
-    if(lastClosed){
-     post={
-      weight:lastClosed.weight??null,
-      sys:lastClosed.sys??null,
-      dia:lastClosed.dia??null,
-      temp:lastClosed.temp??null
-     };
-    }
+  const washes=allWashes
+   .filter(w=>dateKey(w.datetime)===k)
+   .sort((a,b)=>{
+    const numberDiff=(Number(b.washNo)||0)-(Number(a.washNo)||0);
+    return numberDiff!==0?numberDiff:new Date(b.datetime)-new Date(a.datetime);
+   });
+
+  const day=data.daily[k]||{pre:{},post:{}};
+  const pre=day.pre||{};
+  let post=day.post||{};
+
+  if(!hasControl(post)){
+   const lastClosed=washes.find(w=>w.status!=='open'&&(w.weight!=null||w.sys!=null||w.dia!=null||w.temp!=null));
+   if(lastClosed){
+    post={
+     weight:lastClosed.weight??null,
+     sys:lastClosed.sys??null,
+     dia:lastClosed.dia??null,
+     temp:lastClosed.temp??null
+    };
    }
-   if(!washes.length&&!hasControl(pre)&&!hasControl(post))return '';
+  }
 
-   const completed=washes.filter(w=>w.status!=='open');
-   const totalBalance=sum(completed,'uf');
-   const dayTitle=fmtDate(k+'T12:00:00');
-   const dayIsToday=k===dateKey(new Date());
+  if(!washes.length&&!hasControl(pre)&&!hasControl(post))return '';
 
-   const washesHtml=washes.length?washes.map(w=>{
-     const isOpen=w.status==='open';
-     const appearance=w.appearance||'Sin observaciones';
-     const notes=w.notes?`<div class="wash-notes"><span>Nota</span><p>${w.notes}</p></div>`:'';
-     return `<article class="clinical-wash-card ${isOpen?'is-open':''}">
-       <div class="wash-card-head">
-         <div class="wash-number">
-           <span>Lavado</span>
-           <strong>${w.washNo}</strong>
-         </div>
-         <span class="wash-status ${isOpen?'pending':'complete'}">${isOpen?'Pendiente de drenaje':'Completado'}</span>
-       </div>
+  const completed=washes.filter(w=>w.status!=='open');
+  const totalBalance=sum(completed,'uf');
+  const dayTitle=fmtDate(k+'T12:00:00');
+  const dayIsToday=k===dateKey(new Date());
 
-       <div class="wash-time-line">
-         <div><span>Ingreso</span><b>${fmtTime(w.datetime)}</b></div>
-         <div class="wash-time-arrow">→</div>
-         <div><span>Drenaje</span><b>${isOpen?'Pendiente':fmtTime(w.drainTime)}</b></div>
-       </div>
+  const washCards=washes.map(w=>{
+   const isOpen=w.status==='open';
+   const appearance=w.appearance||'Sin observaciones';
+   const notes=w.notes?`<div class="wash-notes"><span>Nota</span><p>${w.notes}</p></div>`:'';
 
-       <div class="wash-solution">
-         <span>Solución</span>
-         <strong>${w.solution||'—'}</strong>
-       </div>
+   return `<article class="clinical-wash-card ${isOpen?'is-open':''}">
+    <div class="wash-card-head">
+     <div class="wash-number"><span>Lavado</span><strong>${w.washNo}</strong></div>
+     <span class="wash-status ${isOpen?'pending':'complete'}">${isOpen?'Pendiente de drenaje':'Completado'}</span>
+    </div>
 
-       <div class="wash-values ${isOpen?'two-cols':'three-cols'}">
-         <div><span>Entrada</span><strong>${Math.round(Number(w.actualIn)||0)} g</strong></div>
-         ${isOpen?'':`<div><span>Drenado</span><strong>${Math.round(Number(w.drained)||0)} g</strong></div>
-         <div><span>Balance</span><strong class="${balanceClass(w.uf)}">${balanceText(w.uf)}</strong></div>`}
-       </div>
+    <div class="wash-time-line">
+     <div><span>Ingreso</span><b>${fmtTime(w.datetime)}</b></div>
+     <div class="wash-time-arrow">→</div>
+     <div><span>Drenaje</span><b>${isOpen?'Pendiente':fmtTime(w.drainTime)}</b></div>
+    </div>
 
-       <div class="wash-observation">
-         <span>Aspecto</span>
-         <strong>${appearance}</strong>
-       </div>
+    <div class="wash-solution"><span>Solución</span><strong>${w.solution||'—'}</strong></div>
 
-       ${notes}
+    <div class="wash-values ${isOpen?'two-cols':'three-cols'}">
+     <div><span>Entrada</span><strong>${Math.round(Number(w.actualIn)||0)} g</strong></div>
+     ${isOpen?'':`<div><span>Drenado</span><strong>${Math.round(Number(w.drained)||0)} g</strong></div>
+     <div><span>Balance</span><strong class="${balanceClass(w.uf)}">${balanceText(w.uf)}</strong></div>`}
+    </div>
 
-       <div class="wash-actions no-print">
-         <button class="btn btn-secondary" onclick="editWash(${w.id})">${isOpen?'Cargar drenaje':'Editar registro'}</button>
-         <button class="btn btn-danger" onclick="deleteWash(${w.id})">Eliminar</button>
-       </div>
-     </article>`;
-   }).join(''):`<div class="history-no-washes">No hay lavados registrados en esta fecha.</div>`;
+    <div class="wash-observation"><span>Aspecto</span><strong>${appearance}</strong></div>
+    ${notes}
 
-   return `<section class="history-day">
-     <div class="history-day-head">
-       <div>
-         <span class="history-day-kicker">${dayIsToday?'Hoy':'Registro diario'}</span>
-         <h3>${dayTitle}</h3>
-       </div>
-       <div class="history-day-summary">
-         <span>${washes.length} lavado${washes.length===1?'':'s'}</span>
-         <strong class="${balanceClass(totalBalance)}">${balanceText(totalBalance)}</strong>
-       </div>
-     </div>
+    <div class="wash-actions no-print">
+     <button class="btn btn-secondary" onclick="editWash(${w.id})">${isOpen?'Cargar drenaje':'Editar registro'}</button>
+     <button class="btn btn-danger" onclick="deleteWash(${w.id})">Eliminar</button>
+    </div>
+   </article>`;
+  }).join('');
 
-     <div class="history-controls-grid">
-       ${renderControlBlock('pre',pre)}
-       ${renderControlBlock('post',post)}
-     </div>
+  const timeline=[
+   renderTimelineControl('post',post),
+   washCards,
+   renderTimelineControl('pre',pre)
+  ].join('');
 
-     <div class="history-washes-title">
-       <span>Lavados del día</span>
-       <b>${washes.length}</b>
-     </div>
+  return `<section class="history-day">
+   <div class="history-day-head">
+    <div>
+     <span class="history-day-kicker">${dayIsToday?'Hoy':'Registro diario'}</span>
+     <h3>${dayTitle}</h3>
+    </div>
+    <div class="history-day-summary">
+     <span>${washes.length} lavado${washes.length===1?'':'s'}</span>
+     <strong class="${balanceClass(totalBalance)}">${balanceText(totalBalance)}</strong>
+    </div>
+   </div>
 
-     <div class="history-washes-list">${washesHtml}</div>
-     ${renderComparison(pre,post,washes)}
-   </section>`;
+   <div class="history-timeline">
+    ${timeline}
+   </div>
+  </section>`;
  }).join('');
 
  $('historyList').innerHTML=html||`<div class="history-empty"><div>📅</div><b>Sin datos para esta fecha</b><span>${showAllHistory?'No hay registros disponibles.':'No hay datos registrados para '+fmtDate(selected+'T12:00:00')+'.'}</span></div>`;
@@ -2510,7 +2521,7 @@ window.addEventListener('load',()=>{
 });
 
 
-const APP_VERSION='3.2.12 Flujo pre/post corregido';
+const APP_VERSION='3.2.13 Historial cronológico';
 
 function showToast(message,type='info',duration=2600){
  const host=document.getElementById('toastHost');
@@ -2580,7 +2591,7 @@ document.addEventListener('click',function(event){
 
 <div id="toastHost" class="toast-host" aria-live="polite" aria-atomic="true"></div>
 <footer class="release-footer">
-  <span>GuillePD v3.2.12 Flujo pre/post corregido</span>
+  <span>GuillePD v3.2.13 Historial cronológico</span>
   <small>Datos guardados localmente en este dispositivo</small>
 </footer>
 </body></html>
