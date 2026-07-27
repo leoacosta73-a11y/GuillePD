@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="GuillePD">
-<title>GuillePD v3.2.6 Informe clínico v3.2.7</title>
+<title>GuillePD v3.2.11 Controles pre y postdiálisis</title>
 <style>
 :root{--bg:#f4f8fa;--card:#fff;--ink:#17323a;--muted:#6d858d;--brand:#0f6f7a;--brand2:#1c9aaa;--ok:#16845b;--danger:#c94040;--line:#d8e6ea;--shadow:0 8px 28px rgba(18,65,75,.10)}
 *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}button,input,select,textarea{font:inherit}.app{max-width:760px;margin:auto;min-height:100vh;padding-bottom:86px}header{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;padding:18px;box-shadow:0 3px 16px rgba(0,0,0,.14)}.brand{display:flex;align-items:center;justify-content:space-between;gap:12px}.brand h1{font-size:25px;margin:0}.brand small{opacity:.9}main{padding:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}.hero{display:grid;grid-template-columns:1fr 1fr;gap:12px}.metric{background:#f6fbfc;border:1px solid var(--line);border-radius:16px;padding:14px}.metric strong{display:block;font-size:25px;margin-top:4px}.metric small{color:var(--muted)}.countdown{grid-column:1/-1;text-align:center;background:#eaf8f7}.countdown strong{font-size:38px}.btn{border:0;border-radius:14px;padding:14px 16px;font-weight:700;cursor:pointer}.btn-primary{background:var(--brand);color:#fff;width:100%;font-size:18px}.btn-secondary{background:#e8f2f4;color:var(--ink)}.btn-danger{background:#ffe9e9;color:#9e2626}.btn-row{display:flex;gap:10px;flex-wrap:wrap}.btn-row .btn{flex:1}h2{font-size:20px;margin:0 0 12px}label{display:block;font-size:13px;font-weight:700;margin:0 0 6px;color:#4e6971}input,select,textarea{width:100%;border:1px solid #c9dce1;border-radius:12px;padding:12px;background:#fff;color:var(--ink)}textarea{min-height:84px;resize:vertical}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.field{margin-bottom:12px}.target{background:#eefafa;border:2px solid #a8dfe4;border-radius:18px;padding:18px;text-align:center;margin:12px 0}.target strong{font-size:42px;display:block;color:var(--brand)}.target small{color:var(--muted);font-weight:800}.kpi{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:10px 0}.kpi:first-child{border-top:0}.kpi b{font-size:18px}.tabs{display:flex;gap:8px;margin-bottom:12px}.tab{flex:1;border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px;font-weight:700}.tab.active{background:var(--brand);color:#fff}.record{border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px}.control-card{border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px;background:#fbfdfe}.control-pre{border-left:5px solid #2f7dd1}.control-post{border-left:5px solid #27a06f}.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.compare-item{background:#f6fbfc;border:1px solid var(--line);border-radius:14px;padding:12px}.compare-item small{display:block;color:var(--muted);font-weight:700;margin-bottom:4px}.compare-item b{font-size:16px}.record-top{display:flex;justify-content:space-between;gap:10px}.uf-pos{color:var(--ok);font-weight:800}.uf-neg{color:var(--danger);font-weight:800}.uf-zero{color:var(--muted);font-weight:800}.muted{color:var(--muted)}.hidden{display:none!important}.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:center;z-index:30;padding-bottom:env(safe-area-inset-bottom)}.bottom-nav .inner{max-width:760px;width:100%;display:grid;grid-template-columns:repeat(4,1fr)}.navbtn{border:0;background:#fff;padding:11px 4px;color:#587078;font-size:12px}.navbtn.active{color:var(--brand);font-weight:800}.notice{font-size:12px;color:#6e7f85;line-height:1.4}.progress{height:12px;background:#e6eef0;border-radius:999px;overflow:hidden}.progress>div{height:100%;background:linear-gradient(90deg,var(--brand),var(--brand2));width:0}.badge{display:inline-block;padding:5px 9px;border-radius:999px;background:#eef5f6;color:#17323a;font-size:12px;font-weight:700}.modal{position:fixed;inset:0;background:rgba(10,30,36,.55);z-index:60;display:flex;align-items:flex-end;justify-content:center}.modal-box{background:#fff;width:100%;max-width:760px;max-height:92vh;overflow:auto;border-radius:24px 24px 0 0;padding:18px}.steps{display:flex;gap:8px;margin-bottom:14px}.stepdot{height:8px;background:#dfeaec;border-radius:999px;flex:1}.stepdot.on{background:var(--brand)}@media(max-width:560px){.grid2,.grid3{grid-template-columns:1fr}.hero{grid-template-columns:1fr 1fr}}@media print{header,.bottom-nav,.no-print{display:none!important}body{background:#fff}.app{max-width:none;padding:0}.card{box-shadow:none;break-inside:avoid}}
@@ -465,6 +465,23 @@ header{
  line-height:1.45;
 }
 
+
+/* ===== GuillePD v3.2.11 · Controles pre y postdiálisis ===== */
+.dialysis-control-card{padding:17px;margin-bottom:14px}
+.dialysis-control-head{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;margin-bottom:14px}
+.dialysis-control-head h3{margin:4px 0 4px;font-size:18px;color:var(--ink)}
+.dialysis-control-head p{margin:0;color:var(--muted);font-size:11px;line-height:1.45}
+.dialysis-control-icon{width:44px;height:44px;flex:0 0 44px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,var(--navy-soft),var(--brand-soft));border:1px solid var(--line);font-size:20px}
+.dialysis-control-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 11px}
+.dialysis-control-save{width:100%;min-height:44px;margin-top:2px}
+.dialysis-control-status{margin:10px 2px 0;color:var(--muted);font-size:10px;text-align:center}
+.dialysis-control-status.saved{color:var(--ok);font-weight:750}
+.step-description{margin:-4px 0 15px;color:var(--muted);font-size:11px;line-height:1.45}
+.post-control-note{margin:3px 0 13px;padding:10px 12px;border-radius:12px;background:#edf7f7;color:#436a70;font-size:10px;line-height:1.4}
+@media(max-width:480px){
+ .dialysis-control-grid{grid-template-columns:1fr 1fr}
+}
+
 </style>
 </head>
 <body>
@@ -486,6 +503,45 @@ header{
         <p id="homeDateLabel">Resumen de hoy</p>
       </div>
       <div class="home-status-dot" id="homeStatusDot" aria-label="Estado actual"></div>
+    </div>
+
+    <div class="card dialysis-control-card pre-dialysis-card">
+      <div class="dialysis-control-head">
+        <div>
+          <span class="eyebrow">Antes del primer lavado</span>
+          <h3>Control prediálisis</h3>
+          <p>Registrá los valores basales del día antes de comenzar.</p>
+        </div>
+        <div class="dialysis-control-icon" aria-hidden="true">🩺</div>
+      </div>
+
+      <div class="dialysis-control-grid">
+        <div class="field">
+          <label for="preWeight">Peso (kg)</label>
+          <input id="preWeight" type="number" step="0.1" inputmode="decimal">
+        </div>
+        <div class="field">
+          <label for="preSys">Presión sistólica</label>
+          <input id="preSys" type="number" inputmode="numeric">
+        </div>
+        <div class="field">
+          <label for="preDia">Presión diastólica</label>
+          <input id="preDia" type="number" inputmode="numeric">
+        </div>
+        <div class="field">
+          <label for="preTemp">Temperatura (°C)</label>
+          <input id="preTemp" type="number" step="0.1" inputmode="decimal">
+        </div>
+        <div class="field">
+          <label for="preUrine">Diuresis (ml)</label>
+          <input id="preUrine" type="number" inputmode="numeric">
+        </div>
+      </div>
+
+      <button class="btn btn-secondary dialysis-control-save" onclick="saveDailyControl('pre')">
+        Guardar control prediálisis
+      </button>
+      <p id="preControlStatus" class="dialysis-control-status">Todavía no se guardó el control de hoy.</p>
     </div>
 
     <div class="card dialysis-hero">
@@ -885,7 +941,53 @@ header{
 <div id="step1"><h2>1. Ingreso</h2><div class="grid2"><div class="field"><label>Fecha y hora de ingreso</label><input id="dt" type="datetime-local"></div><div class="field"><label>Número de lavado</label><input id="washNo" type="number" min="1"></div><div class="field"><label>Solución</label><select id="solution" onchange="toggleOtherSolution()"><option>1,5%</option><option>2,5%</option><option>4,25%</option><option>Otra</option></select></div><div class="field hidden" id="otherSolutionWrap"><label>Especificar solución, medicación o aditivo</label><input id="otherSolution" placeholder="Ej.: Heparina 500 UI"></div><div class="field"><label>Tiempo de permanencia (min)</label><input id="dwell" type="number" value="120" min="0"></div><div class="field"><label>Peso bolsa llena (g)</label><input id="fullBag" type="number"></div><div class="field"><label>Cantidad indicada a infundir (g)</label><input id="prescribed" type="number" value="500"></div></div><div class="target"><small>CERRAR LOS CLAMPS CUANDO LA BOLSA PESE</small><strong id="targetWeight">—</strong></div><div class="target"><small>HORARIO PREVISTO DE DRENAJE</small><strong id="drainAt">—</strong><div id="drainDate" class="muted"></div></div><div class="btn-row"><button class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn btn-primary" onclick="goStep(2)">Continuar</button></div></div>
 <div id="step2" class="hidden"><h2>2. Peso real al cerrar</h2><div class="field"><label>Peso real de la bolsa al cerrar clamps (g)</label><input id="afterFill" type="number"></div><div class="target"><small>ENTRADA REAL</small><strong id="actualIn">—</strong></div><div class="btn-row"><button class="btn btn-secondary" onclick="goStep(1)">Atrás</button><button class="btn btn-secondary" onclick="savePartialWash()">Guardar ingreso</button><button class="btn btn-primary" onclick="goStep(3)">Continuar</button></div></div>
 <div id="step3" class="hidden"><h2>3. Drenaje</h2><div class="grid2"><div class="field"><label>Peso bolsa de drenaje vacía (g)</label><input id="emptyDrain" type="number"></div><div class="field"><label>Peso bolsa de drenaje llena (g)</label><input id="fullDrain" type="number"></div></div><div class="grid2"><div class="target"><small>DRENADO</small><strong id="drained">—</strong></div><div class="target"><small>BALANCE</small><strong id="uf">—</strong></div></div><div class="btn-row"><button class="btn btn-secondary" onclick="goStep(2)">Atrás</button><button class="btn btn-primary" onclick="goStep(4)">Continuar</button></div></div>
-<div id="step4" class="hidden"><h2>4. Observaciones</h2><div class="grid2"><div class="field"><label>Aspecto del líquido</label><select id="appearance"><option>Claro</option><option>Levemente turbio</option><option>Turbio</option><option>Con fibrina</option><option>Hemático</option></select></div><div class="field"><label>Temperatura (°C)</label><input id="temp" type="number" step="0.1"></div><div class="field"><label>Presión sistólica</label><input id="sys" type="number"></div><div class="field"><label>Presión diastólica</label><input id="dia" type="number"></div><div class="field"><label>Peso (kg)</label><input id="weight" type="number" step="0.1"></div></div><div class="field"><label>Observaciones</label><textarea id="notes"></textarea></div><div class="btn-row"><button class="btn btn-secondary" onclick="goStep(3)">Atrás</button><button class="btn btn-primary" onclick="saveWash()">Guardar lavado</button></div></div>
+<div id="step4" class="hidden">
+  <h2>4. Control postdiálisis</h2>
+  <p class="step-description">Completá los valores al finalizar el lavado. Quedarán asociados al control postdiálisis del día.</p>
+
+  <div class="grid2">
+    <div class="field">
+      <label for="appearance">Aspecto del líquido</label>
+      <select id="appearance">
+        <option>Claro</option>
+        <option>Levemente turbio</option>
+        <option>Turbio</option>
+        <option>Con fibrina</option>
+        <option>Hemático</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="postTemp">Temperatura (°C)</label>
+      <input id="postTemp" type="number" step="0.1" inputmode="decimal">
+    </div>
+    <div class="field">
+      <label for="postSys">Presión sistólica</label>
+      <input id="postSys" type="number" inputmode="numeric">
+    </div>
+    <div class="field">
+      <label for="postDia">Presión diastólica</label>
+      <input id="postDia" type="number" inputmode="numeric">
+    </div>
+    <div class="field">
+      <label for="postWeight">Peso (kg)</label>
+      <input id="postWeight" type="number" step="0.1" inputmode="decimal">
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="notes">Observaciones</label>
+    <textarea id="notes" placeholder="Síntomas, molestias, características del drenaje u otra observación relevante."></textarea>
+  </div>
+
+  <div class="post-control-note">
+    Al guardar, estos valores se registrarán como control postdiálisis del día.
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-secondary" onclick="goStep(3)">Atrás</button>
+    <button class="btn btn-primary" onclick="saveWash()">Finalizar lavado</button>
+  </div>
+</div>
 </div></div>
 <script>
 function openWashModal(){
@@ -1005,7 +1107,7 @@ function openNew(){
  const usedNumbers=todayWashes.map(w=>Number(w.washNo)||0);
  $('washNo').value=usedNumbers.length?Math.max(...usedNumbers)+1:1;
 
- ['fullBag','afterFill','emptyDrain','fullDrain','temp','sys','dia','weight','notes'].forEach(id=>{
+ ['fullBag','afterFill','emptyDrain','fullDrain','postTemp','postSys','postDia','postWeight','notes'].forEach(id=>{
   const el=$(id);
   if(el)el.value='';
  });
@@ -1086,10 +1188,10 @@ function editWash(id){
  $('emptyDrain').value=w.emptyDrain??'';
  $('fullDrain').value=w.fullDrain??'';
  $('appearance').value=w.appearance||'Claro';
- $('temp').value=w.temp??'';
- $('sys').value=w.sys??'';
- $('dia').value=w.dia??'';
- $('weight').value=w.weight??'';
+ $('postTemp').value=w.temp??'';
+ $('postSys').value=w.sys??'';
+ $('postDia').value=w.dia??'';
+ $('postWeight').value=w.weight??'';
  $('notes').value=w.notes??'';
  $('modal').classList.remove('hidden');
  goStep(w.status==='open'?3:1);
@@ -1097,19 +1199,69 @@ function editWash(id){
 }
 
 function saveWash(){
- const dt=$('dt').value,full=num('fullBag'),pres=num('prescribed'),after=num('afterFill'),empty=num('emptyDrain'),fd=num('fullDrain');
+ const dt=$('dt').value;
+ const full=num('fullBag'),pres=num('prescribed'),after=num('afterFill');
+ const empty=num('emptyDrain'),fd=num('fullDrain');
+
  if(!dt||full===null||pres===null||after===null||empty===null||fd===null){
-  alert('Para cerrar el lavado faltan datos de ingreso o drenaje. Temperatura, peso y presión son opcionales.');
+  alert('Para cerrar el lavado faltan datos de ingreso o drenaje. Los controles clínicos son opcionales.');
   return;
  }
- const d=new Date(dt);d.setMinutes(d.getMinutes()+(num('dwell')||0));
- const actual=full-after,drained=fd-empty,uf=actual-drained;
- const record={id:editingId||Date.now(),status:'closed',datetime:dt,washNo:num('washNo')||1,solution:selectedSolution(),dwell:num('dwell')||0,drainTime:d.toISOString(),fullBag:full,prescribed:pres,target:full-pres,afterFill:after,actualIn:actual,emptyDrain:empty,fullDrain:fd,drained,uf,appearance:$('appearance').value,temp:num('temp'),sys:num('sys'),dia:num('dia'),weight:num('weight'),notes:$('notes').value.trim()};
+
+ const d=new Date(dt);
+ d.setMinutes(d.getMinutes()+(num('dwell')||0));
+
+ const actual=full-after;
+ const drained=fd-empty;
+ const uf=actual-drained;
+
+ const postControl={
+  temp:num('postTemp'),
+  sys:num('postSys'),
+  dia:num('postDia'),
+  weight:num('postWeight')
+ };
+
+ const record={
+  id:editingId||Date.now(),
+  status:'closed',
+  datetime:dt,
+  washNo:num('washNo')||1,
+  solution:selectedSolution(),
+  dwell:num('dwell')||0,
+  drainTime:d.toISOString(),
+  fullBag:full,
+  prescribed:pres,
+  target:full-pres,
+  afterFill:after,
+  actualIn:actual,
+  emptyDrain:empty,
+  fullDrain:fd,
+  drained,
+  uf,
+  appearance:$('appearance').value,
+  temp:postControl.temp,
+  sys:postControl.sys,
+  dia:postControl.dia,
+  weight:postControl.weight,
+  notes:$('notes').value.trim()
+ };
+
  const idx=data.washes.findIndex(w=>w.id===record.id);
  if(idx>=0)data.washes[idx]={...data.washes[idx],...record};
  else data.washes.push(record);
+
+ // Guardar también como control postdiálisis diario si se ingresó algún valor.
+ if(Object.values(postControl).some(v=>v!==null)){
+  const day=ensureDailyRecord(dateKey(dt));
+  day.post={...postControl,savedAt:new Date().toISOString()};
+ }
+
  editingId=null;
- persist();closeModal();renderAll();
+ persist();
+ closeModal();
+ renderAll();
+ alert('Lavado finalizado y guardado.');
 }
 function enableAlarms(){
 alarmEnabled=true;
@@ -1218,7 +1370,7 @@ function dateFromInput(id){
  return value?new Date(value+'T12:00:00'):new Date();
 }
 
-function hasControl(c){return !!(c&&['weight','sys','dia','temp','urine'].some(k=>c[k]!==null&&c[k]!==undefined&&c[k]!==''))}
+function hasControl(c){return !!(c&&['postWeight','postSys','postDia','postTemp','urine'].some(k=>c[k]!==null&&c[k]!==undefined&&c[k]!==''))}
 function controlValue(v,suffix=''){return v===null||v===undefined||v===''?'—':`${v}${suffix}`}
 function pressureValue(c){return c&&(c.sys!==null&&c.sys!==undefined||c.dia!==null&&c.dia!==undefined)?`${c.sys??'—'}/${c.dia??'—'}`:'—'}
 function renderControlBlock(kind,c){const isPre=kind==='pre',title=isPre?'🔵 Control prediálisis':'🟢 Control posdiálisis',cls=isPre?'control-pre':'control-post';if(!hasControl(c))return `<div class="control-card ${cls}"><b>${title}</b><div class="muted" style="margin-top:8px">Sin datos guardados.</div></div>`;return `<div class="control-card ${cls}"><b>${title}</b><div class="kpi"><span>Peso</span><b>${controlValue(c.weight,' kg')}</b></div><div class="kpi"><span>Presión</span><b>${pressureValue(c)}</b></div><div class="kpi"><span>Temperatura</span><b>${controlValue(c.temp,' °C')}</b></div>${isPre?`<div class="kpi"><span>Diuresis</span><b>${controlValue(c.urine,' ml')}</b></div>`:''}</div>`}
@@ -1460,7 +1612,49 @@ function deleteCurrentPatient(){
  persist();
  renderAll();
 }
-function saveDailyControl(kind){const k=dateKey(new Date());if(!data.daily[k]||typeof data.daily[k]!=='object')data.daily[k]={pre:{},post:{}};if(!data.daily[k].pre)data.daily[k].pre={};if(!data.daily[k].post)data.daily[k].post={};if(kind==='pre'){data.daily[k].pre={weight:num('preWeight'),sys:num('preSys'),dia:num('preDia'),temp:num('preTemp'),urine:num('preUrine')}}else{data.daily[k].post={weight:num('postWeight'),sys:num('postSys'),dia:num('postDia'),temp:num('postTemp')}}persist();renderAll();alert(kind==='pre'?'Control prediálisis guardado.':'Control posdiálisis guardado.')}
+function ensureDailyRecord(key){
+ if(!data.daily[key]||typeof data.daily[key]!=='object')data.daily[key]={pre:{},post:{}};
+ if(!data.daily[key].pre||typeof data.daily[key].pre!=='object')data.daily[key].pre={};
+ if(!data.daily[key].post||typeof data.daily[key].post!=='object')data.daily[key].post={};
+ return data.daily[key];
+}
+
+function saveDailyControl(kind){
+ const k=dateKey(new Date());
+ const day=ensureDailyRecord(k);
+
+ if(kind==='pre'){
+  const values={
+   weight:num('preWeight'),
+   sys:num('preSys'),
+   dia:num('preDia'),
+   temp:num('preTemp'),
+   urine:num('preUrine')
+  };
+  if(Object.values(values).every(v=>v===null)){
+   alert('Ingresá al menos un dato del control prediálisis.');
+   return;
+  }
+  day.pre={...values,savedAt:new Date().toISOString()};
+ }else{
+  const values={
+   weight:num('postWeight'),
+   sys:num('postSys'),
+   dia:num('postDia'),
+   temp:num('postTemp')
+  };
+  if(Object.values(values).every(v=>v===null)){
+   alert('Ingresá al menos un dato del control postdiálisis.');
+   return;
+  }
+  day.post={...values,savedAt:new Date().toISOString()};
+ }
+
+ persist();
+ renderAll();
+ alert(kind==='pre'?'Control prediálisis guardado.':'Control postdiálisis guardado.');
+}
+
 function saveSettings(){
  const s=data.settings;
  const patientName=$('patientName').value.trim();
@@ -2137,6 +2331,23 @@ function renderAll(){
  setFieldValue('solutions',data.settings.solutions||'');
  setFieldValue('contactName',data.settings.contactName||'');
  setFieldValue('contactPhone',data.settings.contactPhone||'');
+
+ const todayKey=dateKey(new Date());
+ const todayControl=(data.daily&&data.daily[todayKey])||{pre:{},post:{}};
+ const pre=todayControl.pre||{},post=todayControl.post||{};
+ setFieldValue('preWeight',pre.weight);
+ setFieldValue('preSys',pre.sys);
+ setFieldValue('preDia',pre.dia);
+ setFieldValue('preTemp',pre.temp);
+ setFieldValue('preUrine',pre.urine);
+
+ const preStatus=$('preControlStatus');
+ if(preStatus){
+  const saved=hasControl(pre);
+  preStatus.textContent=saved?'Control prediálisis guardado para hoy.':'Todavía no se guardó el control de hoy.';
+  preStatus.className='dialysis-control-status '+(saved?'saved':'');
+ }
+
 renderHome();
  renderHistory();
  renderSummary();
@@ -2193,7 +2404,7 @@ window.addEventListener('load',()=>{
 });
 
 
-const APP_VERSION='3.2.6 Informe clínico v3.2.7';
+const APP_VERSION='3.2.11 Controles pre y postdiálisis';
 
 function showToast(message,type='info',duration=2600){
  const host=document.getElementById('toastHost');
@@ -2263,7 +2474,7 @@ document.addEventListener('click',function(event){
 
 <div id="toastHost" class="toast-host" aria-live="polite" aria-atomic="true"></div>
 <footer class="release-footer">
-  <span>GuillePD v3.2.6 Informe clínico v3.2.7</span>
+  <span>GuillePD v3.2.11 Controles pre y postdiálisis</span>
   <small>Datos guardados localmente en este dispositivo</small>
 </footer>
 </body></html>
