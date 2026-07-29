@@ -9,6 +9,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="GuillePD">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+<link rel="apple-touch-icon" href="./icon-192.png">
 <title>GuillePD v3.2.25 Unidades de volumen corregidas</title>
 <style>
 :root{--bg:#f4f8fa;--card:#fff;--ink:#17323a;--muted:#6d858d;--brand:#0f6f7a;--brand2:#1c9aaa;--ok:#16845b;--danger:#c94040;--line:#d8e6ea;--shadow:0 8px 28px rgba(18,65,75,.10)}
@@ -2841,4 +2844,13 @@ document.addEventListener('DOMContentLoaded',()=>{
   <span>GuillePD v3.2.24</span>
   <small>Datos guardados localmente en este dispositivo</small>
 </footer>
+<script>
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js').catch(error => {
+      console.warn('No se pudo activar el modo sin conexiÃ³n:', error);
+    });
+  });
+}
+</script>
 </body></html>
