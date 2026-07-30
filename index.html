@@ -130,12 +130,12 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#36aeb1;box-sh
 .history-header p{margin:0;color:var(--muted);font-size:12px}
 .history-header-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:16px;background:linear-gradient(135deg,var(--navy-soft),var(--brand-soft));font-size:23px;border:1px solid var(--line)}
 .history-filter-card{padding:16px;margin-bottom:14px}
-.history-filter-top{display:flex;align-items:flex-end;gap:10px}
+.history-filter-top{display:block}
 .history-date-field{flex:1;margin:0}
-.history-today-btn{height:44px;padding:0 17px;border:0;border-radius:13px;background:var(--brand);color:white;font-weight:800;cursor:pointer}
-.history-navigation{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:11px}
+.history-navigation{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:11px}
 .history-nav-btn{min-height:42px;border:1px solid var(--line);border-radius:13px;background:#f7fafb;color:var(--ink);font-weight:750;cursor:pointer}
 .history-nav-btn span{color:var(--brand2);font-size:16px}
+.history-today-btn:disabled{background:var(--brand);border-color:var(--brand);color:#fff;opacity:1;cursor:default}
 .history-all-btn{width:100%;margin-top:10px}
 .history-list{display:flex;flex-direction:column;gap:15px}
 .history-day{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:22px;padding:16px;box-shadow:0 10px 30px rgba(19,63,78,.07)}
@@ -692,15 +692,17 @@ header{
           <label for="historyDate">Fecha</label>
           <input id="historyDate" type="date" onchange="renderHistory()">
         </div>
-        <button class="history-today-btn" onclick="setHistoryToday()">📅 Hoy</button>
       </div>
 
       <div class="history-navigation">
         <button class="history-nav-btn" onclick="moveHistoryDay(-1)">
-          <span>←</span> Día anterior
+          <span>←</span> Anterior
         </button>
-        <button class="history-nav-btn" onclick="moveHistoryDay(1)">
-          Día siguiente <span>→</span>
+        <button class="history-nav-btn history-today-btn" onclick="setHistoryToday()">
+          Hoy
+        </button>
+        <button class="history-nav-btn history-next-btn" onclick="moveHistoryDay(1)">
+          Siguiente <span>→</span>
         </button>
       </div>
 
@@ -1750,11 +1752,11 @@ function renderHistory(){
 }
 function updateHistoryNav(){
  const today=dateKey(new Date());
- const nextBtn=document.querySelectorAll('.history-nav-btn')[1];
+ const nextBtn=document.querySelector('.history-next-btn');
  const todayBtn=document.querySelector('.history-today-btn');
  const isToday=$('historyDate').value===today;
  if(nextBtn) nextBtn.disabled=isToday;
- if(todayBtn){todayBtn.disabled=isToday;todayBtn.textContent='📅 Hoy';}
+ if(todayBtn){todayBtn.disabled=isToday;todayBtn.textContent='Hoy';}
 }
 function moveHistoryDay(delta){
  const d=dateFromInput('historyDate');
