@@ -469,7 +469,7 @@ header{
 }
 
 
-/* ===== GuillePD v3.2.11 · Controles pre y postdiálisis ===== */
+/* ===== GuillePD v3.2.11 · Controles pre y posdiálisis ===== */
 .dialysis-control-card{padding:17px;margin-bottom:14px}
 .dialysis-control-head{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;margin-bottom:14px}
 .dialysis-control-head h3{margin:4px 0 4px;font-size:18px;color:var(--ink)}
@@ -600,7 +600,7 @@ header{
       <div class="hero-top">
         <div>
           <span class="hero-kicker">Estado actual</span>
-          <h3 id="heroStateTitle">Sin lavado activo</h3>
+          <h3 id="heroStateTitle">Sin intercambio activo</h3>
           <p id="heroStateText">Podés iniciar un nuevo registro cuando corresponda.</p>
         </div>
         <div class="hero-icon" aria-hidden="true">💧</div>
@@ -609,12 +609,12 @@ header{
       <div class="countdown-wrap">
         <span class="countdown-label" id="countdownLabel">Próximo drenaje</span>
         <div class="countdown" id="countdown">--:--:--</div>
-        <div class="countdown-sub" id="countdownSub">No hay un lavado en curso</div>
+        <div class="countdown-sub" id="countdownSub">No hay un intercambio en curso</div>
       </div>
 
       <button class="btn btn-primary btn-new-wash" onclick="openWashModal()">
         <span class="btn-plus">＋</span>
-        <span>Nuevo lavado</span>
+        <span>Nuevo intercambio</span>
       </button>
     </div>
 
@@ -622,7 +622,7 @@ header{
       <div class="metric-card">
         <div class="metric-icon">🧾</div>
         <div class="metric-copy">
-          <span>Lavados de hoy</span>
+          <span>Intercambios de hoy</span>
           <strong id="todayCount">0</strong>
         </div>
       </div>
@@ -653,12 +653,12 @@ header{
       <div class="progress-head">
         <div>
           <span class="eyebrow">Objetivo diario</span>
-          <h3 id="progressTitle">0 de 4 lavados</h3>
+          <h3 id="progressTitle">0 de 4 intercambios</h3>
         </div>
         <span class="progress-percent" id="progressPercent">0%</span>
       </div>
       <div class="progress modern-progress"><div id="dailyProgressBar" style="width:0%"></div></div>
-      <p id="progressHint">Todavía no hay lavados registrados hoy.</p>
+      <p id="progressHint">Todavía no hay intercambios registrados hoy.</p>
     </div>
 
     <div class="card latest-summary-card">
@@ -670,7 +670,7 @@ header{
         <button class="link-button" onclick="showScreen('history')">Ver historial</button>
       </div>
       <div id="latestWashSummary" class="latest-empty">
-        Cuando registres un lavado, vas a ver acá sus datos principales.
+        Cuando registres un intercambio, vas a ver acá sus datos principales.
       </div>
     </div>
   </div>
@@ -681,7 +681,7 @@ header{
       <div>
         <span class="eyebrow">Registro clínico</span>
         <h2>Historial</h2>
-        <p>Consultá los controles y lavados registrados por día.</p>
+        <p>Consultá los controles e intercambios registrados por día.</p>
       </div>
       <div class="history-header-icon" aria-hidden="true">🗂️</div>
     </div>
@@ -769,9 +769,9 @@ header{
     </div>
 
     <div class="report-preview-metrics">
-      <div><span>Lavados completados</span><strong id="reportPreviewWashes">0</strong></div>
-      <div><span>Ingreso</span><strong id="reportPreviewInput">0 mL</strong></div>
-      <div><span>Egreso</span><strong id="reportPreviewOutput">0 mL</strong></div>
+      <div><span>Intercambios completados</span><strong id="reportPreviewWashes">0</strong></div>
+      <div><span>Volumen infundido</span><strong id="reportPreviewInput">0 mL</strong></div>
+      <div><span>Volumen drenado</span><strong id="reportPreviewOutput">0 mL</strong></div>
       <div><span>Balance</span><strong id="reportPreviewBalance">0 mL</strong></div>
     </div>
     <div id="reportPreviewNote" class="report-preview-note">
@@ -849,7 +849,7 @@ header{
           Eliminar paciente actual
         </button>
       </div>
-      <p class="notice">Cada paciente conserva por separado su configuración, lavados, controles e informes.</p>
+      <p class="notice">Cada paciente conserva por separado su configuración, intercambios, controles e informes.</p>
     </div>
 
     <div class="settings-overview">
@@ -927,11 +927,11 @@ header{
           <input id="dryWeight" type="text" inputmode="decimal" step="0.1" min="0" autocomplete="off">
         </div>
         <div class="field settings-field">
-          <label for="plannedWashes">Lavados diarios planificados</label>
+          <label for="plannedWashes">Intercambios diarios indicados</label>
           <input id="plannedWashes" type="number" min="1" max="12">
         </div>
         <div class="field settings-field">
-          <label for="usualVolume">Volumen habitual (ml)</label>
+          <label for="usualVolume">Volumen habitual por intercambio (mL)</label>
           <input id="usualVolume" type="text" inputmode="numeric" min="0" autocomplete="off">
         </div>
         <div class="field settings-field">
@@ -991,11 +991,11 @@ header{
 <nav class="bottom-nav no-print"><div class="inner"><button class="navbtn active" onclick="showScreen('home',this)">🏠<br>Inicio</button><button class="navbtn" onclick="showScreen('history',this)">🗂️<br>Historial</button><button class="navbtn" onclick="showScreen('summary',this)">📊<br>Resumen</button><button class="navbtn" onclick="showScreen('settings',this)">⚙️<br>Ajustes</button></div></nav>
 <div id="modal" class="modal hidden"><div class="modal-box"><div class="steps"><div class="stepdot on"></div><div class="stepdot"></div><div class="stepdot"></div><div class="stepdot"></div></div>
 <div id="step1">
-<h2>1. Ingreso</h2>
+<h2>1. Infusión</h2>
 <div id="preDialysisInWash" class="pre-in-wash hidden">
   <div class="pre-in-wash-head">
     <div>
-      <span class="eyebrow">Primer lavado del día</span>
+      <span class="eyebrow">Primer intercambio del día</span>
       <h3>Control prediálisis</h3>
       <p>Se guarda en el historial diario y no permanece visible en el Home.</p>
     </div>
@@ -1004,21 +1004,21 @@ header{
   <div class="grid2">
     <div class="field"><label for="preWeight">Peso (kg)</label><input id="preWeight" type="text" step="0.1" inputmode="decimal" autocomplete="off"></div>
     <div class="field"><label for="preTemp">Temperatura (°C)</label><small class="decimal-help">Podés usar coma o punto.</small><input id="preTemp" type="text" step="0.1" inputmode="decimal" autocomplete="off"></div>
-    <div class="field"><label for="preSys">Presión sistólica</label><input id="preSys" type="number" inputmode="numeric"></div>
-    <div class="field"><label for="preDia">Presión diastólica</label><input id="preDia" type="number" inputmode="numeric"></div>
-    <div class="field"><label for="preUrine">Diuresis (ml)</label><input id="preUrine" type="number" inputmode="numeric"></div>
+    <div class="field"><label for="preSys">Presión arterial sistólica (mmHg)</label><input id="preSys" type="number" inputmode="numeric"></div>
+    <div class="field"><label for="preDia">Presión arterial diastólica (mmHg)</label><input id="preDia" type="number" inputmode="numeric"></div>
+    <div class="field"><label for="preUrine">Diuresis (mL)</label><input id="preUrine" type="number" inputmode="numeric"></div>
   </div>
   <div id="preExistingNotice" class="pre-existing-notice hidden"></div>
   <button type="button" class="btn btn-secondary pre-save-only-btn" onclick="savePreDialysisOnly()">
     Guardar control y continuar después
   </button>
-  <p class="pre-save-only-help">No hace falta iniciar todavía el primer lavado.</p>
-</div><div class="grid2"><div class="field"><label>Fecha y hora de ingreso</label><input id="dt" type="datetime-local"></div><div class="field"><label>Número de lavado</label><input id="washNo" type="number" min="1"></div><div class="field"><label>Solución</label><select id="solution" onchange="toggleOtherSolution()"><option>1,5%</option><option>2,5%</option><option>4,25%</option><option>Otra</option></select></div><div class="field hidden" id="otherSolutionWrap"><label>Especificar solución, medicación o aditivo</label><input id="otherSolution" placeholder="Ej.: Heparina 500 UI"></div><div class="field"><label>Tiempo de permanencia (min)</label><input id="dwell" type="number" value="120" min="0"></div><div class="field"><label>Peso bolsa llena (g)</label><input id="fullBag" type="text" inputmode="decimal" autocomplete="off"></div><div class="field"><label>Cantidad indicada a infundir (g)</label><input id="prescribed" type="text" value="500" inputmode="decimal" autocomplete="off"></div></div><div class="target"><small>CERRAR LOS CLAMPS CUANDO LA BOLSA PESE</small><strong id="targetWeight">—</strong></div><div class="target"><small>HORARIO PREVISTO DE DRENAJE</small><strong id="drainAt">—</strong><div id="drainDate" class="muted"></div></div><div class="btn-row"><button class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn btn-primary" onclick="goStep(2)">Continuar</button></div></div>
-<div id="step2" class="hidden"><h2>2. Peso real al cerrar</h2><div class="field"><label>Peso real de la bolsa al cerrar clamps (g)</label><input id="afterFill" type="text" inputmode="decimal" autocomplete="off"></div><div class="target"><small>ENTRADA REAL</small><strong id="actualIn">—</strong></div><div class="btn-row"><button class="btn btn-secondary" onclick="goStep(1)">Atrás</button><button class="btn btn-secondary" onclick="savePartialWash()">Guardar ingreso</button><button class="btn btn-primary" onclick="goStep(3)">Continuar</button></div></div>
-<div id="step3" class="hidden"><h2>3. Drenaje</h2><div class="grid2"><div class="field"><label>Peso bolsa de drenaje vacía (g)</label><input id="emptyDrain" type="text" inputmode="decimal" autocomplete="off"></div><div class="field"><label>Peso bolsa de drenaje llena (g)</label><input id="fullDrain" type="text" inputmode="decimal" autocomplete="off"></div></div><button type="button" class="btn btn-secondary drain-save-only-btn" onclick="saveEmptyDrainOnly()">Guardar bolsa vacía y continuar después</button><p class="drain-save-only-help">El lavado queda abierto. Después volvés desde Historial para cargar el peso de la bolsa llena.</p><div class="grid2"><div class="target"><small>DRENADO</small><strong id="drained">—</strong></div><div class="target"><small>BALANCE</small><strong id="uf">—</strong></div></div><div class="btn-row"><button class="btn btn-secondary" onclick="goStep(2)">Atrás</button><button class="btn btn-primary" onclick="goStep(4)">Continuar</button></div></div>
+  <p class="pre-save-only-help">No hace falta iniciar todavía el primer intercambio.</p>
+</div><div class="grid2"><div class="field"><label>Fecha y hora de infusión</label><input id="dt" type="datetime-local"></div><div class="field"><label>Número de intercambio</label><input id="washNo" type="number" min="1"></div><div class="field"><label>Solución de diálisis</label><select id="solution" onchange="toggleOtherSolution()"><option>1,5%</option><option>2,5%</option><option>4,25%</option><option>Otra</option></select></div><div class="field hidden" id="otherSolutionWrap"><label>Especificar solución, medicación o aditivo</label><input id="otherSolution" placeholder="Ej.: Heparina 500 UI"></div><div class="field"><label>Tiempo de permanencia (min)</label><input id="dwell" type="number" value="120" min="0"></div><div class="field"><label>Peso bolsa llena (g)</label><input id="fullBag" type="text" inputmode="decimal" autocomplete="off"></div><div class="field"><label>Volumen indicado a infundir (mL)</label><input id="prescribed" type="text" value="500" inputmode="decimal" autocomplete="off"></div></div><div class="target"><small>CERRAR LOS CLAMPS CUANDO LA BOLSA PESE</small><strong id="targetWeight">—</strong></div><div class="target"><small>HORARIO PREVISTO DE DRENAJE</small><strong id="drainAt">—</strong><div id="drainDate" class="muted"></div></div><div class="btn-row"><button class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn btn-primary" onclick="goStep(2)">Continuar</button></div></div>
+<div id="step2" class="hidden"><h2>2. Peso real al cerrar</h2><div class="field"><label>Peso real de la bolsa al cerrar clamps (g)</label><input id="afterFill" type="text" inputmode="decimal" autocomplete="off"></div><div class="target"><small>VOLUMEN INFUNDIDO</small><strong id="actualIn">—</strong></div><div class="btn-row"><button class="btn btn-secondary" onclick="goStep(1)">Atrás</button><button class="btn btn-secondary" onclick="savePartialWash()">Guardar infusión</button><button class="btn btn-primary" onclick="goStep(3)">Continuar</button></div></div>
+<div id="step3" class="hidden"><h2>3. Drenaje</h2><div class="grid2"><div class="field"><label>Peso bolsa de drenaje vacía (g)</label><input id="emptyDrain" type="text" inputmode="decimal" autocomplete="off"></div><div class="field"><label>Peso bolsa de drenaje llena (g)</label><input id="fullDrain" type="text" inputmode="decimal" autocomplete="off"></div></div><button type="button" class="btn btn-secondary drain-save-only-btn" onclick="saveEmptyDrainOnly()">Guardar bolsa vacía y continuar después</button><p class="drain-save-only-help">El intercambio queda abierto. Después volvés desde Historial para cargar el peso de la bolsa llena.</p><div class="grid2"><div class="target"><small>VOLUMEN DRENADO</small><strong id="drained">—</strong></div><div class="target"><small>BALANCE DEL INTERCAMBIO</small><strong id="uf">—</strong></div></div><div class="btn-row"><button class="btn btn-secondary" onclick="goStep(2)">Atrás</button><button class="btn btn-primary" onclick="goStep(4)">Continuar</button></div></div>
 <div id="step4" class="hidden">
-  <h2>4. Control postdiálisis</h2>
-  <p class="step-description">Completá los valores al finalizar el lavado. Quedarán asociados al control postdiálisis del día.</p>
+  <h2>4. Control posdiálisis</h2>
+  <p class="step-description">Completá los valores al finalizar el intercambio. Quedarán asociados al control posdiálisis del día.</p>
 
   <div class="grid2">
     <div class="field">
@@ -1036,11 +1036,11 @@ header{
       <input id="postTemp" type="text" step="0.1" inputmode="decimal" autocomplete="off">
     </div>
     <div class="field">
-      <label for="postSys">Presión sistólica</label>
+      <label for="postSys">Presión arterial sistólica (mmHg)</label>
       <input id="postSys" type="number" inputmode="numeric">
     </div>
     <div class="field">
-      <label for="postDia">Presión diastólica</label>
+      <label for="postDia">Presión arterial diastólica (mmHg)</label>
       <input id="postDia" type="number" inputmode="numeric">
     </div>
     <div class="field">
@@ -1055,12 +1055,12 @@ header{
   </div>
 
   <div class="post-control-note">
-    Al guardar, estos valores se registrarán como control postdiálisis del día.
+    Al guardar, estos valores se registrarán como control posdiálisis del día.
   </div>
 
   <div class="btn-row">
     <button class="btn btn-secondary" onclick="goStep(3)">Atrás</button>
-    <button class="btn btn-primary" onclick="saveWash()">Finalizar lavado</button>
+    <button class="btn btn-primary" onclick="saveWash()">Guardar y finalizar intercambio</button>
   </div>
 </div>
 </div></div>
@@ -1221,7 +1221,7 @@ function showPreDialysisForCurrentWash(){
   setFieldValue('preTemp',pre.temp);
   setFieldValue('preUrine',pre.urine);
   if(notice){
-   notice.textContent='El control prediálisis de este día ya está guardado. Podés corregirlo o continuar con el lavado.';
+   notice.textContent='El control prediálisis de este día ya está guardado. Podés corregirlo o continuar con el intercambio.';
    notice.classList.remove('hidden');
   }
  }else{
@@ -1277,7 +1277,7 @@ function savePreDialysisOnly(){
  persist();
  renderAll();
  closeModal();
- alert('Control prediálisis guardado. Podés iniciar el primer lavado más tarde.');
+ alert('Control prediálisis guardado. Podés iniciar el primer intercambio más tarde.');
 }
 
 function openNew(){
@@ -1363,7 +1363,7 @@ function savePartialWash(){
  persist();
  closeModal();
  renderAll();
- alert('Ingreso guardado. Después entrá a Historial y tocá “Cargar drenaje”.');
+ alert('Infusión guardada. Después entrá a Historial y tocá “Cargar drenaje”.');
 }
 
 function saveEmptyDrainOnly(){
@@ -1371,7 +1371,7 @@ function saveEmptyDrainOnly(){
  const full=num('fullBag'),pres=num('prescribed'),after=num('afterFill');
  const empty=num('emptyDrain');
  if(!dt||full===null||pres===null||after===null){
-  alert('Primero completá y guardá los datos de ingreso del lavado.');
+  alert('Primero completá y guardá los datos de infusión del intercambio.');
   return;
  }
  if(empty===null){
@@ -1412,7 +1412,7 @@ function saveEmptyDrainOnly(){
  persist();
  closeModal();
  renderAll();
- alert('Peso de la bolsa vacía guardado. El lavado queda pendiente hasta cargar la bolsa llena.');
+ alert('Peso de la bolsa vacía guardado. El intercambio queda pendiente hasta cargar la bolsa llena.');
 }
 
 function editWash(id){
@@ -1446,7 +1446,7 @@ function saveWash(){
  const empty=num('emptyDrain'),fd=num('fullDrain');
 
  if(!dt||full===null||pres===null||after===null||empty===null||fd===null){
-  alert('Para cerrar el lavado faltan datos de ingreso o drenaje. Los controles clínicos son opcionales.');
+  alert('Para cerrar el intercambio faltan datos de infusión o drenaje. Los controles clínicos son opcionales.');
   return;
  }
 
@@ -1493,7 +1493,7 @@ function saveWash(){
  if(idx>=0)data.washes[idx]={...data.washes[idx],...record};
  else data.washes.push(record);
 
- // Guardar también como control postdiálisis diario si se ingresó algún valor.
+ // Guardar también como control posdiálisis diario si se ingresó algún valor.
  if(Object.values(postControl).some(v=>v!==null)){
   const day=ensureDailyRecord(dateKey(dt));
   day.post={...postControl,savedAt:new Date().toISOString()};
@@ -1503,7 +1503,7 @@ function saveWash(){
  persist();
  closeModal();
  renderAll();
- alert('Lavado finalizado y guardado.');
+ alert('Intercambio finalizado y guardado.');
 }
 function enableAlarms(){
 alarmEnabled=true;
@@ -1552,17 +1552,17 @@ function updateCountdown(){
  if(!active){
   label.textContent='Próximo drenaje';
   countdown.textContent='--:--:--';
-  sub.textContent='No hay un lavado en curso';
+  sub.textContent='No hay un intercambio en curso';
   return;
  }
 
  const drainDate=getDrainDate(active);
  if(!drainDate){
   label.textContent='Drenaje pendiente';
-  countdown.textContent=`Lavado ${active.washNo||'—'}`;
+  countdown.textContent=`Intercambio ${active.washNo||'—'}`;
   sub.textContent='No se pudo determinar el horario previsto';
   if(stateTitle)stateTitle.textContent='Drenaje pendiente';
-  if(stateText)stateText.textContent='Hay un lavado abierto que necesita completar el drenaje.';
+  if(stateText)stateText.textContent='Hay un intercambio abierto que necesita completar el drenaje.';
   if(dot)dot.className='home-status-dot active';
   return;
  }
@@ -1577,10 +1577,10 @@ function updateCountdown(){
   label.textContent='Drenaje pendiente';
   countdown.textContent=`Previsto ${fmtTime(drainDate)}`;
   sub.textContent=h>0
-   ? `Vencido hace ${h} h ${m} min · Lavado ${active.washNo||'—'}`
-   : `Vencido hace ${m} min · Lavado ${active.washNo||'—'}`;
+   ? `Vencido hace ${h} h ${m} min · Intercambio ${active.washNo||'—'}`
+   : `Vencido hace ${m} min · Intercambio ${active.washNo||'—'}`;
   if(stateTitle)stateTitle.textContent='Drenaje pendiente';
-  if(stateText)stateText.textContent=`El lavado ${active.washNo||''} ya alcanzó el horario previsto de drenaje.`;
+  if(stateText)stateText.textContent=`El intercambio ${active.washNo||''} ya alcanzó el horario previsto de drenaje.`;
   if(dot)dot.className='home-status-dot active';
 
   if(lastAlarmId!==active.id){
@@ -1595,8 +1595,8 @@ function updateCountdown(){
  const s=Math.floor((ms%60000)/1000);
  label.textContent='Próximo drenaje';
  countdown.textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
- sub.textContent=`Hoy ${fmtTime(drainDate)} · Lavado ${active.washNo||'—'}`;
- if(stateTitle)stateTitle.textContent='Lavado en curso';
+ sub.textContent=`Hoy ${fmtTime(drainDate)} · Intercambio ${active.washNo||'—'}`;
+ if(stateTitle)stateTitle.textContent='Intercambio en curso';
  if(stateText)stateText.textContent=`Drenaje previsto a las ${fmtTime(drainDate)}.`;
  if(dot)dot.className='home-status-dot active';
 }
@@ -1614,11 +1614,11 @@ function dateFromInput(id){
 
 function hasControl(c){return !!(c&&['weight','sys','dia','temp','urine','postWeight','postSys','postDia','postTemp'].some(k=>c[k]!==null&&c[k]!==undefined&&c[k]!==''))}
 function controlValue(v,suffix=''){return v===null||v===undefined||v===''?'—':`${v}${suffix}`}
-function pressureValue(c){return c&&(c.sys!==null&&c.sys!==undefined||c.dia!==null&&c.dia!==undefined)?`${c.sys??'—'}/${c.dia??'—'}`:'—'}
-function renderControlBlock(kind,c){const isPre=kind==='pre',title=isPre?'🔵 Control prediálisis':'🟢 Control posdiálisis',cls=isPre?'control-pre':'control-post';if(!hasControl(c))return `<div class="control-card ${cls}"><b>${title}</b><div class="muted" style="margin-top:8px">Sin datos guardados.</div></div>`;return `<div class="control-card ${cls}"><b>${title}</b><div class="kpi"><span>Peso</span><b>${controlValue(c.weight,' kg')}</b></div><div class="kpi"><span>Presión</span><b>${pressureValue(c)}</b></div><div class="kpi"><span>Temperatura</span><b>${controlValue(c.temp,' °C')}</b></div>${isPre?`<div class="kpi"><span>Diuresis</span><b>${controlValue(c.urine,' ml')}</b></div>`:''}</div>`}
+function pressureValue(c){return c&&(c.sys!==null&&c.sys!==undefined||c.dia!==null&&c.dia!==undefined)?`${c.sys??'—'}/${c.dia??'—'} mmHg`:'—'}
+function renderControlBlock(kind,c){const isPre=kind==='pre',title=isPre?'🔵 Control prediálisis':'🟢 Control posdiálisis',cls=isPre?'control-pre':'control-post';if(!hasControl(c))return `<div class="control-card ${cls}"><b>${title}</b><div class="muted" style="margin-top:8px">Sin datos guardados.</div></div>`;return `<div class="control-card ${cls}"><b>${title}</b><div class="kpi"><span>Peso</span><b>${controlValue(c.weight,' kg')}</b></div><div class="kpi"><span>Presión arterial</span><b>${pressureValue(c)}</b></div><div class="kpi"><span>Temperatura</span><b>${controlValue(c.temp,' °C')}</b></div>${isPre?`<div class="kpi"><span>Diuresis</span><b>${controlValue(c.urine,' mL')}</b></div>`:''}</div>`}
 function renderTimelineControl(kind,control){
  const isPre=kind==='pre';
- const title=isPre?'Control prediálisis':'Control postdiálisis';
+ const title=isPre?'Control prediálisis':'Control posdiálisis';
  const value=(v,suffix='')=>v!==null&&v!==undefined&&v!==''?`${v}${suffix}`:'—';
  const pressure=(control.sys||control.dia)?`${control.sys??'—'}/${control.dia??'—'} mmHg`:'—';
  const saved=hasControl(control);
@@ -1636,7 +1636,7 @@ function renderTimelineControl(kind,control){
      <div><span>Peso</span><strong>${value(control.weight,' kg')}</strong></div>
      <div><span>Presión arterial</span><strong>${pressure}</strong></div>
      <div><span>Temperatura</span><strong>${value(control.temp,' °C')}</strong></div>
-     ${isPre?`<div><span>Diuresis</span><strong>${value(control.urine,' ml')}</strong></div>`:''}
+     ${isPre?`<div><span>Diuresis</span><strong>${value(control.urine,' mL')}</strong></div>`:''}
    </div>
  </article>`;
 }
@@ -1693,22 +1693,22 @@ function renderHistory(){
 
    return `<article class="clinical-wash-card ${isOpen?'is-open':''}">
     <div class="wash-card-head">
-     <div class="wash-number"><span>Lavado</span><strong>${w.washNo}</strong></div>
+     <div class="wash-number"><span>Intercambio</span><strong>${w.washNo}</strong></div>
      <span class="wash-status ${isOpen?'pending':'complete'}">${isOpen?'Pendiente de drenaje':'Completado'}</span>
     </div>
 
     <div class="wash-time-line">
-     <div><span>Ingreso</span><b>${fmtTime(w.datetime)}</b></div>
+     <div><span>Infusión</span><b>${fmtTime(w.datetime)}</b></div>
      <div class="wash-time-arrow">→</div>
      <div><span>Drenaje</span><b>${isOpen?'Pendiente':fmtTime(w.drainTime)}</b></div>
     </div>
 
-    <div class="wash-solution"><span>Solución</span><strong>${w.solution||'—'}</strong></div>
+    <div class="wash-solution"><span>Solución de diálisis</span><strong>${w.solution||'—'}</strong></div>
 
     <div class="wash-values ${isOpen?'two-cols':'three-cols'}">
-     <div><span>Entrada</span><strong>${Math.round(Number(w.actualIn)||0)} mL</strong></div>
-     ${isOpen?`<div><span>Bolsa vacía</span><strong>${w.emptyDrain!==null&&w.emptyDrain!==undefined?Math.round(Number(w.emptyDrain))+' g':'Pendiente'}</strong></div>`:`<div><span>Drenado</span><strong>${Math.round(Number(w.drained)||0)} mL</strong></div>
-     <div><span>Balance</span><strong class="${balanceClass(w.uf)}">${balanceText(w.uf)}</strong></div>`}
+     <div><span>Volumen infundido</span><strong>${Math.round(Number(w.actualIn)||0)} mL</strong></div>
+     ${isOpen?`<div><span>Bolsa vacía</span><strong>${w.emptyDrain!==null&&w.emptyDrain!==undefined?Math.round(Number(w.emptyDrain))+' g':'Pendiente'}</strong></div>`:`<div><span>Volumen drenado</span><strong>${Math.round(Number(w.drained)||0)} mL</strong></div>
+     <div><span>Balance del intercambio</span><strong class="${balanceClass(w.uf)}">${balanceText(w.uf)}</strong></div>`}
     </div>
 
     <div class="wash-observation"><span>Aspecto</span><strong>${appearance}</strong></div>
@@ -1734,7 +1734,7 @@ function renderHistory(){
      <h3>${dayTitle}</h3>
     </div>
     <div class="history-day-summary">
-     <span>${washes.length} lavado${washes.length===1?'':'s'}</span>
+     <span>${washes.length} intercambio${washes.length===1?'':'s'}</span>
      <strong class="${balanceClass(totalBalance)}">${balanceText(totalBalance)}</strong>
     </div>
    </div>
@@ -1775,7 +1775,7 @@ function toggleAllHistory(){
  renderHistory();
 }
 function deleteWash(id){
- if(confirm('¿Eliminar este lavado?')){
+ if(confirm('¿Eliminar este intercambio?')){
   data.washes=data.washes.filter(w=>w.id!==id);
   persist();
   renderAll();
@@ -1844,11 +1844,11 @@ function renderSummary(){
  const pending=a.filter(w=>w.status==='open');
  $('summaryPeriod').innerHTML=`<b>Período:</b> ${p.label}`;
  $('summaryBox').innerHTML=`
-  <div class="kpi"><span>Lavados registrados</span><b>${a.length}</b></div>
-  <div class="kpi"><span>Lavados completados</span><b>${completed.length}</b></div>
+  <div class="kpi"><span>Intercambios registrados</span><b>${a.length}</b></div>
+  <div class="kpi"><span>Intercambios completados</span><b>${completed.length}</b></div>
   ${pending.length?`<div class="kpi"><span>Drenajes pendientes</span><b>${pending.length}</b></div>`:''}
-  <div class="kpi"><span>Total ingresado</span><b>${Math.round(sum(a,'actualIn'))} mL</b></div>
-  <div class="kpi"><span>Total drenado</span><b>${Math.round(sum(completed,'drained'))} mL</b></div>
+  <div class="kpi"><span>Volumen total infundido</span><b>${Math.round(sum(a,'actualIn'))} mL</b></div>
+  <div class="kpi"><span>Volumen total drenado</span><b>${Math.round(sum(completed,'drained'))} mL</b></div>
   <div class="kpi"><span>Balance total</span><b class="${balanceClass(sum(completed,'uf'))}">${balanceText(sum(completed,'uf'))}</b></div>`;
  if(typeof renderReportPreview==='function')renderReportPreview();
 }
@@ -1928,7 +1928,7 @@ function saveDailyControl(kind){
    temp:num('postTemp')
   };
   if(Object.values(values).every(v=>v===null)){
-   alert('Ingresá al menos un dato del control postdiálisis.');
+   alert('Ingresá al menos un dato del control posdiálisis.');
    return;
   }
   day.post={...values,savedAt:new Date().toISOString()};
@@ -1936,7 +1936,7 @@ function saveDailyControl(kind){
 
  persist();
  renderAll();
- alert(kind==='pre'?'Control prediálisis guardado.':'Control postdiálisis guardado.');
+ alert(kind==='pre'?'Control prediálisis guardado.':'Control posdiálisis guardado.');
 }
 
 function saveSettings(){
@@ -1950,7 +1950,7 @@ function saveSettings(){
   return;
  }
  if(!Number.isFinite(planned)||planned<1||planned>12){
-  alert('Los lavados diarios deben ser un número entre 1 y 12.');
+  alert('Los intercambios diarios deben ser un número entre 1 y 12.');
   $('plannedWashes').focus();
   return;
  }
@@ -2025,8 +2025,8 @@ function renderReportPreview(){
  }
  const note=$('reportPreviewNote');
  if(note){
-   if(!washes.length)note.textContent='No hay lavados completados en el período seleccionado. El PDF podrá incluir controles clínicos si fueron registrados.';
-   else note.textContent=`El informe reunirá ${washes.length} lavado${washes.length===1?'':'s'}, controles clínicos, balances y gráficos del período.`;
+   if(!washes.length)note.textContent='No hay intercambios completados en el período seleccionado. El PDF podrá incluir controles clínicos si fueron registrados.';
+   else note.textContent=`El informe reunirá ${washes.length} intercambio${washes.length===1?'':'s'}, controles clínicos, balances y gráficos del período.`;
  }
 }
 
@@ -2302,8 +2302,8 @@ function makePdfBlob(){
   const xs=[M];
   widths.forEach(w=>xs.push(xs.at(-1)+w));
   const heads=[
-   ['N°'],['Fecha / hora','ingreso'],['Volumen','ingreso'],['Tiempo de','contacto'],
-   ['Hora de','salida'],['Volumen','egreso'],['Balance','parcial'],
+   ['N°'],['Fecha / hora','infusión'],['Volumen','infundido'],['Tiempo de','permanencia'],
+   ['Hora de','drenaje'],['Volumen','drenado'],['Balance','parcial'],
    ['Solución diálisis'],['Observaciones']
   ];
 
@@ -2393,7 +2393,7 @@ function makePdfBlob(){
   s=pdfRoundRect(s,20,51,356,32,4,true,true,.6);
   s=pdfFill(s,.02,.26,.35);
   s=pdfText(s,30,72,'Resumen del período',8.5,true);
-  s=pdfText(s,30,58,`Lavados: ${all.length}  |  Total ingreso: ${ti} mL  |  Total egreso: ${to} mL  |  Balance total: ${tb>0?'+':''}${tb} mL`,7.4);
+  s=pdfText(s,30,58,`Intercambios: ${all.length}  |  Vol. infundido: ${ti} mL  |  Vol. drenado: ${to} mL  |  Balance total: ${tb>0?'+':''}${tb} mL`,7.4);
 
   s=pdfFill(s,.06,.12,.24);
   s=pdfText(s,740,60,`Página ${pi+1} de ${pagesData.length}`,7);
@@ -2487,7 +2487,7 @@ function downloadPdfReport(){
  download(`GuillePD_${data.settings.patient}_${safe}.pdf`,blob);
 }
 
-function exportCSV(){const h=['Fecha_hora_ingreso','Hora_drenaje','Lavado','Solucion','Permanencia_min','Bolsa_llena_g','Indicado_g','Objetivo_g','Bolsa_al_cerrar_g','Entrada_real_mL','Bolsa_drenaje_vacia_g','Bolsa_drenaje_llena_g','Drenado_mL','Balance_mL','Aspecto','Temperatura','Sistolica','Diastolica','Peso_kg','Observaciones'],rows=data.washes.map(w=>[w.datetime,w.drainTime,w.washNo,w.solution,w.dwell,w.fullBag,w.prescribed,w.target,w.afterFill,w.actualIn,w.emptyDrain,w.fullDrain,w.drained,w.uf,w.appearance,w.temp??'',w.sys??'',w.dia??'',w.weight??'',w.notes??'']),csv=[h,...rows].map(r=>r.map(v=>`"${String(v).replaceAll('"','""')}"`).join(',')).join('\n');download('GuillePD_registros.csv',new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}))}function exportJSON(){download('GuillePD_respaldo_completo.json',new Blob([JSON.stringify(root,null,2)],{type:'application/json'}))}function download(n,b){
+function exportCSV(){const h=['Fecha_hora_infusion','Hora_drenaje','Intercambio','Solucion_dialisis','Permanencia_min','Bolsa_llena_g','Volumen_indicado_mL','Objetivo_g','Bolsa_al_cerrar_g','Volumen_infundido_mL','Bolsa_drenaje_vacia_g','Bolsa_drenaje_llena_g','Volumen_drenado_mL','Balance_mL','Aspecto','Temperatura','Sistolica','Diastolica','Peso_kg','Observaciones'],rows=data.washes.map(w=>[w.datetime,w.drainTime,w.washNo,w.solution,w.dwell,w.fullBag,w.prescribed,w.target,w.afterFill,w.actualIn,w.emptyDrain,w.fullDrain,w.drained,w.uf,w.appearance,w.temp??'',w.sys??'',w.dia??'',w.weight??'',w.notes??'']),csv=[h,...rows].map(r=>r.map(v=>`"${String(v).replaceAll('"','""')}"`).join(',')).join('\n');download('GuillePD_registros.csv',new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}))}function exportJSON(){download('GuillePD_respaldo_completo.json',new Blob([JSON.stringify(root,null,2)],{type:'application/json'}))}function download(n,b){
  const url=URL.createObjectURL(b);
  const a=document.createElement('a');
  a.href=url;
@@ -2517,7 +2517,7 @@ function extractBackupRoot(value){
   return candidate;
  }
  if(Array.isArray(candidate.washes))return candidate; // formato antiguo de un solo paciente
- throw new Error('El archivo no contiene pacientes ni lavados reconocibles.');
+ throw new Error('El archivo no contiene pacientes ni intercambios reconocibles.');
 }
 function backupSummary(candidate){
  const normalized=normalizeRoot(JSON.parse(JSON.stringify(candidate)));
@@ -2550,7 +2550,7 @@ function restoreJSON(input){
    info=backupSummary(candidate);
    const detail=`Respaldo válido:
 • ${info.patients} paciente${info.patients===1?'':'s'}
-• ${info.washes} lavado${info.washes===1?'':'s'}
+• ${info.washes} intercambio${info.washes===1?'':'s'}
 • ${info.controlDays} día${info.controlDays===1?'':'s'} con controles
 
 Al restaurar se reemplazarán los datos actuales. ¿Continuar?`;
@@ -2573,14 +2573,14 @@ Al restaurar se reemplazarán los datos actuales. ¿Continuar?`;
 
    const status=document.getElementById('backupStatus');
    if(status){
-    status.textContent=`Respaldo restaurado correctamente: ${info.patients} paciente${info.patients===1?'':'s'}, ${info.washes} lavado${info.washes===1?'':'s'} y ${info.controlDays} día${info.controlDays===1?'':'s'} con controles.`;
+    status.textContent=`Respaldo restaurado correctamente: ${info.patients} paciente${info.patients===1?'':'s'}, ${info.washes} intercambio${info.washes===1?'':'s'} y ${info.controlDays} día${info.controlDays===1?'':'s'} con controles.`;
     status.classList.add('saved');
    }
-   showToast(`Respaldo restaurado correctamente · ${info.patients} paciente${info.patients===1?'':'s'} · ${info.washes} lavado${info.washes===1?'':'s'}`,'success');
+   showToast(`Respaldo restaurado correctamente · ${info.patients} paciente${info.patients===1?'':'s'} · ${info.washes} intercambio${info.washes===1?'':'s'}`,'success');
    alert(`Respaldo restaurado correctamente.
 
 • ${info.patients} paciente${info.patients===1?'':'s'}
-• ${info.washes} lavado${info.washes===1?'':'s'}
+• ${info.washes} intercambio${info.washes===1?'':'s'}
 • ${info.controlDays} día${info.controlDays===1?'':'s'} con controles`);
   }catch(e){
    console.error('Error al restaurar respaldo:',e);
@@ -2617,26 +2617,26 @@ function renderHome(){
  if(todayBalanceEl)todayBalanceEl.className=balance<0?'uf-pos':balance>0?'uf-neg':'uf-zero';
  $set('todayDwell',dwell+' min');
  $set('todayWeight',last&&Number(last.weight)>0?Number(last.weight).toFixed(1)+' kg':'—');
- $set('progressTitle',`${count} de ${planned} lavados`);
+ $set('progressTitle',`${count} de ${planned} intercambios`);
  const pct=Math.max(0,Math.min(100,Math.round((count/planned)*100)));
  $set('progressPercent',pct+'%');
  const bar=document.getElementById('dailyProgressBar');if(bar)bar.style.width=pct+'%';
- $set('progressHint',count===0?'Todavía no hay lavados registrados hoy.':count>=planned?'Objetivo diario completado.':`Faltan ${planned-count} lavado${planned-count===1?'':'s'} para completar el objetivo.`);
+ $set('progressHint',count===0?'Todavía no hay intercambios registrados hoy.':count>=planned?'Objetivo diario completado.':`Faltan ${planned-count} intercambio${planned-count===1?'':'s'} para completar el objetivo.`);
 
  const title=document.getElementById('latestWashTitle'),summary=document.getElementById('latestWashSummary');
  if(last&&title&&summary){
-  title.textContent=`Lavado ${last.washNo||''} · ${fmtTime(last.datetime)}`;
+  title.textContent=`Intercambio ${last.washNo||''} · ${fmtTime(last.datetime)}`;
   const bal=Number(last.uf)||0;
   summary.className='latest-wash-grid';
   summary.innerHTML=`
-    <div><span>Ingreso</span><strong>${Math.round(Number(last.actualIn)||0)} mL</strong></div>
-    <div><span>Egreso</span><strong>${Math.round(Number(last.drained)||0)} mL</strong></div>
-    <div><span>Balance</span><strong class="${bal<0?'positive':bal>0?'negative':''}">${bal>0?'+':''}${Math.round(bal)} mL</strong></div>
-    <div><span>Solución</span><strong>${last.solution||'—'}</strong></div>`;
+    <div><span>Volumen infundido</span><strong>${Math.round(Number(last.actualIn)||0)} mL</strong></div>
+    <div><span>Volumen drenado</span><strong>${Math.round(Number(last.drained)||0)} mL</strong></div>
+    <div><span>Balance del intercambio</span><strong class="${bal<0?'positive':bal>0?'negative':''}">${bal>0?'+':''}${Math.round(bal)} mL</strong></div>
+    <div><span>Solución de diálisis</span><strong>${last.solution||'—'}</strong></div>`;
  }else if(title&&summary){
   title.textContent='Sin registros';
   summary.className='latest-empty';
-  summary.textContent='Cuando registres un lavado, vas a ver acá sus datos principales.';
+  summary.textContent='Cuando registres un intercambio, vas a ver acá sus datos principales.';
  }
 
  const active=getPendingWash();
@@ -2644,16 +2644,16 @@ function renderHome(){
  if(active){
   const drainDate=getDrainDate(active);
   const pending=drainDate&&drainDate<=new Date();
-  if(stateTitle)stateTitle.textContent=pending?'Drenaje pendiente':'Lavado en curso';
+  if(stateTitle)stateTitle.textContent=pending?'Drenaje pendiente':'Intercambio en curso';
   if(stateText)stateText.textContent=drainDate
    ? (pending
-      ? `El lavado ${active.washNo||''} ya alcanzó el horario previsto de drenaje.`
+      ? `El intercambio ${active.washNo||''} ya alcanzó el horario previsto de drenaje.`
       : `Drenaje previsto a las ${fmtTime(drainDate)}.`)
-   : 'Hay un lavado abierto pendiente de completar.';
+   : 'Hay un intercambio abierto pendiente de completar.';
   if(dot)dot.className='home-status-dot active';
  }else{
-  if(stateTitle)stateTitle.textContent=count?'Jornada en seguimiento':'Sin lavado activo';
-  if(stateText)stateText.textContent=count?`${count} lavado${count===1?'':'s'} registrado${count===1?'':'s'} hoy.`:'Podés iniciar un nuevo registro cuando corresponda.';
+  if(stateTitle)stateTitle.textContent=count?'Jornada en seguimiento':'Sin intercambio activo';
+  if(stateText)stateText.textContent=count?`${count} intercambio${count===1?'':'s'} registrado${count===1?'':'s'} hoy.`:'Podés iniciar un nuevo registro cuando corresponda.';
   if(dot)dot.className='home-status-dot';
  }
  updateCountdown();
@@ -2690,7 +2690,7 @@ function runFunctionalCheck(){
  add('Datos del paciente',!!data&&!!data.settings&&Array.isArray(data.washes));
  add('Guardado local',typeof localStorage!=='undefined');
  add('Exportaciones',typeof exportCSV==='function'&&typeof exportJSON==='function'&&typeof downloadPdfReport==='function');
- add('Registro de lavados',typeof saveWash==='function'&&typeof editWash==='function'&&typeof deleteWash==='function');
+ add('Registro de intercambios',typeof saveWash==='function'&&typeof editWash==='function'&&typeof deleteWash==='function');
  add('Respaldo y restauración',typeof restoreJSON==='function'&&typeof persist==='function');
 
  const list=$('appCheckList');
