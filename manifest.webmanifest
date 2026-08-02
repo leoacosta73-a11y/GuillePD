@@ -1,7 +1,7 @@
 {
   "name": "GuillePD",
   "short_name": "GuillePD",
-  "description": "Registro de diÃ¡lisis peritoneal.",
+  "description": "Registro y seguimiento de diálisis peritoneal.",
   "lang": "es",
   "start_url": "./",
   "scope": "./",

@@ -1,10 +1,13 @@
-const CACHE_NAME = 'guillepd-pwa-v6';
+const CACHE_NAME = 'guillepd-pwa-v7';
 const SUPABASE_LIBRARY = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
 const APP_SHELL = [
   './',
   './index.html',
   './apd-styles.css',
   './apd-module.js',
+  './smart-features.css',
+  './i18n.js',
+  './notifications.js',
   './manifest.webmanifest',
   './icon-192.png',
   './icon-512.png'
@@ -58,4 +61,50 @@ self.addEventListener('fetch', event => {
         return Response.error();
       }))
   );
+});
+
+/* Notificaciones mostradas por la PWA. El horario se conserva en el
+ * dispositivo y la página solicita al Service Worker que muestre el aviso.
+ * Este mismo formato queda preparado para incorporar Web Push en el futuro. */
+self.addEventListener('message', event => {
+  const message=event.data||{};
+  if(message.type==='SKIP_WAITING'){
+    self.skipWaiting();
+    return;
+  }
+  if(message.type==='SHOW_NOTIFICATION'&&message.title){
+    event.waitUntil(self.registration.showNotification(message.title,message.options||{}));
+  }
+});
+
+self.addEventListener('notificationclick', event => {
+  event.notification.close();
+  const target=(event.notification.data&&event.notification.data.url)||'./';
+  event.waitUntil(
+    clients.matchAll({type:'window',includeUncontrolled:true}).then(openClients=>{
+      for(const client of openClients){
+        if('focus' in client){
+          client.navigate(target).catch(()=>null);
+          return client.focus();
+        }
+      }
+      return clients.openWindow?clients.openWindow(target):null;
+    })
+  );
+});
+
+// Punto de extensión reservado para recordatorios APD y notificaciones push.
+self.addEventListener('push', event => {
+  if(!event.data)return;
+  let payload={};
+  try{payload=event.data.json()}catch(_){payload={body:event.data.text()}}
+  const title=payload.title||'GuillePD';
+  const options={
+    body:payload.body||'',
+    icon:'./icon-192.png',
+    badge:'./icon-192.png',
+    tag:payload.tag||'guillepd-push',
+    data:{url:payload.url||'./',type:payload.type||'custom',...(payload.data||{})}
+  };
+  event.waitUntil(self.registration.showNotification(title,options));
 });

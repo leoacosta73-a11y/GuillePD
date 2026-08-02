@@ -13,7 +13,8 @@
 <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
 <link rel="apple-touch-icon" href="./icon-192.png">
 <link rel="stylesheet" href="./apd-styles.css">
-<title>GuillePD v3.4.3 · Historia ampliada</title>
+<link rel="stylesheet" href="./smart-features.css">
+<title>GuillePD v3.5.0 · Notificaciones e idiomas</title>
 <style>
 :root{--bg:#f4f8fa;--card:#fff;--ink:#17323a;--muted:#6d858d;--brand:#0f6f7a;--brand2:#1c9aaa;--ok:#16845b;--danger:#c94040;--line:#d8e6ea;--shadow:0 8px 28px rgba(18,65,75,.10)}
 *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}button,input,select,textarea{font:inherit}.app{max-width:760px;margin:auto;min-height:100vh;padding-bottom:86px}header{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;padding:18px;box-shadow:0 3px 16px rgba(0,0,0,.14)}.brand{display:flex;align-items:center;justify-content:space-between;gap:12px}.brand h1{font-size:25px;margin:0}.brand small{opacity:.9}main{padding:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}.hero{display:grid;grid-template-columns:1fr 1fr;gap:12px}.metric{background:#f6fbfc;border:1px solid var(--line);border-radius:16px;padding:14px}.metric strong{display:block;font-size:25px;margin-top:4px}.metric small{color:var(--muted)}.countdown{grid-column:1/-1;text-align:center;background:#eaf8f7}.countdown strong{font-size:38px}.btn{border:0;border-radius:14px;padding:14px 16px;font-weight:700;cursor:pointer}.btn-primary{background:var(--brand);color:#fff;width:100%;font-size:18px}.btn-secondary{background:#e8f2f4;color:var(--ink)}.btn-danger{background:#ffe9e9;color:#9e2626}.btn-row{display:flex;gap:10px;flex-wrap:wrap}.btn-row .btn{flex:1}h2{font-size:20px;margin:0 0 12px}label{display:block;font-size:13px;font-weight:700;margin:0 0 6px;color:#4e6971}input,select,textarea{width:100%;border:1px solid #c9dce1;border-radius:12px;padding:12px;background:#fff;color:var(--ink)}textarea{min-height:84px;resize:vertical}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.field{margin-bottom:12px}.target{background:#eefafa;border:2px solid #a8dfe4;border-radius:18px;padding:18px;text-align:center;margin:12px 0}.target strong{font-size:42px;display:block;color:var(--brand)}.target small{color:var(--muted);font-weight:800}.kpi{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:10px 0}.kpi:first-child{border-top:0}.kpi b{font-size:18px}.tabs{display:flex;gap:8px;margin-bottom:12px}.tab{flex:1;border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px;font-weight:700}.tab.active{background:var(--brand);color:#fff}.record{border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px}.control-card{border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px;background:#fbfdfe}.control-pre{border-left:5px solid #2f7dd1}.control-post{border-left:5px solid #27a06f}.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.compare-item{background:#f6fbfc;border:1px solid var(--line);border-radius:14px;padding:12px}.compare-item small{display:block;color:var(--muted);font-weight:700;margin-bottom:4px}.compare-item b{font-size:16px}.record-top{display:flex;justify-content:space-between;gap:10px}.uf-pos{color:var(--ok);font-weight:800}.uf-neg{color:var(--danger);font-weight:800}.uf-zero{color:var(--muted);font-weight:800}.muted{color:var(--muted)}.hidden{display:none!important}.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:center;z-index:30;padding-bottom:env(safe-area-inset-bottom)}.bottom-nav .inner{max-width:760px;width:100%;display:grid;grid-template-columns:repeat(4,1fr)}.navbtn{border:0;background:#fff;padding:11px 4px;color:#587078;font-size:12px}.navbtn.active{color:var(--brand);font-weight:800}.notice{font-size:12px;color:#6e7f85;line-height:1.4}.progress{height:12px;background:#e6eef0;border-radius:999px;overflow:hidden}.progress>div{height:100%;background:linear-gradient(90deg,var(--brand),var(--brand2));width:0}.badge{display:inline-block;padding:5px 9px;border-radius:999px;background:#eef5f6;color:#17323a;font-size:12px;font-weight:700}.modal{position:fixed;inset:0;background:rgba(10,30,36,.55);z-index:60;display:flex;align-items:flex-end;justify-content:center}.modal-box{background:#fff;width:100%;max-width:760px;max-height:92vh;overflow:auto;border-radius:24px 24px 0 0;padding:18px}.steps{display:flex;gap:8px;margin-bottom:14px}.stepdot{height:8px;background:#dfeaec;border-radius:999px;flex:1}.stepdot.on{background:var(--brand)}@media(max-width:560px){.grid2,.grid3{grid-template-columns:1fr}.hero{grid-template-columns:1fr 1fr}}@media print{header,.bottom-nav,.no-print{display:none!important}body{background:#fff}.app{max-width:none;padding:0}.card{box-shadow:none;break-inside:avoid}}
@@ -1273,6 +1274,72 @@ body.legal-open{overflow:hidden}
       </div>
     </div>
 
+    <div class="settings-section card smart-settings-card">
+      <div class="smart-settings-head">
+        <div>
+          <span class="eyebrow">Experiencia</span>
+          <h3 data-i18n="language.title">Idioma</h3>
+          <p data-i18n="language.subtitle">Elegí el idioma de la aplicación y de los informes.</p>
+        </div>
+        <div class="smart-settings-icon" aria-hidden="true">🌐</div>
+      </div>
+      <div class="language-options" role="radiogroup" aria-label="Idioma">
+        <label class="language-option">
+          <input id="appLanguageEs" type="radio" name="appLanguage" value="es" onchange="selectAppLanguage(this.value)">
+          <span>Español</span>
+        </label>
+        <label class="language-option">
+          <input id="appLanguageEn" type="radio" name="appLanguage" value="en" onchange="selectAppLanguage(this.value)">
+          <span>English</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="settings-section card smart-settings-card">
+      <div class="smart-settings-head">
+        <div>
+          <span class="eyebrow">Acompañamiento</span>
+          <h3 data-i18n="notifications.title">Notificaciones</h3>
+          <p data-i18n="notifications.subtitle">Recordatorios del horario previsto de drenaje.</p>
+        </div>
+        <div class="smart-settings-icon" aria-hidden="true">🔔</div>
+      </div>
+
+      <div class="notification-master">
+        <div>
+          <strong data-i18n="notifications.enable">Activar recordatorios</strong>
+          <small data-i18n="notifications.enableHelp">GuillePD avisará cuando finalice la permanencia.</small>
+        </div>
+        <label class="switch-control" for="notificationsEnabled">
+          <input id="notificationsEnabled" type="checkbox" onchange="toggleNotificationControls()">
+          <span class="switch-track" aria-hidden="true"></span>
+        </label>
+      </div>
+
+      <div id="notificationOptions" class="notification-options">
+        <div class="field">
+          <label for="notificationRepeat" data-i18n="notifications.repeat">Repetición automática</label>
+          <select id="notificationRepeat">
+            <option value="0" data-i18n="notifications.noRepeat">No repetir</option>
+            <option value="5" data-i18n="notifications.every5">Cada 5 minutos</option>
+            <option value="10" data-i18n="notifications.every10">Cada 10 minutos</option>
+            <option value="15" data-i18n="notifications.every15">Cada 15 minutos</option>
+            <option value="30" data-i18n="notifications.every30">Cada 30 minutos</option>
+          </select>
+        </div>
+        <label class="notification-choice"><input id="notificationSound" type="checkbox"><span data-i18n="notifications.sound">Sonido</span></label>
+        <label class="notification-choice"><input id="notificationVibration" type="checkbox"><span data-i18n="notifications.vibration">Vibración</span></label>
+        <label class="notification-choice"><input id="notificationClosed" type="checkbox"><span data-i18n="notifications.closed">Mostrar con la aplicación cerrada</span></label>
+        <label class="notification-choice"><input id="notificationBackground" type="checkbox"><span data-i18n="notifications.background">Permitir recordatorios en segundo plano</span></label>
+      </div>
+
+      <div class="notification-permission">
+        <button id="notificationPermissionButton" class="btn btn-secondary" type="button" onclick="requestNotificationPermission()" data-i18n="notifications.enableButton">Activar notificaciones en este dispositivo</button>
+        <p id="notificationPermissionStatus" class="notification-status"></p>
+      </div>
+      <p class="notification-compatibility" data-i18n="notifications.compatibility">El horario queda guardado aunque cierres GuillePD. La entrega con la aplicación totalmente cerrada depende de las reglas de iOS, Android, Windows y del navegador; al volver a abrirla se recuperan los avisos vencidos.</p>
+    </div>
+
     <div class="settings-save-card card">
       <div>
         <span class="eyebrow">Guardar configuración</span>
@@ -1678,7 +1745,8 @@ const cloudState={
  reconciledUserId:null,reconcilePromise:null,recovery:false
 };
 const defaultPatient=(name='Guillermina')=>({id:'p_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),settings:{patient:name,planned:4,hc:'',dni:'',birthDate:'',diagnosis:'',hospital:'',nephrologist:'',dryWeight:'',usualVolume:'',ufTarget:'',solutions:'',contactName:'',contactPhone:''},washes:[],daily:{}});
-const defaultProfile=()=>({userId:null,welcomeSeen:false,welcomeSeenAt:null,legalAcceptedVersion:null,legalAcceptedAt:null,legalAcceptedUserId:null});
+const defaultNotificationPreferences=()=>({enabled:false,repeatMinutes:0,sound:true,vibration:true,showWhenClosed:true,background:true});
+const defaultProfile=()=>({userId:null,welcomeSeen:false,welcomeSeenAt:null,legalAcceptedVersion:null,legalAcceptedAt:null,legalAcceptedUserId:null,language:'es',notificationPreferences:defaultNotificationPreferences()});
 const defaultRoot=()=>{const p=defaultPatient();return {activePatientId:p.id,patients:[p],profile:defaultProfile()}};
 function safeParse(v,fallback=null){try{return v?JSON.parse(v):fallback}catch(e){return fallback}}
 function normalizePatient(v){
@@ -1707,6 +1775,16 @@ function normalizeRoot(v){
   if(v.profile.legalAcceptedVersion===undefined)v.profile.legalAcceptedVersion=null;
   if(v.profile.legalAcceptedAt===undefined)v.profile.legalAcceptedAt=null;
   if(v.profile.legalAcceptedUserId===undefined)v.profile.legalAcceptedUserId=null;
+  if(!['es','en'].includes(v.profile.language))v.profile.language='es';
+  const notificationSource=(v.profile.notificationPreferences&&typeof v.profile.notificationPreferences==='object')?v.profile.notificationPreferences:{};
+  v.profile.notificationPreferences={
+   enabled:notificationSource.enabled===true,
+   repeatMinutes:[0,5,10,15,30].includes(Number(notificationSource.repeatMinutes))?Number(notificationSource.repeatMinutes):0,
+   sound:notificationSource.sound!==false,
+   vibration:notificationSource.vibration!==false,
+   showWhenClosed:notificationSource.showWhenClosed!==false,
+   background:notificationSource.background!==false
+  };
   return v;
  }
  if(v&&Array.isArray(v.washes)){
@@ -1766,7 +1844,7 @@ function persist(){
  }catch(e){}
  saveToIndexedDB(snapshot);
  const el=document.getElementById('backupStatus');
- if(el)el.textContent='Último guardado automático: '+new Date().toLocaleString('es-AR');
+ if(el)el.textContent='Último guardado automático: '+new Date().toLocaleString(appLocale());
  if(changed&&!cloudState.applying){
   markCloudDirty();
   scheduleCloudSync();
@@ -1903,6 +1981,7 @@ function applyCloudPayload(payload,updatedAt){
   lastSyncedAt:updatedAt||new Date().toISOString()
  });
  renderAll();
+ if(window.GuillePDNotifications)window.GuillePDNotifications.rebuildManualJobs();
 }
 async function reconcileCloudData(){
  if(!cloudClient||!cloudState.user||!navigator.onLine)return false;
@@ -2186,7 +2265,7 @@ function num(id){
  if(raw==='')return null;
  const v=Number(raw);
  return Number.isFinite(v)?v:null;
-}function localDT(d=new Date()){const z=n=>String(n).padStart(2,'0');return `${d.getFullYear()}-${z(d.getMonth()+1)}-${z(d.getDate())}T${z(d.getHours())}:${z(d.getMinutes())}`}function sameDay(a,b=new Date()){return new Date(a).toDateString()===b.toDateString()}function fmtDate(v){return new Date(v).toLocaleDateString('es-AR',{day:'2-digit',month:'2-digit',year:'numeric'})}function fmtTime(v){return new Date(v).toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'})}function sum(a,k){return a.reduce((s,x)=>s+(Number(x[k])||0),0)}
+}function appLocale(){return window.GuillePDI18n?window.GuillePDI18n.locale():((root&&root.profile&&root.profile.language==='en')?'en-US':'es-AR')}function localDT(d=new Date()){const z=n=>String(n).padStart(2,'0');return `${d.getFullYear()}-${z(d.getMonth()+1)}-${z(d.getDate())}T${z(d.getHours())}:${z(d.getMinutes())}`}function sameDay(a,b=new Date()){return new Date(a).toDateString()===b.toDateString()}function fmtDate(v){return new Date(v).toLocaleDateString(appLocale(),{day:'2-digit',month:'2-digit',year:'numeric'})}function fmtTime(v){return new Date(v).toLocaleTimeString(appLocale(),{hour:'2-digit',minute:'2-digit'})}function sum(a,k){return a.reduce((s,x)=>s+(Number(x[k])||0),0)}
 function balanceClass(v){
  const n=Number(v)||0;
  return n<0?'uf-pos':n>0?'uf-neg':'uf-zero';
@@ -2386,6 +2465,7 @@ function savePartialWash(){
  else data.washes.push(record);
  editingId=null;
  persist();
+ if(window.GuillePDNotifications)window.GuillePDNotifications.scheduleManualDrain(record);
  closeModal();
  renderAll();
  alert('Infusión guardada. Después entrá a Historial y tocá “Cargar drenaje”.');
@@ -2435,6 +2515,7 @@ function saveEmptyDrainOnly(){
  else data.washes.push(record);
  editingId=null;
  persist();
+ if(window.GuillePDNotifications)window.GuillePDNotifications.scheduleManualDrain(record);
  closeModal();
  renderAll();
  alert('Peso de la bolsa vacía guardado. El intercambio queda pendiente hasta cargar la bolsa llena.');
@@ -2526,6 +2607,7 @@ function saveWash(){
 
  editingId=null;
  persist();
+ if(window.GuillePDNotifications)window.GuillePDNotifications.cancelManualDrain(record.id);
  closeModal();
  renderAll();
  alert('Intercambio finalizado y guardado.');
@@ -2841,6 +2923,7 @@ function toggleAllHistory(){
 function deleteWash(id){
  if(confirm('¿Eliminar este intercambio?')){
   data.washes=data.washes.filter(w=>w.id!==id);
+  if(window.GuillePDNotifications)window.GuillePDNotifications.cancelManualDrain(id);
   persist();
   renderAll();
  }
@@ -2863,11 +2946,11 @@ function summaryPeriod(){
   const weekday=(base.getDay()+6)%7;
   start=new Date(base);start.setDate(base.getDate()-weekday);start.setHours(0,0,0,0);
   end=new Date(start);end.setDate(start.getDate()+6);end.setHours(23,59,59,999);
-  label=`${fmtDate(start)} al ${fmtDate(end)}`;
+  label=`${fmtDate(start)} ${root.profile?.language==='en'?'to':'al'} ${fmtDate(end)}`;
  }else{
   start=new Date(base.getFullYear(),base.getMonth(),1,0,0,0,0);
   end=new Date(base.getFullYear(),base.getMonth()+1,0,23,59,59,999);
-  label=base.toLocaleDateString('es-AR',{month:'long',year:'numeric'});
+  label=base.toLocaleDateString(appLocale(),{month:'long',year:'numeric'});
  }
  return {start,end,label};
 }
@@ -3034,6 +3117,15 @@ function saveSettings(){
  s.contactName=$('contactName').value.trim();
  s.contactPhone=$('contactPhone').value.trim();
 
+ root.profile=(root.profile&&typeof root.profile==='object')?root.profile:defaultProfile();
+ const selectedLanguage=document.querySelector('input[name="appLanguage"]:checked');
+ root.profile.language=selectedLanguage&&selectedLanguage.value==='en'?'en':'es';
+ if(window.GuillePDNotifications){
+  root.profile.notificationPreferences=window.GuillePDNotifications.configure(
+   window.GuillePDNotifications.readPreferencesFromForm()
+  );
+ }
+
  persist();
  renderAll();
 
@@ -3126,15 +3218,15 @@ function reportPeriod(){
  if(type==='day'){
   start=new Date(base);start.setHours(0,0,0,0);
   end=new Date(base);end.setHours(23,59,59,999);
-  label=base.toLocaleDateString('es-AR');
+  label=base.toLocaleDateString(appLocale());
  }else if(type==='week'){
   start=new Date(base);start.setHours(0,0,0,0);
   end=new Date(start);end.setDate(start.getDate()+6);end.setHours(23,59,59,999);
-  label=`${start.toLocaleDateString('es-AR')} al ${end.toLocaleDateString('es-AR')}`;
+  label=`${start.toLocaleDateString(appLocale())} ${root.profile?.language==='en'?'to':'al'} ${end.toLocaleDateString(appLocale())}`;
  }else{
   start=new Date(base.getFullYear(),base.getMonth(),1,0,0,0,0);
   end=new Date(base.getFullYear(),base.getMonth()+1,0,23,59,59,999);
-  label=base.toLocaleDateString('es-AR',{month:'long',year:'numeric'});
+  label=base.toLocaleDateString(appLocale(),{month:'long',year:'numeric'});
  }
  return {type,start,end,label};
 }
@@ -3181,7 +3273,7 @@ function pdfFooter(s,page,total){
 function reportDailySeries(all,period){
  const map={};
  const ensure=k=>{
-  if(!map[k])map[k]={key:k,label:new Date(k+'T12:00:00').toLocaleDateString('es-AR',{day:'2-digit',month:'2-digit'}),input:0,output:0,balance:0,weight:null,sys:null,dia:null,urine:null};
+  if(!map[k])map[k]={key:k,label:new Date(k+'T12:00:00').toLocaleDateString(appLocale(),{day:'2-digit',month:'2-digit'}),input:0,output:0,balance:0,weight:null,sys:null,dia:null,urine:null};
   return map[k];
  };
  all.forEach(w=>{
@@ -3284,8 +3376,8 @@ function makePdfBlob(){
 
  const idValue=`${data.settings.dni||'—'} / ${data.settings.hc||'—'}`;
  const reportTypeLabel=period.type==='day'?'Diario':period.type==='week'?'Semanal':'Mensual';
- const reportDateLabel=period.type==='day'?period.label:new Date().toLocaleDateString('es-AR');
- const modality='Diálisis Peritoneal Manual (CAPD)';
+ const reportDateLabel=period.type==='day'?period.label:new Date().toLocaleDateString(appLocale());
+ const modality=root.profile?.language==='en'?'Manual Peritoneal Dialysis (CAPD)':'Diálisis Peritoneal Manual (CAPD)';
  const center=data.settings.hospital||'—';
  const nephro=data.settings.nephrologist||'—';
  const responsible=data.settings.contactName||'—';
@@ -3457,7 +3549,10 @@ function makePdfBlob(){
   s=pdfRoundRect(s,20,51,356,32,4,true,true,.6);
   s=pdfFill(s,.02,.26,.35);
   s=pdfText(s,30,72,'Resumen del período',8.5,true);
-  s=pdfText(s,30,58,`Intercambios: ${all.length}  |  Vol. infundido: ${ti} mL  |  Vol. drenado: ${to} mL  |  Balance total: ${tb>0?'+':''}${tb} mL`,7.4);
+  const periodSummary=root.profile?.language==='en'
+   ? `Exchanges: ${all.length}  |  Infused vol.: ${ti} mL  |  Drained vol.: ${to} mL  |  Total balance: ${tb>0?'+':''}${tb} mL`
+   : `Intercambios: ${all.length}  |  Vol. infundido: ${ti} mL  |  Vol. drenado: ${to} mL  |  Balance total: ${tb>0?'+':''}${tb} mL`;
+  s=pdfText(s,30,58,periodSummary,7.4);
 
   s=pdfFill(s,.06,.12,.24);
   s=pdfText(s,740,60,`Página ${pi+1} de ${pagesData.length}`,7);
@@ -3472,9 +3567,9 @@ function makePdfBlob(){
 
   // Frase exacta y espaciada según la identidad visual.
   s=pdfFill(s,.03,.20,.45);
-  s=pdfText(s,320,26,'Every records help ',11,true);
+  s=pdfText(s,320,26,root.profile?.language==='en'?'Every record helps ':'Cada registro ayuda a ',11,true);
   s=pdfFill(s,.10,.66,.64);
-  s=pdfText(s,430,26,'care for a kidney.',11,true);
+  s=pdfText(s,430,26,root.profile?.language==='en'?'care for a kidney.':'cuidar un riñón.',11,true);
 
   // Corazón final.
   s=pdfStroke(s,.10,.66,.64);
@@ -3674,7 +3769,7 @@ function renderHome(){
 
  const $set=(id,val)=>{const el=document.getElementById(id);if(el)el.textContent=val};
  $set('homePatientName',data.settings.patient||'Guillermina');
- $set('homeDateLabel',now.toLocaleDateString('es-AR',{weekday:'long',day:'numeric',month:'long'}));
+ $set('homeDateLabel',now.toLocaleDateString(appLocale(),{weekday:'long',day:'numeric',month:'long'}));
  $set('todayCount',String(count));
  $set('todayBalance',(balance>0?'+':'')+balance+' mL');
  const todayBalanceEl=document.getElementById('todayBalance');
@@ -3752,6 +3847,7 @@ function runFunctionalCheck(){
    'screen-apd-treatment','apdProgramSelect','apdPrescriptionHistory',
    'welcomeOverlay','welcomeAction','legalOverlay','legalTermsDocument',
    'legalPrivacyDocument','legalPrimaryAction','cloudLegalConsent'
+   ,'notificationsEnabled','notificationRepeat','notificationPermissionStatus'
   ];
  add('Pantallas principales',requiredIds.every(id=>!!$(id)));
  add('Datos del paciente',!!data&&!!data.settings&&Array.isArray(data.washes));
@@ -3760,6 +3856,7 @@ function runFunctionalCheck(){
   add('Registro de intercambios',typeof saveWash==='function'&&typeof editWash==='function'&&typeof deleteWash==='function');
   add('Respaldo y restauración',typeof restoreJSON==='function'&&typeof persist==='function');
   add('Modalidades y APD',typeof openAPDTreatment==='function'&&typeof saveAPDPrescription==='function');
+  add('Idiomas y notificaciones',!!window.GuillePDI18n&&!!window.GuillePDNotifications);
 
  const list=$('appCheckList');
  const badge=$('appCheckBadge');
@@ -3792,6 +3889,11 @@ function renderAll(){
  setFieldValue('contactName',data.settings.contactName||'');
  setFieldValue('contactPhone',data.settings.contactPhone||'');
 
+ const language=(root.profile&&root.profile.language==='en')?'en':'es';
+ const languageInput=document.querySelector(`input[name="appLanguage"][value="${language}"]`);
+ if(languageInput)languageInput.checked=true;
+ if(window.GuillePDNotifications)window.GuillePDNotifications.renderSettings();
+
 
 renderHome();
  renderHistory();
@@ -3799,6 +3901,7 @@ renderHome();
  renderReportPreview();
  renderSettingsPreview();
  runFunctionalCheck();
+ if(window.GuillePDI18n)window.GuillePDI18n.apply();
 }
 async function initializeApp(){
  if(!localStorage.getItem(storeKey)){
@@ -3861,12 +3964,12 @@ document.addEventListener('input',function(e){
 
 
 window.addEventListener('load',()=>{
-  console.log('GuillePD v3.4.3 cargada');
+  console.log('GuillePD v3.5.0 cargada');
  runFunctionalCheck();
 });
 
 
-const APP_VERSION='3.4.3 Historia ampliada';
+const APP_VERSION='3.5.0 Notificaciones e idiomas';
 
 function showToast(message,type='info',duration=2600){
  const host=document.getElementById('toastHost');
@@ -3956,9 +4059,11 @@ document.addEventListener('DOMContentLoaded',()=>{
 </script>
 
 <script src="./apd-module.js"></script>
+<script src="./i18n.js"></script>
+<script src="./notifications.js"></script>
 <div id="toastHost" class="toast-host" aria-live="polite" aria-atomic="true"></div>
 <footer class="release-footer">
-  <span>GuillePD v3.4.3</span>
+  <span>GuillePD v3.5.0</span>
   <small>Manual (CAPD) · Cicladora (APD) · Mixto</small>
   <small><button class="legal-inline-link" type="button" onclick="openLegalDocument('terms')">Términos</button> · <button class="legal-inline-link" type="button" onclick="openLegalDocument('privacy')">Privacidad</button></small>
 </footer>
@@ -3966,7 +4071,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 if ('serviceWorker' in navigator && location.protocol !== 'file:') {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./service-worker.js').catch(error => {
-      console.warn('No se pudo activar el modo sin conexiÃ³n:', error);
+      console.warn('No se pudo activar el modo sin conexión:', error);
     });
   });
 }
