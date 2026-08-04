@@ -1,4 +1,4 @@
-const CACHE_NAME = 'guillepd-pwa-v9';
+const CACHE_NAME = 'guillepd-pwa-v11';
 const SUPABASE_LIBRARY = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
 const APP_SHELL = [
   './',

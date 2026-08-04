@@ -14,6 +14,7 @@
 .fluid-balance-item{padding:12px;border:1px solid var(--line);border-radius:14px;background:#f8fbfc}
 .fluid-balance-item span{display:block;color:var(--muted);font-size:.75rem;line-height:1.3}
 .fluid-balance-item strong{display:block;margin-top:4px;color:var(--navy);font-size:1rem}
+.fluid-balance-completed-note{margin:0 0 8px;padding:9px 11px;border-radius:12px;background:#eef8f3;color:#287058;font-size:.75rem;font-weight:750;line-height:1.4}
 .fluid-balance-formula{margin:0 0 15px;color:var(--muted);font-size:.78rem;line-height:1.45}
 .fluid-balance-card .btn{width:100%}
 .fluid-modal-card{width:min(620px,calc(100% - 24px));max-height:92vh;overflow:auto;padding:0}

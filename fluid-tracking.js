@@ -31,6 +31,15 @@
   if(!Array.isArray(data.fluidEntries))data.fluidEntries=[];
   return data.fluidEntries;
  }
+ function isEnabled(){
+  return typeof data!=='undefined'&&data?.settings?.fluidTrackingEnabled===true;
+ }
+ function isCompletedManualWash(wash){
+  if(!wash||wash.status==='open')return false;
+  const hasInfused=wash.actualIn!==null&&wash.actualIn!==undefined&&wash.actualIn!=='';
+  const hasDrained=wash.drained!==null&&wash.drained!==undefined&&wash.drained!=='';
+  return hasInfused&&hasDrained&&Number.isFinite(Number(wash.actualIn))&&Number.isFinite(Number(wash.drained));
+ }
  function entryDate(){
   const input=document.getElementById('fluidEntryDateTime');
   return localDateKey(input?.value||new Date());
@@ -58,7 +67,8 @@
   const dayEntries=entries().filter(item=>localDateKey(item.datetime)===day);
   const intake=Math.round(dayEntries.filter(item=>item.type==='intake').reduce((sum,item)=>sum+number(item.amount),0));
   const urine=Math.round(dayEntries.filter(item=>item.type==='urine').reduce((sum,item)=>sum+number(item.amount),0));
-  const washes=(typeof data!=='undefined'&&Array.isArray(data?.washes)?data.washes:[]).filter(wash=>localDateKey(wash.datetime)===day);
+  const washes=(typeof data!=='undefined'&&Array.isArray(data?.washes)?data.washes:[])
+   .filter(wash=>localDateKey(wash.datetime)===day&&isCompletedManualWash(wash));
   const infused=Math.round(washes.reduce((sum,wash)=>sum+number(wash.actualIn),0));
   const drained=Math.round(washes.reduce((sum,wash)=>sum+number(wash.drained),0));
   const apdUf=Math.round(patientAPDTreatments()
@@ -72,7 +82,10 @@
  function setText(id,value){const el=document.getElementById(id);if(el)el.textContent=value}
 
  function renderHome(){
-  if(!document.getElementById('fluidBalanceCard'))return;
+  const card=document.getElementById('fluidBalanceCard');
+  if(!card)return;
+  card.classList.toggle('hidden',!isEnabled());
+  if(!isEnabled())return;
   const totals=computeDailyBalance();
   setText('fluidTodayIntake',`${totals.intake} mL`);
   setText('fluidTodayUrine',`${totals.urine} mL`);
@@ -129,6 +142,7 @@
   renderEntryList();
  }
  function open(){
+  if(!isEnabled())return;
   resetForm();
   document.getElementById('fluidModal')?.classList.remove('hidden');
   document.body.style.overflow='hidden';
@@ -186,80 +200,188 @@
   const locale=window.GuillePDI18n?.locale?.()||'es-AR';
   return Number.isNaN(date.getTime())?day:date.toLocaleDateString(locale,{day:'2-digit',month:'long',year:'numeric'});
  }
+ function reportLogoJpeg(){
+  try{
+   const source=document.querySelector('.brand-full-logo');
+   if(!source||!source.complete||!source.naturalWidth||!source.naturalHeight)return null;
+   const width=1251,height=519,canvas=document.createElement('canvas');
+   canvas.width=width;canvas.height=height;
+   const context=canvas.getContext('2d');
+   if(!context)return null;
+   context.fillStyle='#ffffff';context.fillRect(0,0,width,height);
+   const scale=Math.min(width/source.naturalWidth,height/source.naturalHeight);
+   const drawWidth=source.naturalWidth*scale,drawHeight=source.naturalHeight*scale;
+   context.drawImage(source,(width-drawWidth)/2,(height-drawHeight)/2,drawWidth,drawHeight);
+   const encoded=canvas.toDataURL('image/jpeg',.92).split(',')[1];
+   return encoded?{binary:atob(encoded),width,height}:null;
+  }catch(_error){return null}
+ }
  function makeReportBlob(day=entryDate()||localDateKey(new Date())){
   const totals=computeDailyBalance(day);
-  const W=595,H=842,M=36;
-  const rows=[...totals.entries].sort((a,b)=>new Date(a.datetime)-new Date(b.datetime));
+  const W=842,H=595,M=20;
+  const intakeRows=totals.entries.filter(item=>item.type==='intake').sort((a,b)=>new Date(a.datetime)-new Date(b.datetime));
+  const urineRows=totals.entries.filter(item=>item.type==='urine').sort((a,b)=>new Date(a.datetime)-new Date(b.datetime));
+  const longest=Math.max(intakeRows.length,urineRows.length);
   const pages=[];
-  if(!rows.length)pages.push([]);
+  if(!longest)pages.push({intake:[],urine:[]});
   else{
-   pages.push(rows.slice(0,16));
-   for(let i=16;i<rows.length;i+=27)pages.push(rows.slice(i,i+27));
+   pages.push({intake:intakeRows.slice(0,7),urine:urineRows.slice(0,7)});
+   for(let i=7;i<longest;i+=12)pages.push({intake:intakeRows.slice(i,i+12),urine:urineRows.slice(i,i+12)});
   }
   const objects=[];
   const add=value=>(objects.push(value),objects.length);
   const font=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>');
   const bold=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>');
+  const logo=reportLogoJpeg();
+  const logoObject=logo?add(`<< /Type /XObject /Subtype /Image /Width ${logo.width} /Height ${logo.height} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${logo.binary.length} >>\nstream\n${logo.binary}\nendstream`):null;
   const pageIds=[],contentIds=[];
-  const patient=String(data?.settings?.patient||'-');
+  const settings=data?.settings||{};
+  const patient=String(settings.patient||'-');
   const locale=window.GuillePDI18n?.locale?.()||'es-AR';
+  const language=window.GuillePDI18n?.language?.()||'es';
   const fmt=value=>`${value>0?'+':''}${Math.round(value)} mL`;
   const pdfLabel=value=>String(value??'').replace(/[−–—]/g,'-');
+  const idValue=`${settings.dni||'-'} / ${settings.hc||'-'}`;
+  const responsible=settings.contactName||'-';
+  const contactPhone=settings.contactPhone||'-';
+  const center=settings.hospital||'-';
+  const nephro=settings.nephrologist||'-';
+  const treatmentMode=settings.treatmentMode||'manual';
+  const modality=language==='en'
+   ? ({manual:'Manual (CAPD)',apd:'Cycler (APD)',mixed:'Mixed (Manual + APD)'}[treatmentMode]||'Manual (CAPD)')
+   : ({manual:'Manual (CAPD)',apd:'Cicladora (APD)',mixed:'Mixto (Manual + APD)'}[treatmentMode]||'Manual (CAPD)');
+  const currentWeight=(()=>{
+   const washes=Array.isArray(data?.washes)?data.washes:[];
+   const weighted=[...washes].reverse().find(wash=>number(wash.weight)>0);
+   if(weighted)return `${number(weighted.weight).toFixed(1)} kg`;
+   return settings.dryWeight?`${settings.dryWeight} kg`:'-';
+  })();
   const field=(stream,x,y,w,label,value)=>{
-   stream=pdfFill(stream,.95,.98,.98);stream=pdfStroke(stream,.80,.88,.89);stream=pdfRoundRect(stream,x,y,w,50,8,true,true,.6);
-   stream=pdfFill(stream,.32,.42,.45);stream=pdfText(stream,x+12,y+31,pdfLabel(label),7.5,true);
-   stream=pdfFill(stream,.03,.20,.34);stream=pdfText(stream,x+12,y+12,value,12,true);
+   stream=pdfFill(stream,.98,.99,1);stream=pdfStroke(stream,.78,.83,.85);stream=pdfRoundRect(stream,x,y,w,40,5,true,true,.6);
+   stream=pdfFill(stream,.32,.42,.45);stream=pdfText(stream,x+10,y+25,pdfLabel(label),6.8,true);
+   stream=pdfFill(stream,.03,.20,.34);stream=pdfText(stream,x+10,y+9,value,10.5,true);
+   return stream;
+  };
+  const headerBlock=stream=>{
+   stream=pdfStroke(stream,.78,.83,.85);
+   stream=pdfRoundRect(stream,6,6,W-12,H-12,4,false,true,.7);
+   if(logoObject)stream+='q 145 0 0 60 20 521 cm /Logo Do Q\n';
+   else{
+    stream=pdfFill(stream,.03,.20,.45);stream=pdfText(stream,27,551,'Guille',23,true);
+    stream=pdfFill(stream,.10,.66,.64);stream=pdfText(stream,91,551,'PD',23,true);
+   }
+   stream=pdfStroke(stream,.82,.86,.88);stream=pdfLine(stream,176,518,176,579,.7);
+   const colX=[194,407,620];
+   stream=pdfFill(stream,.02,.26,.35);stream=pdfText(stream,colX[0],568,tr('fluid.report.patient','Paciente')+':',8,true);
+   stream=pdfFill(stream,.08,.14,.20);stream=pdfText(stream,colX[0]+44,568,shortText(patient,26),8.5);
+   stream=pdfFill(stream,.02,.26,.35);stream=pdfText(stream,colX[0],544,tr('fluid.report.idHistory','DNI / HC')+':',8,true);
+   stream=pdfFill(stream,.08,.14,.20);stream=pdfText(stream,colX[0]+48,544,shortText(idValue,27),8.5);
+   stream=pdfFill(stream,.02,.26,.35);stream=pdfText(stream,colX[0],526,tr('fluid.report.responsible','Responsable')+':',7.2,true);
+   stream=pdfFill(stream,.08,.14,.20);stream=pdfText(stream,colX[0]+54,526,shortText(responsible,17),7.2);
+   stream=pdfFill(stream,.02,.26,.35);stream=pdfText(stream,colX[0]+128,526,tr('fluid.report.phone','Tel.')+':',7.2,true);
+   stream=pdfFill(stream,.08,.14,.20);stream=pdfText(stream,colX[0]+149,526,shortText(contactPhone,14),7.2);
+
+   stream=pdfFill(stream,.02,.26,.35);stream=pdfText(stream,colX[1],568,tr('fluid.report.date','Fecha')+':',8,true);
+   stream=pdfFill(stream,.08,.14,.20);stream=pdfText(stream,colX[1]+34,568,shortText(reportDateLabel(day),22),8);
+   stream=pdfFill(stream,.02,.26,.35);stream=pdfText(stream,colX[1],550,tr('fluid.report.kind','Informe')+':',8,true);
+   stream=pdfFill(stream,.08,.14,.20);stream=pdfText(stream,colX[1]+40,550,shortText(tr('fluid.report.kindValue','Balance hídrico'),24),8);
+   stream=pdfFill(stream,.02,.26,.35);stream=pdfText(stream,colX[1],532,tr('fluid.report.weight','Peso')+':',8,true);
+   stream=pdfFill(stream,.08,.14,.20);stream=pdfText(stream,colX[1]+32,532,currentWeight,8);
+
+   stream=pdfFill(stream,.02,.26,.35);stream=pdfText(stream,colX[2],568,tr('fluid.report.modality','Modalidad')+':',8,true);
+   stream=pdfFill(stream,.08,.14,.20);stream=pdfText(stream,colX[2]+50,568,shortText(modality,28),7.5);
+   stream=pdfFill(stream,.02,.26,.35);stream=pdfText(stream,colX[2],550,tr('fluid.report.center','Centro')+':',8,true);
+   stream=pdfFill(stream,.08,.14,.20);stream=pdfText(stream,colX[2]+38,550,shortText(center,40),7.5);
+   stream=pdfFill(stream,.02,.26,.35);stream=pdfText(stream,colX[2],532,tr('fluid.report.clinician','Médico')+':',8,true);
+   stream=pdfFill(stream,.08,.14,.20);stream=pdfText(stream,colX[2]+40,532,shortText(nephro,28),7.5);
+   stream=pdfStroke(stream,.58,.68,.72);stream=pdfLine(stream,20,517,W-20,517,.8);
+   return stream;
+  };
+  const ledgerHeader=(stream,top)=>{
+   const gap=14,sideWidth=(W-M*2-gap)/2,leftX=M,rightX=M+sideWidth+gap;
+   stream=pdfFill(stream,.02,.45,.49);stream=pdfStroke(stream,.02,.38,.43);stream=pdfRoundRect(stream,leftX,top-28,sideWidth,28,3,true,true,.6);
+   stream=pdfFill(stream,1,1,1);stream=pdfText(stream,leftX+10,top-18,tr('fluid.report.inflows','INGRESOS - LÍQUIDOS POR BOCA'),8.3,true);
+   stream=pdfText(stream,leftX+sideWidth-83,top-18,`${totals.intake} mL`,8.3,true);
+   stream=pdfFill(stream,.03,.20,.45);stream=pdfStroke(stream,.02,.16,.36);stream=pdfRoundRect(stream,rightX,top-28,sideWidth,28,3,true,true,.6);
+   stream=pdfFill(stream,1,1,1);stream=pdfText(stream,rightX+10,top-18,tr('fluid.report.outflows','EGRESOS - ORINA'),8.3,true);
+   stream=pdfText(stream,rightX+sideWidth-83,top-18,`${totals.urine} mL`,8.3,true);
+   [leftX,rightX].forEach(x=>{
+    stream=pdfFill(stream,.88,.95,.96);stream=pdfRect(stream,x,top-49,sideWidth,21,true,false);
+    stream=pdfFill(stream,.08,.24,.29);
+    stream=pdfText(stream,x+8,top-42,tr('fluid.report.time','Hora'),7,true);
+    stream=pdfText(stream,x+63,top-42,tr('fluid.report.type','Tipo'),7,true);
+    stream=pdfText(stream,x+181,top-42,tr('fluid.report.amount','Cantidad'),7,true);
+    stream=pdfText(stream,x+260,top-42,tr('fluid.report.note','Observación'),7,true);
+   });
+   return {stream,rowTop:top-49,leftX,rightX,sideWidth};
+  };
+  const ledgerRow=(stream,item,index,x,width,rowTop)=>{
+   const y=rowTop-index*28,bottom=y-28;
+   if(index%2===1){stream=pdfFill(stream,.97,.98,.98);stream=pdfRect(stream,x,bottom,width,28,true,false)}
+   stream=pdfStroke(stream,.83,.87,.89);stream=pdfLine(stream,x,bottom,x+width,bottom,.4);
+   stream=pdfFill(stream,.12,.20,.24);
+   if(!item){
+    if(index===0)stream=pdfText(stream,x+8,y-18,tr('fluid.report.noSideEntries','Sin registros.'),7.5);
+    return stream;
+   }
+   const time=new Date(item.datetime).toLocaleTimeString(locale,{hour:'2-digit',minute:'2-digit'});
+   stream=pdfText(stream,x+8,y-18,time,7.5);
+   stream=pdfText(stream,x+63,y-18,shortText(typeLabel(item.type,item.beverage),18),7.5);
+   stream=pdfText(stream,x+181,y-18,`${Math.round(number(item.amount))} mL`,8,true);
+   stream=pdfText(stream,x+260,y-18,shortText(item.note||'-',21),7.2);
+   return stream;
+  };
+  const footer=(stream,pageIndex)=>{
+   stream=pdfFill(stream,.06,.12,.24);stream=pdfText(stream,740,60,`${tr('fluid.report.page','Página')} ${pageIndex+1} ${tr('fluid.report.of','de')} ${pages.length}`,7);
+   stream=pdfStroke(stream,.10,.66,.64);
+   stream+='1.5 w 272 34 m 264 42 252 37 252 28 c 252 18 272 10 272 10 c 272 10 292 18 292 28 c 292 37 280 42 272 34 c S\n';
+   stream+='1.0 w 267 30 m 263 31 261 28 262 25 c S\n';
+   stream+='1.0 w 277 30 m 281 31 283 28 282 25 c S\n';
+   stream+='1.2 w 272 24 m 270 20 270 17 272 15 c 274 17 274 20 272 24 c S\n';
+   stream=pdfFill(stream,.03,.20,.45);stream=pdfText(stream,310,26,tr('fluid.report.footerLead','Cada registro ayuda a '),11,true);
+   stream=pdfFill(stream,.10,.66,.64);stream=pdfText(stream,447,26,tr('fluid.report.footerEnd','cuidar un riñón.'),11,true);
+   stream=pdfStroke(stream,.10,.66,.64);
+   stream+='1.2 w 570 29 m 566 33 561 30 561 26 c 561 21 570 16 570 16 c 570 16 579 21 579 26 c 579 30 574 33 570 29 c S\n';
+   stream=pdfFill(stream,.16,.70,.68);stream+=`0 0 m 0 52 l 120 15 l 300 0 l h f\n`;
+   stream=pdfFill(stream,.02,.25,.48);stream+=`${W} 0 m ${W} 55 l 700 19 l 520 0 l h f\n`;
+   stream=pdfFill(stream,.02,.47,.53);stream+=`${W} 0 m ${W} 36 l 690 10 l 560 0 l h f\n`;
    return stream;
   };
   pages.forEach((pageRows,pageIndex)=>{
-   let stream='';
-   stream=pdfFill(stream,.04,.57,.59);stream=pdfRect(stream,0,H-88,W,88,true,false);
-   stream=pdfFill(stream,1,1,1);stream=pdfText(stream,M,H-47,tr('fluid.report.title','Informe de balance hídrico'),19,true);
-   stream=pdfText(stream,M,H-69,`${tr('fluid.report.patient','Paciente')}: ${patient}`,9);
-   stream=pdfText(stream,390,H-69,`${tr('fluid.report.page','Página')} ${pageIndex+1}/${pages.length}`,8);
-   stream=pdfFill(stream,.08,.14,.20);
-   stream=pdfText(stream,M,H-116,`${tr('fluid.report.date','Fecha')}: ${reportDateLabel(day)}`,10,true);
-   let tableTop;
-   if(pageIndex===0){
-    stream=pdfFill(stream,.03,.20,.34);stream=pdfText(stream,M,H-151,pdfLabel(tr('fluid.report.oralSection','Balance ingesta - orina')),11,true);
-    stream=field(stream,M,H-218,160,tr('fluid.total.intake','Líquidos ingeridos'),`${totals.intake} mL`);
-    stream=field(stream,M+170,H-218,160,tr('fluid.total.urine','Orina'),`${totals.urine} mL`);
-    stream=field(stream,M+340,H-218,183,tr('fluid.balance.oral','Balance ingesta − orina'),fmt(totals.oralBalance));
-    stream=pdfFill(stream,.03,.20,.34);stream=pdfText(stream,M,H-250,tr('fluid.report.totalSection','Balance total con diálisis'),11,true);
-    stream=field(stream,M,H-317,118,tr('fluid.total.infused','Infundido'),`${totals.infused} mL`);
-    stream=field(stream,M+128,H-317,118,tr('fluid.total.drained','Drenado'),`${totals.drained} mL`);
-    stream=field(stream,M+256,H-317,118,tr('fluid.total.apdUf','UF APD'),`${totals.apdUf} mL`);
-    stream=field(stream,M+384,H-317,139,tr('fluid.balance.total','Balance total'),fmt(totals.total));
-    tableTop=H-360;
-   }else tableTop=H-145;
-   stream=pdfFill(stream,.03,.20,.34);stream=pdfText(stream,M,tableTop,tr('fluid.report.entries','Detalle de líquidos por boca y orina'),10,true);
-   const headerY=tableTop-25;
-   stream=pdfFill(stream,.88,.95,.96);stream=pdfRect(stream,M,headerY,W-M*2,24,true,false);
-   stream=pdfFill(stream,.08,.24,.29);
-   stream=pdfText(stream,M+8,headerY+8,tr('fluid.report.time','Hora'),7.5,true);
-   stream=pdfText(stream,M+70,headerY+8,tr('fluid.report.type','Tipo'),7.5,true);
-   stream=pdfText(stream,M+245,headerY+8,tr('fluid.report.amount','Cantidad'),7.5,true);
-   stream=pdfText(stream,M+335,headerY+8,tr('fluid.report.note','Observación'),7.5,true);
-   if(!pageRows.length){
-    stream=pdfFill(stream,.42,.49,.52);stream=pdfText(stream,M+8,headerY-25,tr('fluid.report.noEntries','Sin registros de líquidos por boca u orina.'),8.5);
-   }else pageRows.forEach((item,index)=>{
-    const y=headerY-24-(index*23);
-    const time=new Date(item.datetime).toLocaleTimeString(locale,{hour:'2-digit',minute:'2-digit'});
-    if(index%2===1){stream=pdfFill(stream,.97,.98,.98);stream=pdfRect(stream,M,y-5,W-M*2,23,true,false)}
-    stream=pdfFill(stream,.12,.20,.24);
-    stream=pdfText(stream,M+8,y,time,7.5);
-    stream=pdfText(stream,M+70,y,shortText(typeLabel(item.type,item.beverage),30),7.5);
-    stream=pdfText(stream,M+245,y,`${Math.round(number(item.amount))} mL`,7.5,true);
-    stream=pdfText(stream,M+335,y,shortText(item.note||'-',29),7.5);
+    let stream='';
+    stream=headerBlock(stream);
+    let tableTop;
+    if(pageIndex===0){
+     stream=pdfFill(stream,.03,.20,.34);stream=pdfText(stream,M,498,tr('fluid.report.title','Informe de balance hídrico'),12,true);
+     stream=pdfText(stream,M,480,pdfLabel(tr('fluid.report.oralSection','Balance ingesta - orina')),8.5,true);
+     stream=field(stream,M,430,250,tr('fluid.total.intake','Líquidos ingeridos'),`${totals.intake} mL`);
+     stream=field(stream,M+260,430,250,tr('fluid.total.urine','Orina'),`${totals.urine} mL`);
+     stream=field(stream,M+520,430,282,tr('fluid.balance.oral','Balance ingesta - orina'),fmt(totals.oralBalance));
+     stream=pdfFill(stream,.03,.20,.34);stream=pdfText(stream,M,413,tr('fluid.report.totalSection','Balance total con diálisis'),8.5,true);
+     stream=field(stream,M,363,190,tr('fluid.total.infused','Infundido'),`${totals.infused} mL`);
+     stream=field(stream,M+198,363,190,tr('fluid.total.drained','Drenado'),`${totals.drained} mL`);
+     stream=field(stream,M+396,363,190,tr('fluid.total.apdUf','UF APD'),`${totals.apdUf} mL`);
+     stream=field(stream,M+594,363,208,tr('fluid.balance.total','Balance total'),fmt(totals.total));
+     stream=pdfFill(stream,.03,.20,.34);stream=pdfText(stream,M,344,tr('fluid.report.entries','Detalle de líquidos por boca y orina'),9,true);
+     tableTop=330;
+    }else{
+     stream=pdfFill(stream,.03,.20,.34);stream=pdfText(stream,M,498,tr('fluid.report.title','Informe de balance hídrico'),12,true);
+     stream=pdfText(stream,M,477,tr('fluid.report.entries','Detalle de líquidos por boca y orina'),9,true);
+     tableTop=463;
+    }
+    const ledger=ledgerHeader(stream,tableTop);stream=ledger.stream;
+    const rowCount=Math.max(pageRows.intake.length,pageRows.urine.length,1);
+    for(let index=0;index<rowCount;index++){
+     stream=ledgerRow(stream,pageRows.intake[index],index,ledger.leftX,ledger.sideWidth,ledger.rowTop);
+     stream=ledgerRow(stream,pageRows.urine[index],index,ledger.rightX,ledger.sideWidth,ledger.rowTop);
+    }
+    stream=footer(stream,pageIndex);
+    const content=add(`<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`);
+    const page=add('');contentIds.push(content);pageIds.push(page);
    });
-   stream=pdfStroke(stream,.82,.88,.89);stream=pdfLine(stream,M,30,W-M,30,.5);
-   stream=pdfFill(stream,.38,.46,.49);stream=pdfText(stream,M,16,tr('fluid.report.footer','Registro personal de GuillePD. Sin interpretación clínica.'),7);
-   const content=add(`<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`);
-   const page=add('');contentIds.push(content);pageIds.push(page);
-  });
-  const pagesObject=add('');
-  const catalog=add(`<< /Type /Catalog /Pages ${pagesObject} 0 R >>`);
-  pageIds.forEach((pageId,index)=>{objects[pageId-1]=`<< /Type /Page /Parent ${pagesObject} 0 R /MediaBox [0 0 ${W} ${H}] /Resources << /Font << /F1 ${font} 0 R /F2 ${bold} 0 R >> >> /Contents ${contentIds[index]} 0 R >>`});
+   const pagesObject=add('');
+   const catalog=add(`<< /Type /Catalog /Pages ${pagesObject} 0 R >>`);
+   pageIds.forEach((pageId,index)=>{objects[pageId-1]=`<< /Type /Page /Parent ${pagesObject} 0 R /MediaBox [0 0 ${W} ${H}] /Resources << /Font << /F1 ${font} 0 R /F2 ${bold} 0 R >>${logoObject?` /XObject << /Logo ${logoObject} 0 R >>`:''} >> /Contents ${contentIds[index]} 0 R >>`});
   objects[pagesObject-1]=`<< /Type /Pages /Kids [${pageIds.map(id=>`${id} 0 R`).join(' ')}] /Count ${pageIds.length} >>`;
   let pdf='%PDF-1.4\n',offsets=[0];
   objects.forEach((object,index)=>{offsets.push(pdf.length);pdf+=`${index+1} 0 obj\n${object}\nendobj\n`});
@@ -291,13 +413,20 @@
    }else downloadReport();
   }catch(error){if(error?.name!=='AbortError')downloadReport()}
  }
- function render(){renderHome();if(!document.getElementById('fluidModal')?.classList.contains('hidden'))renderEntryList()}
+ function render(){
+  renderHome();
+  if(!isEnabled()){
+   close();
+   return;
+  }
+  if(!document.getElementById('fluidModal')?.classList.contains('hidden'))renderEntryList();
+ }
  function init(){
   document.querySelectorAll('input[name="fluidEntryType"]').forEach(input=>input.addEventListener('change',toggleFields));
   document.getElementById('fluidEntryDateTime')?.addEventListener('change',renderEntryList);
   render();
  }
 
- window.GuillePDFluids={open,close,save,edit,remove,render,renderEntryList,computeDailyBalance,resetForm,makeReportBlob,downloadReport,shareReport};
+ window.GuillePDFluids={open,close,save,edit,remove,render,renderEntryList,computeDailyBalance,resetForm,makeReportBlob,downloadReport,shareReport,isEnabled};
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();

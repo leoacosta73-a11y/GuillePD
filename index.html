@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="./apd-styles.css">
 <link rel="stylesheet" href="./smart-features.css">
 <link rel="stylesheet" href="./fluid-tracking.css">
-<title>GuillePD v3.6.1 · Doble balance e informe diario</title>
+<title>GuillePD v3.6.3 · Informe hídrico contable</title>
 <style>
 :root{--bg:#f4f8fa;--card:#fff;--ink:#17323a;--muted:#6d858d;--brand:#0f6f7a;--brand2:#1c9aaa;--ok:#16845b;--danger:#c94040;--line:#d8e6ea;--shadow:0 8px 28px rgba(18,65,75,.10)}
 *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}button,input,select,textarea{font:inherit}.app{max-width:760px;margin:auto;min-height:100vh;padding-bottom:86px}header{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;padding:18px;box-shadow:0 3px 16px rgba(0,0,0,.14)}.brand{display:flex;align-items:center;justify-content:space-between;gap:12px}.brand h1{font-size:25px;margin:0}.brand small{opacity:.9}main{padding:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}.hero{display:grid;grid-template-columns:1fr 1fr;gap:12px}.metric{background:#f6fbfc;border:1px solid var(--line);border-radius:16px;padding:14px}.metric strong{display:block;font-size:25px;margin-top:4px}.metric small{color:var(--muted)}.countdown{grid-column:1/-1;text-align:center;background:#eaf8f7}.countdown strong{font-size:38px}.btn{border:0;border-radius:14px;padding:14px 16px;font-weight:700;cursor:pointer}.btn-primary{background:var(--brand);color:#fff;width:100%;font-size:18px}.btn-secondary{background:#e8f2f4;color:var(--ink)}.btn-danger{background:#ffe9e9;color:#9e2626}.btn-row{display:flex;gap:10px;flex-wrap:wrap}.btn-row .btn{flex:1}h2{font-size:20px;margin:0 0 12px}label{display:block;font-size:13px;font-weight:700;margin:0 0 6px;color:#4e6971}input,select,textarea{width:100%;border:1px solid #c9dce1;border-radius:12px;padding:12px;background:#fff;color:var(--ink)}textarea{min-height:84px;resize:vertical}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.field{margin-bottom:12px}.target{background:#eefafa;border:2px solid #a8dfe4;border-radius:18px;padding:18px;text-align:center;margin:12px 0}.target strong{font-size:42px;display:block;color:var(--brand)}.target small{color:var(--muted);font-weight:800}.kpi{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:10px 0}.kpi:first-child{border-top:0}.kpi b{font-size:18px}.tabs{display:flex;gap:8px;margin-bottom:12px}.tab{flex:1;border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px;font-weight:700}.tab.active{background:var(--brand);color:#fff}.record{border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px}.control-card{border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px;background:#fbfdfe}.control-pre{border-left:5px solid #2f7dd1}.control-post{border-left:5px solid #27a06f}.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.compare-item{background:#f6fbfc;border:1px solid var(--line);border-radius:14px;padding:12px}.compare-item small{display:block;color:var(--muted);font-weight:700;margin-bottom:4px}.compare-item b{font-size:16px}.record-top{display:flex;justify-content:space-between;gap:10px}.uf-pos{color:var(--ok);font-weight:800}.uf-neg{color:var(--danger);font-weight:800}.uf-zero{color:var(--muted);font-weight:800}.muted{color:var(--muted)}.hidden{display:none!important}.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:center;z-index:30;padding-bottom:env(safe-area-inset-bottom)}.bottom-nav .inner{max-width:760px;width:100%;display:grid;grid-template-columns:repeat(4,1fr)}.navbtn{border:0;background:#fff;padding:11px 4px;color:#587078;font-size:12px}.navbtn.active{color:var(--brand);font-weight:800}.notice{font-size:12px;color:#6e7f85;line-height:1.4}.progress{height:12px;background:#e6eef0;border-radius:999px;overflow:hidden}.progress>div{height:100%;background:linear-gradient(90deg,var(--brand),var(--brand2));width:0}.badge{display:inline-block;padding:5px 9px;border-radius:999px;background:#eef5f6;color:#17323a;font-size:12px;font-weight:700}.modal{position:fixed;inset:0;background:rgba(10,30,36,.55);z-index:60;display:flex;align-items:flex-end;justify-content:center}.modal-box{background:#fff;width:100%;max-width:760px;max-height:92vh;overflow:auto;border-radius:24px 24px 0 0;padding:18px}.steps{display:flex;gap:8px;margin-bottom:14px}.stepdot{height:8px;background:#dfeaec;border-radius:999px;flex:1}.stepdot.on{background:var(--brand)}@media(max-width:560px){.grid2,.grid3{grid-template-columns:1fr}.hero{grid-template-columns:1fr 1fr}}@media print{header,.bottom-nav,.no-print{display:none!important}body{background:#fff}.app{max-width:none;padding:0}.card{box-shadow:none;break-inside:avoid}}
@@ -864,7 +864,7 @@ body.legal-open{overflow:hidden}
       </div>
     </div>
 
-    <div id="fluidBalanceCard" class="card fluid-balance-card">
+    <div id="fluidBalanceCard" class="card fluid-balance-card hidden">
       <div class="fluid-balance-head">
         <div>
           <span class="eyebrow" data-i18n="fluid.home.eyebrow">Registro diario</span>
@@ -892,6 +892,7 @@ body.legal-open{overflow:hidden}
         <div class="fluid-balance-item"><span data-i18n="fluid.total.drained">Drenado en diálisis</span><strong id="fluidTodayDrained">0 mL</strong></div>
         <div id="fluidApdUfItem" class="fluid-balance-item hidden"><span data-i18n="fluid.total.apdUf">UF total APD descontada</span><strong id="fluidTodayApdUf">0 mL</strong></div>
       </div>
+      <p class="fluid-balance-completed-note" data-i18n="fluid.balance.completedOnly">Los datos de diálisis incluyen únicamente intercambios terminados.</p>
       <p class="fluid-balance-formula" data-i18n="fluid.balance.formula">Cálculo: líquidos ingeridos + volumen infundido − orina − volumen drenado − UF APD.</p>
       <button class="btn btn-secondary" type="button" onclick="GuillePDFluids.open()" data-i18n="fluid.action.open">Registrar líquidos u orina</button>
     </div>
@@ -1305,6 +1306,28 @@ body.legal-open{overflow:hidden}
           <input id="contactPhone" type="tel" inputmode="tel">
         </div>
       </div>
+    </div>
+
+    <div class="settings-section card smart-settings-card">
+      <div class="smart-settings-head">
+        <div>
+          <span class="eyebrow" data-i18n="fluid.settings.eyebrow">Módulo opcional</span>
+          <h3 data-i18n="fluid.settings.title">Registro de líquidos y orina</h3>
+          <p data-i18n="fluid.settings.subtitle">Habilitalo solamente si necesitás llevar el balance hídrico diario.</p>
+        </div>
+        <div class="smart-settings-icon" aria-hidden="true">💧</div>
+      </div>
+      <div class="notification-master">
+        <div>
+          <strong data-i18n="fluid.settings.enable">Mostrar registro hídrico</strong>
+          <small data-i18n="fluid.settings.enableHelp">Agrega en Inicio el ingreso de líquidos, la orina y los dos balances.</small>
+        </div>
+        <label class="switch-control" for="fluidTrackingEnabled">
+          <input id="fluidTrackingEnabled" type="checkbox">
+          <span class="switch-track" aria-hidden="true"></span>
+        </label>
+      </div>
+      <p class="notification-compatibility" data-i18n="fluid.settings.keepData">Si lo desactivás, los registros existentes se conservan y vuelven a aparecer cuando lo habilites.</p>
     </div>
 
     <div class="settings-section card smart-settings-card">
@@ -1813,7 +1836,7 @@ const cloudState={
  session:null,user:null,syncing:false,applying:false,timer:null,
  reconciledUserId:null,reconcilePromise:null,recovery:false
 };
-const defaultPatient=(name='Guillermina')=>({id:'p_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),settings:{patient:name,planned:4,hc:'',dni:'',birthDate:'',diagnosis:'',hospital:'',nephrologist:'',dryWeight:'',usualVolume:'',ufTarget:'',solutions:'',contactName:'',contactPhone:''},washes:[],daily:{},fluidEntries:[]});
+const defaultPatient=(name='Guillermina')=>({id:'p_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),settings:{patient:name,planned:4,hc:'',dni:'',birthDate:'',diagnosis:'',hospital:'',nephrologist:'',dryWeight:'',usualVolume:'',ufTarget:'',solutions:'',contactName:'',contactPhone:'',fluidTrackingEnabled:false},washes:[],daily:{},fluidEntries:[]});
 const defaultNotificationPreferences=()=>({enabled:false,repeatMinutes:0,sound:true,vibration:true,showWhenClosed:true,background:true});
 const defaultProfile=()=>({userId:null,welcomeSeen:false,welcomeSeenAt:null,legalAcceptedVersion:null,legalAcceptedAt:null,legalAcceptedUserId:null,language:'es',notificationPreferences:defaultNotificationPreferences()});
 const defaultRoot=()=>{const p=defaultPatient();return {activePatientId:p.id,patients:[p],profile:defaultProfile()}};
@@ -1829,6 +1852,8 @@ function normalizePatient(v){
  ['birthDate','diagnosis','hospital','nephrologist','dryWeight','usualVolume','ufTarget','solutions','contactName','contactPhone'].forEach(k=>{if(p.settings[k]===undefined)p.settings[k]=''});
  p.washes=Array.isArray(p.washes)?p.washes:[];
  p.fluidEntries=Array.isArray(p.fluidEntries)?p.fluidEntries:[];
+ if(p.settings.fluidTrackingEnabled===undefined)p.settings.fluidTrackingEnabled=p.fluidEntries.length>0;
+ else p.settings.fluidTrackingEnabled=p.settings.fluidTrackingEnabled===true;
  p.daily=(p.daily&&typeof p.daily==='object')?p.daily:{};
  Object.keys(p.daily).forEach(k=>{const d=p.daily[k];if(!d||typeof d!=='object')p.daily[k]={pre:{},post:{}};else if(!('pre' in d)||!('post' in d)){p.daily[k]={pre:{weight:d.weight??null,sys:d.sys??null,dia:d.dia??null,temp:d.temp??null,urine:d.urine??null},post:{}}}else{d.pre=(d.pre&&typeof d.pre==='object')?d.pre:{};d.post=(d.post&&typeof d.post==='object')?d.post:{}}});
  return p;
@@ -3186,6 +3211,7 @@ function saveSettings(){
  s.solutions=$('solutions').value.trim();
  s.contactName=$('contactName').value.trim();
  s.contactPhone=$('contactPhone').value.trim();
+ s.fluidTrackingEnabled=$('fluidTrackingEnabled')?.checked===true;
 
  root.profile=(root.profile&&typeof root.profile==='object')?root.profile:defaultProfile();
  const selectedLanguage=document.querySelector('input[name="appLanguage"]:checked');
@@ -3918,7 +3944,7 @@ function runFunctionalCheck(){
    'welcomeOverlay','welcomeAction','legalOverlay','legalTermsDocument',
    'legalPrivacyDocument','legalPrimaryAction','cloudLegalConsent'
   ,'notificationsEnabled','notificationRepeat','notificationPermissionStatus'
-   ,'fluidBalanceCard','fluidModal','fluidEntryDateTime','fluidEntryAmount','fluidEntryList'
+   ,'fluidBalanceCard','fluidModal','fluidEntryDateTime','fluidEntryAmount','fluidEntryList','fluidTrackingEnabled'
   ];
  add('Pantallas principales',requiredIds.every(id=>!!$(id)));
  add('Datos del paciente',!!data&&!!data.settings&&Array.isArray(data.washes));
@@ -3960,6 +3986,8 @@ function renderAll(){
  setFieldValue('solutions',data.settings.solutions||'');
  setFieldValue('contactName',data.settings.contactName||'');
  setFieldValue('contactPhone',data.settings.contactPhone||'');
+ const fluidTrackingToggle=document.getElementById('fluidTrackingEnabled');
+ if(fluidTrackingToggle)fluidTrackingToggle.checked=data.settings.fluidTrackingEnabled===true;
 
  const language=(root.profile&&root.profile.language==='en')?'en':'es';
  const languageInput=document.querySelector(`input[name="appLanguage"][value="${language}"]`);
@@ -4037,7 +4065,7 @@ document.addEventListener('input',function(e){
 
 
 window.addEventListener('load',()=>{
-  console.log('GuillePD v3.6.1 cargada');
+  console.log('GuillePD v3.6.3 cargada');
  runFunctionalCheck();
 });
 
@@ -4137,7 +4165,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 <script src="./fluid-tracking.js"></script>
 <div id="toastHost" class="toast-host" aria-live="polite" aria-atomic="true"></div>
 <footer class="release-footer">
-  <span>GuillePD v3.6.1</span>
+  <span>GuillePD v3.6.3</span>
   <small>Manual (CAPD) · Cicladora (APD) · Mixto</small>
   <small><button class="legal-inline-link" type="button" onclick="openLegalDocument('terms')">Términos</button> · <button class="legal-inline-link" type="button" onclick="openLegalDocument('privacy')">Privacidad</button></small>
 </footer>
