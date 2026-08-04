@@ -1,4 +1,4 @@
-const CACHE_NAME = 'guillepd-pwa-v7';
+const CACHE_NAME = 'guillepd-pwa-v9';
 const SUPABASE_LIBRARY = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
 const APP_SHELL = [
   './',
@@ -6,8 +6,10 @@ const APP_SHELL = [
   './apd-styles.css',
   './apd-module.js',
   './smart-features.css',
+  './fluid-tracking.css',
   './i18n.js',
   './notifications.js',
+  './fluid-tracking.js',
   './manifest.webmanifest',
   './icon-192.png',
   './icon-512.png'

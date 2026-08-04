@@ -1,4 +1,4 @@
-/* GuillePD v3.5.0 · Recordatorios locales de tratamiento
+/* GuillePD v3.6.1 · Recordatorios locales de tratamiento
  *
  * Los horarios se guardan por dispositivo. Las preferencias pertenecen al
  * perfil sincronizado. La entrega se realiza por el Service Worker cuando el

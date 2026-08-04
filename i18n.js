@@ -1,4 +1,4 @@
-/* GuillePD v3.5.0 · Sistema central de idiomas
+/* GuillePD v3.6.1 · Sistema central de idiomas
  * La interfaz histórica conserva sus textos fuente en español. Este módulo
  * centraliza su equivalente inglés y traduce también contenido generado en
  * tiempo de ejecución, alertas, notificaciones e informes PDF.
@@ -31,7 +31,59 @@
       'notifications.permissionGranted':'Notificaciones autorizadas en este dispositivo.',
       'notifications.permissionDenied':'Las notificaciones están bloqueadas. Podés habilitarlas desde los ajustes del dispositivo.',
       'notifications.permissionPending':'Todavía falta autorizar las notificaciones en este dispositivo.',
-      'notifications.permissionUnsupported':'Este navegador no admite notificaciones web.'
+      'notifications.permissionUnsupported':'Este navegador no admite notificaciones web.',
+      'fluid.home.eyebrow':'Registro diario',
+      'fluid.home.title':'Líquidos y balance hídrico',
+      'fluid.home.subtitle':'Ingresos, orina y diálisis reunidos en un solo cálculo.',
+      'fluid.balance.oral':'Balance ingesta − orina',
+      'fluid.balance.oralShort':'Solo líquidos por boca y orina',
+      'fluid.balance.total':'Balance total con diálisis',
+      'fluid.balance.totalShort':'Incluye los registros de diálisis',
+      'fluid.balance.formula':'Cálculo: líquidos ingeridos + volumen infundido − orina − volumen drenado − UF APD.',
+      'fluid.total.intake':'Líquidos ingeridos',
+      'fluid.total.urine':'Orina',
+      'fluid.total.infused':'Infundido en diálisis',
+      'fluid.total.drained':'Drenado en diálisis',
+      'fluid.total.apdUf':'UF total APD descontada',
+      'fluid.action.open':'Registrar líquidos u orina',
+      'fluid.modal.title':'Registrar líquidos u orina',
+      'fluid.type.intake':'Ingreso de líquidos',
+      'fluid.type.urine':'Orina',
+      'fluid.field.datetime':'Fecha y hora',
+      'fluid.field.amount':'Cantidad (mL)',
+      'fluid.field.beverage':'Tipo de líquido',
+      'fluid.field.note':'Observación (opcional)',
+      'fluid.field.notePlaceholder':'Ej.: con medicación',
+      'fluid.beverage.water':'Agua',
+      'fluid.beverage.juice':'Jugo',
+      'fluid.beverage.milk':'Leche',
+      'fluid.beverage.infusion':'Infusión',
+      'fluid.beverage.other':'Otro líquido',
+      'fluid.action.close':'Cerrar',
+      'fluid.action.save':'Guardar registro',
+      'fluid.action.update':'Actualizar registro',
+      'fluid.action.edit':'Editar',
+      'fluid.action.delete':'Eliminar',
+      'fluid.list.title':'Registros del día seleccionado',
+      'fluid.list.empty':'No hay ingresos de líquidos ni orina registrados para este día.',
+      'fluid.validation.required':'Ingresá la fecha, la hora y una cantidad mayor que cero.',
+      'fluid.confirm.delete':'¿Eliminar este registro?',
+      'fluid.saved':'Registro guardado.',
+      'fluid.report.download':'Descargar informe diario',
+      'fluid.report.share':'Compartir informe',
+      'fluid.report.title':'Informe de balance hídrico',
+      'fluid.report.patient':'Paciente',
+      'fluid.report.date':'Fecha',
+      'fluid.report.page':'Página',
+      'fluid.report.oralSection':'Balance ingesta − orina',
+      'fluid.report.totalSection':'Balance total con diálisis',
+      'fluid.report.entries':'Detalle de líquidos por boca y orina',
+      'fluid.report.time':'Hora',
+      'fluid.report.type':'Tipo',
+      'fluid.report.amount':'Cantidad',
+      'fluid.report.note':'Observación',
+      'fluid.report.noEntries':'Sin registros de líquidos por boca u orina.',
+      'fluid.report.footer':'Registro personal de GuillePD. Sin interpretación clínica.'
     },
     en:{
       'language.title':'Language',
@@ -57,7 +109,59 @@
       'notifications.permissionGranted':'Notifications are authorized on this device.',
       'notifications.permissionDenied':'Notifications are blocked. You can enable them in the device settings.',
       'notifications.permissionPending':'Notifications still need to be authorized on this device.',
-      'notifications.permissionUnsupported':'This browser does not support web notifications.'
+      'notifications.permissionUnsupported':'This browser does not support web notifications.',
+      'fluid.home.eyebrow':'Daily record',
+      'fluid.home.title':'Fluids and fluid balance',
+      'fluid.home.subtitle':'Intake, urine output and dialysis combined in one calculation.',
+      'fluid.balance.oral':'Intake − urine balance',
+      'fluid.balance.oralShort':'Oral fluid intake and urine only',
+      'fluid.balance.total':'Total balance with dialysis',
+      'fluid.balance.totalShort':'Includes dialysis records',
+      'fluid.balance.formula':'Calculation: fluid intake + infused volume − urine output − drained volume − APD UF.',
+      'fluid.total.intake':'Fluid intake',
+      'fluid.total.urine':'Urine output',
+      'fluid.total.infused':'Dialysis infused volume',
+      'fluid.total.drained':'Dialysis drained volume',
+      'fluid.total.apdUf':'Total APD UF deducted',
+      'fluid.action.open':'Record fluids or urine output',
+      'fluid.modal.title':'Record fluids or urine output',
+      'fluid.type.intake':'Fluid intake',
+      'fluid.type.urine':'Urine output',
+      'fluid.field.datetime':'Date and time',
+      'fluid.field.amount':'Amount (mL)',
+      'fluid.field.beverage':'Fluid type',
+      'fluid.field.note':'Note (optional)',
+      'fluid.field.notePlaceholder':'E.g. with medication',
+      'fluid.beverage.water':'Water',
+      'fluid.beverage.juice':'Juice',
+      'fluid.beverage.milk':'Milk',
+      'fluid.beverage.infusion':'Tea / infusion',
+      'fluid.beverage.other':'Other fluid',
+      'fluid.action.close':'Close',
+      'fluid.action.save':'Save record',
+      'fluid.action.update':'Update record',
+      'fluid.action.edit':'Edit',
+      'fluid.action.delete':'Delete',
+      'fluid.list.title':'Records for selected day',
+      'fluid.list.empty':'No fluid intake or urine output has been recorded for this day.',
+      'fluid.validation.required':'Enter the date, time and an amount greater than zero.',
+      'fluid.confirm.delete':'Delete this record?',
+      'fluid.saved':'Record saved.',
+      'fluid.report.download':'Download daily report',
+      'fluid.report.share':'Share report',
+      'fluid.report.title':'Fluid balance report',
+      'fluid.report.patient':'Patient',
+      'fluid.report.date':'Date',
+      'fluid.report.page':'Page',
+      'fluid.report.oralSection':'Intake − urine balance',
+      'fluid.report.totalSection':'Total balance with dialysis',
+      'fluid.report.entries':'Oral fluid intake and urine details',
+      'fluid.report.time':'Time',
+      'fluid.report.type':'Type',
+      'fluid.report.amount':'Amount',
+      'fluid.report.note':'Note',
+      'fluid.report.noEntries':'No oral fluid intake or urine records.',
+      'fluid.report.footer':'Personal GuillePD record. No clinical interpretation.'
     }
   };
 
@@ -433,6 +537,11 @@
     if(translationKey){
       const translated=t(translationKey);
       if(element.textContent!==translated)element.textContent=translated;
+    }
+    const placeholderKey=element.getAttribute('data-i18n-placeholder');
+    if(placeholderKey){
+      const translated=t(placeholderKey);
+      if(element.getAttribute('placeholder')!==translated)element.setAttribute('placeholder',translated);
     }
     const attrs=['placeholder','title','aria-label'];
     let store=sourceAttrs.get(element);
