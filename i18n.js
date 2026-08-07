@@ -452,6 +452,31 @@
     ,'La finalización no puede ser anterior al inicio.':'The end time cannot be before the start time.'
     ,'Ingresá el ultrafiltrado total informado por la cicladora.':'Enter the total ultrafiltration reported by the cycler.'
     ,'Tratamiento APD finalizado y guardado.':'APD treatment completed and saved.'
+    ,'Tratamiento APD finalizado. Quedó pendiente drenar el último llenado.':'APD treatment completed. Draining the last fill is still pending.'
+    ,'Drenar último llenado APD':'Drain APD last fill'
+    ,'Drenaje pendiente del último llenado APD':'APD last fill drain pending'
+    ,'Drená el líquido dejado por la cicladora antes de iniciar un intercambio manual.':'Drain the fluid left by the cycler before starting a manual exchange.'
+    ,'El último llenado permanece en cavidad y debe drenarse antes de iniciar otro intercambio manual.':'The last fill remains in the peritoneal cavity and must be drained before starting another manual exchange.'
+    ,'Último llenado APD':'APD last fill'
+    ,'Último llenado APD ·':'APD last fill ·'
+    ,'Volumen en cavidad':'Volume in cavity'
+    ,'Drenaje completado':'Drain completed'
+    ,'Transición APD → Manual':'APD → Manual transition'
+    ,'Este líquido fue dejado en cavidad por la cicladora. No se registrará una nueva infusión manual.':'This fluid was left in the peritoneal cavity by the cycler. A new manual infusion will not be recorded.'
+    ,'Tratamiento vinculado':'Linked treatment'
+    ,'Volumen del último llenado':'Last fill volume'
+    ,'Fecha y hora del drenaje':'Drain date and time'
+    ,'Peso bolsa de drenaje vacía (g)':'Empty drain bag weight (g)'
+    ,'Peso bolsa de drenaje llena (g)':'Full drain bag weight (g)'
+    ,'VOLUMEN DRENADO':'DRAINED VOLUME'
+    ,'BALANCE DEL ÚLTIMO LLENADO':'LAST FILL BALANCE'
+    ,'Características del drenaje u otra observación relevante.':'Drain characteristics or another relevant note.'
+    ,'Guardar drenaje':'Save drain'
+    ,'No hay un drenaje de último llenado APD pendiente.':'There is no pending APD last fill drain.'
+    ,'No se encontró el drenaje pendiente.':'The pending drain was not found.'
+    ,'Completá la fecha y los pesos de la bolsa de drenaje.':'Enter the date and both drain bag weights.'
+    ,'El peso de la bolsa llena no puede ser menor que el de la bolsa vacía.':'The full bag weight cannot be less than the empty bag weight.'
+    ,'Drenaje del último llenado APD guardado. Ya podés iniciar un nuevo intercambio manual.':'APD last fill drain saved. You can now start a new manual exchange.'
     ,'Registro APD eliminado.':'APD record deleted.'
     ,'Seleccioná Cicladora (APD) o Mixto en Ajustes.':'Select Cycler (APD) or Mixed in Settings.'
     ,'Indicación manual actual':'Current manual prescription'
@@ -558,6 +583,8 @@
     if((match=trimmed.match(/^Programa APD N\.º (\d+)$/)))return `APD Program No. ${match[1]}`;
     if((match=trimmed.match(/^El intercambio (.+) ya alcanzó el horario previsto de drenaje\.$/)))return `Exchange ${match[1]} has reached its scheduled drain time.`;
     if((match=trimmed.match(/^Inicio: (.+) · (.+)$/)))return `Start: ${match[1]} · ${match[2]}`;
+    if((match=trimmed.match(/^Último llenado APD · (.+) mL en cavidad$/)))return `APD last fill · ${match[1]} mL in cavity`;
+    if((match=trimmed.match(/^(.+) mL en cavidad$/)))return `${match[1]} mL in cavity`;
     return value;
   }
   function preserveWhitespace(original,translated){

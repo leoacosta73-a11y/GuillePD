@@ -1,4 +1,4 @@
-/* GuillePD v3.4.0
+/* GuillePD v3.6.4
  * Módulo aislado de modalidades CAPD/APD/Mixta.
  * No modifica cálculos, balances ni generación de informes del modo Manual.
  */
@@ -26,6 +26,7 @@ const SOLUTION_LABELS={
 
 let prescriptionTab='manual';
 let apdModuleReady=false;
+let activeLastFillDrainTreatmentId=null;
 
 function text(value){
  return String(value??'')
@@ -106,6 +107,13 @@ function ensurePatientExtensions(patient=data){
    if(!Array.isArray(record.future.events)){record.future.events=[];changed=true}
    if(!('import' in record.future)){record.future.import=null;changed=true}
   }
+  if(record.lastFillDrain&&typeof record.lastFillDrain==='object'){
+   if(!record.lastFillDrain.linkedTreatmentId){record.lastFillDrain.linkedTreatmentId=record.id;changed=true}
+   if(!['pending','completed','not-required'].includes(record.lastFillDrain.status)){
+    record.lastFillDrain.status=record.lastFillDrain.completedAt?'completed':'pending';
+    changed=true;
+   }
+  }
  });
  return changed;
 }
@@ -138,6 +146,19 @@ function activeAPDTreatment(){
  return apdTreatments()
   .filter(record=>record.status==='active')
   .sort((a,b)=>new Date(b.startTime)-new Date(a.startTime))[0]||null;
+}
+function pendingAPDLastFillDrain(){
+ if(currentMode()!=='mixed')return null;
+ return apdTreatments()
+  .filter(record=>record.status==='completed'&&record.lastFillDrain?.required===true&&record.lastFillDrain.status==='pending')
+  .sort((a,b)=>new Date(a.endTime||a.startTime)-new Date(b.endTime||b.startTime))[0]||null;
+}
+function hasAPDLastFill(record){
+ return record?.prescriptionSnapshot?.treatment?.lastFill===true;
+}
+function APDLastFillVolume(record){
+ const volume=Number(record?.prescriptionSnapshot?.treatment?.lastFillVolume);
+ return Number.isFinite(volume)?Math.round(volume):null;
 }
 function treatmentModeAllowsAPD(){
  const mode=currentMode();
@@ -486,13 +507,116 @@ function finishAPDTreatment(){
  record.temp=optionalNumber('apdTemp');
  record.urine=optionalNumber('apdUrine');
  record.notes=value('apdNotes');
+ const needsLastFillDrain=currentMode()==='mixed'&&hasAPDLastFill(record);
+ record.lastFillDrain=needsLastFillDrain
+  ? {
+     required:true,
+     status:'pending',
+     linkedTreatmentId:record.id,
+     expectedVolume:APDLastFillVolume(record),
+     drainTime:null,
+     emptyDrain:null,
+     fullDrain:null,
+     drained:null,
+     balance:null,
+     appearance:'',
+     notes:'',
+     completedAt:null
+    }
+  : {required:false,status:'not-required',linkedTreatmentId:record.id};
+ record.cavityFluidPresent=needsLastFillDrain;
  record.updatedAt=new Date().toISOString();
  persist();
  renderAll();
  showScreen('history');
  $('historyDate').value=dateKey(record.startTime);
  renderHistory();
- showToast('Tratamiento APD finalizado y guardado.','success');
+ showToast(needsLastFillDrain?'Tratamiento APD finalizado. Quedó pendiente drenar el último llenado.':'Tratamiento APD finalizado y guardado.','success');
+}
+
+function calculateAPDLastFillDrain(){
+ const record=apdTreatments().find(item=>item.id===activeLastFillDrainTreatmentId)||pendingAPDLastFillDrain();
+ const expected=Number(record?.lastFillDrain?.expectedVolume);
+ const empty=optionalNumber('apdLastFillEmptyDrain');
+ const full=optionalNumber('apdLastFillFullDrain');
+ const drained=empty!==null&&full!==null?full-empty:null;
+ const balance=drained!==null&&Number.isFinite(expected)?expected-drained:null;
+ const drainedEl=$('apdLastFillDrained');
+ const balanceEl=$('apdLastFillBalance');
+ if(drainedEl)drainedEl.textContent=drained===null?'—':`${Math.round(drained)} mL`;
+ if(balanceEl){
+  balanceEl.textContent=balance===null?'—':`${balance>0?'+':''}${Math.round(balance)} mL`;
+  balanceEl.className=balance===null?'':balanceClass(balance);
+ }
+}
+
+function closeAPDLastFillDrain(){
+ const modal=$('apdLastFillDrainModal');
+ if(modal)modal.classList.add('hidden');
+ document.body.style.overflow='';
+ activeLastFillDrainTreatmentId=null;
+}
+
+function openAPDLastFillDrain(treatmentId=null){
+ const record=treatmentId
+  ? apdTreatments().find(item=>item.id===treatmentId&&item.lastFillDrain?.status==='pending')
+  : pendingAPDLastFillDrain();
+ if(!record){
+  showToast('No hay un drenaje de último llenado APD pendiente.','error');
+  return;
+ }
+ activeLastFillDrainTreatmentId=record.id;
+ const drain=record.lastFillDrain;
+ if($('apdLastFillProgram'))$('apdLastFillProgram').textContent=record.programName||'Tratamiento APD';
+ if($('apdLastFillExpected'))$('apdLastFillExpected').textContent=drain.expectedVolume!=null?`${drain.expectedVolume} mL`:'—';
+ if($('apdLastFillDrainTime'))$('apdLastFillDrainTime').value=drain.drainTime?String(drain.drainTime).slice(0,16):localDT(new Date());
+ if($('apdLastFillEmptyDrain'))$('apdLastFillEmptyDrain').value=drain.emptyDrain??'';
+ if($('apdLastFillFullDrain'))$('apdLastFillFullDrain').value=drain.fullDrain??'';
+ if($('apdLastFillAppearance'))$('apdLastFillAppearance').value=drain.appearance||'Claro';
+ if($('apdLastFillNotes'))$('apdLastFillNotes').value=drain.notes||'';
+ calculateAPDLastFillDrain();
+ $('apdLastFillDrainModal')?.classList.remove('hidden');
+ document.body.style.overflow='hidden';
+ window.GuillePDI18n?.apply?.();
+}
+
+function saveAPDLastFillDrain(){
+ const record=apdTreatments().find(item=>item.id===activeLastFillDrainTreatmentId);
+ if(!record||record.lastFillDrain?.status!=='pending'){
+  showToast('No se encontró el drenaje pendiente.','error');
+  return;
+ }
+ const drainTime=value('apdLastFillDrainTime');
+ const empty=optionalNumber('apdLastFillEmptyDrain');
+ const full=optionalNumber('apdLastFillFullDrain');
+ if(!drainTime||empty===null||full===null){
+  showToast('Completá la fecha y los pesos de la bolsa de drenaje.','error');
+  return;
+ }
+ if(full<empty){
+  showToast('El peso de la bolsa llena no puede ser menor que el de la bolsa vacía.','error');
+  return;
+ }
+ const drained=Math.round(full-empty);
+ const expected=Number(record.lastFillDrain.expectedVolume);
+ record.lastFillDrain={
+  ...record.lastFillDrain,
+  status:'completed',
+  drainTime,
+  emptyDrain:empty,
+  fullDrain:full,
+  drained,
+  balance:Number.isFinite(expected)?Math.round(expected-drained):null,
+  appearance:value('apdLastFillAppearance')||'Claro',
+  notes:value('apdLastFillNotes'),
+  completedAt:new Date().toISOString()
+ };
+ record.cavityFluidPresent=false;
+ record.updatedAt=new Date().toISOString();
+ persist();
+ closeAPDLastFillDrain();
+ renderAll();
+ showToast('Drenaje del último llenado APD guardado. Ya podés iniciar un nuevo intercambio manual.','success');
 }
 
 function deleteAPDTreatment(id){
@@ -581,6 +705,21 @@ function renderAPDHistoryCards(records){
    const pressure=record.sys!=null||record.dia!=null
     ? `${record.sys??'—'} / ${record.dia??'—'} mmHg`
     : '—';
+   const lastFill=record.lastFillDrain;
+   const lastFillBlock=lastFill?.required===true
+    ? lastFill.status==='completed'
+      ? `<div class="apd-last-fill-history complete">
+          <div><span>Último llenado APD</span><strong>Drenaje completado</strong></div>
+          <div><span>Hora</span><strong>${lastFill.drainTime?fmtTime(lastFill.drainTime):'—'}</strong></div>
+          <div><span>Volumen drenado</span><strong>${lastFill.drained!=null?text(lastFill.drained)+' mL':'—'}</strong></div>
+          <div><span>Balance</span><strong class="${balanceClass(lastFill.balance)}">${lastFill.balance!=null?balanceText(lastFill.balance):'—'}</strong></div>
+         </div>`
+      : `<div class="apd-last-fill-history pending">
+          <div><span>Último llenado APD</span><strong>Drenaje pendiente</strong></div>
+          <div><span>Volumen en cavidad</span><strong>${lastFill.expectedVolume!=null?text(lastFill.expectedVolume)+' mL':'—'}</strong></div>
+          <button class="btn btn-primary" type="button" onclick="openAPDLastFillDrain('${text(record.id)}')">Drenar último llenado APD</button>
+         </div>`
+    : '';
    return `<article class="clinical-apd-card ${completed?'':'is-active'}">
     <div class="apd-card-head">
      <div>
@@ -602,6 +741,7 @@ function renderAPDHistoryCards(records){
      <div><span>Diuresis</span><strong>${record.urine!=null?text(record.urine)+' mL':'—'}</strong></div>
      <div><span>Prescripción</span><strong>${text(record.prescriptionSnapshot?.number?'N.º '+record.prescriptionSnapshot.number:'Guardada')}</strong></div>
     </div>
+    ${lastFillBlock}
     ${record.notes?`<div class="apd-card-notes">${text(record.notes)}</div>`:''}
     <div class="apd-history-actions no-print">
      ${completed?'':`<button class="btn btn-secondary" onclick="openAPDTreatment()">Completar tratamiento</button>`}
@@ -613,6 +753,7 @@ function renderAPDHistoryCards(records){
 
 function updateAPDHome(){
  const mode=currentMode();
+ const pendingLastFill=mode==='mixed'?pendingAPDLastFillDrain():null;
  const manualButton=$('manualNewWashBtn');
  const apdButton=$('apdHomeButton');
  const actions=$('homeTreatmentActions');
@@ -630,6 +771,11 @@ function updateAPDHome(){
  if(manualProgress)manualProgress.classList.toggle('hidden',!manualAllowed);
  if(manualLatest)manualLatest.classList.toggle('hidden',!manualAllowed);
  if(apdCard)apdCard.classList.toggle('hidden',!apdAllowed);
+ if(manualButton){
+  const label=manualButton.querySelectorAll('span')[1];
+  if(label)label.textContent=pendingLastFill?'Drenar último llenado APD':'Nuevo intercambio';
+  manualButton.classList.toggle('apd-last-fill-action',!!pendingLastFill);
+ }
 
  if(!apdAllowed)return;
  const today=dateKey(new Date());
@@ -647,7 +793,9 @@ function updateAPDHome(){
  }else if(latest){
   if(badge){badge.textContent='Finalizado';badge.className='apd-home-badge'}
   if(title)title.textContent=latest.programName||'Tratamiento APD';
-  if(subtitle)subtitle.textContent=`Último tratamiento finalizado a las ${fmtTime(latest.endTime)}.`;
+  if(subtitle)subtitle.textContent=pendingLastFill
+   ? 'El último llenado permanece en cavidad y debe drenarse antes de iniciar otro intercambio manual.'
+   : `Último tratamiento finalizado a las ${fmtTime(latest.endTime)}.`;
  }else{
   if(badge){badge.textContent='Sin registro';badge.className='apd-home-badge'}
   if(title)title.textContent='Tratamiento APD';
@@ -666,7 +814,13 @@ function updateAPDHome(){
   const countdownLabel=$('countdownLabel');
   const countdown=$('countdown');
   const countdownSub=$('countdownSub');
-  if(current){
+  if(pendingLastFill){
+   if(stateTitle)stateTitle.textContent='Drenaje pendiente del último llenado APD';
+   if(stateText)stateText.textContent='Drená el líquido dejado por la cicladora antes de iniciar un intercambio manual.';
+   if(countdownLabel)countdownLabel.textContent='Estado actual';
+   if(countdown)countdown.textContent='DRENAR';
+   if(countdownSub)countdownSub.textContent=`${pendingLastFill.lastFillDrain.expectedVolume??'—'} mL en cavidad`;
+  }else if(current){
    if(stateTitle)stateTitle.textContent='Tratamiento APD en curso';
    if(stateText)stateText.textContent=`${current.programName||'Programa APD'} iniciado a las ${fmtTime(current.startTime)}.`;
    if(countdownLabel)countdownLabel.textContent='Estado del tratamiento';
@@ -736,10 +890,29 @@ window.startAPDTreatment=startAPDTreatment;
 window.finishAPDTreatment=finishAPDTreatment;
 window.deleteAPDTreatment=deleteAPDTreatment;
 window.renderAPDHistoryCards=renderAPDHistoryCards;
+window.getPendingAPDLastFillDrain=pendingAPDLastFillDrain;
+window.openAPDLastFillDrain=openAPDLastFillDrain;
+window.closeAPDLastFillDrain=closeAPDLastFillDrain;
+window.calculateAPDLastFillDrain=calculateAPDLastFillDrain;
+window.saveAPDLastFillDrain=saveAPDLastFillDrain;
+
+const coreOpenWashModal=window.openWashModal;
+window.openWashModal=function(){
+ const pending=pendingAPDLastFillDrain();
+ if(pending){
+  openAPDLastFillDrain(pending.id);
+  return;
+ }
+ coreOpenWashModal();
+};
 
 function initializeAPDModule(){
  if(apdModuleReady)return;
  apdModuleReady=true;
+ const lastFillModal=$('apdLastFillDrainModal');
+ lastFillModal?.addEventListener('click',event=>{
+  if(event.target===lastFillModal)closeAPDLastFillDrain();
+ });
  const changed=ensureAllPatientExtensions();
  clearAPDPrescriptionForm();
  renderAll();
