@@ -1,4 +1,4 @@
-/* GuillePD v3.6.6
+/* GuillePD v3.6.7
  * Módulo aislado de modalidades CAPD/APD/Mixta.
  * No modifica cálculos, balances ni generación de informes del modo Manual.
  */
