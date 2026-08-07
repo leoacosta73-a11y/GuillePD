@@ -1,4 +1,4 @@
-/* GuillePD v3.6.4
+/* GuillePD v3.6.6
  * Módulo aislado de modalidades CAPD/APD/Mixta.
  * No modifica cálculos, balances ni generación de informes del modo Manual.
  */
@@ -27,6 +27,7 @@ const SOLUTION_LABELS={
 let prescriptionTab='manual';
 let apdModuleReady=false;
 let activeLastFillDrainTreatmentId=null;
+let editingAPDTreatmentId=null;
 
 function text(value){
  return String(value??'')
@@ -54,6 +55,23 @@ function value(id){
 function checked(id){
  const el=$(id);
  return !!(el&&el.checked);
+}
+function findAPDTreatment(id){
+ return apdTreatments().find(item=>String(item.id)===String(id));
+}
+function setAPDResultFields(record,includeStart=false){
+ if(includeStart&&$('apdEditStartTime'))$('apdEditStartTime').value=String(record?.startTime||'').slice(0,16);
+ if($('apdEndTime'))$('apdEndTime').value=String(record?.endTime||'').slice(0,16);
+ if($('apdTotalUf'))$('apdTotalUf').value=record?.totalUf??'';
+ if($('apdWeight'))$('apdWeight').value=record?.weight??'';
+ if($('apdSys'))$('apdSys').value=record?.sys??'';
+ if($('apdDia'))$('apdDia').value=record?.dia??'';
+ if($('apdTemp'))$('apdTemp').value=record?.temp??'';
+ if($('apdUrine'))$('apdUrine').value=record?.urine??'';
+ if($('apdNotes'))$('apdNotes').value=record?.notes??'';
+}
+function clearAPDResultFields(){
+ setAPDResultFields({startTime:'',endTime:'',totalUf:null,weight:null,sys:null,dia:null,temp:null,urine:null,notes:''},true);
 }
 function modeLabel(mode){
  return MODE_LABELS[mode]||MODE_LABELS.manual;
@@ -469,6 +487,8 @@ function startAPDTreatment(){
   updatedAt:new Date().toISOString()
  };
  apdTreatments().push(record);
+ editingAPDTreatmentId=null;
+ clearAPDResultFields();
  persist();
  renderAll();
  showScreen('apd-treatment');
@@ -476,19 +496,27 @@ function startAPDTreatment(){
 }
 
 function finishAPDTreatment(){
- const record=activeAPDTreatment();
+ const editingRecord=editingAPDTreatmentId?findAPDTreatment(editingAPDTreatmentId):null;
+ const editing=!!(editingRecord&&editingRecord.status==='completed');
+ const record=editing?editingRecord:activeAPDTreatment();
  if(!record){
   showToast('No hay un tratamiento APD en curso.','error');
   return;
  }
  const endTime=value('apdEndTime');
  const totalUf=optionalNumber('apdTotalUf');
+ const startTime=editing?value('apdEditStartTime'):record.startTime;
+ if(editing&&!startTime){
+  showToast('Ingresá la hora de inicio.','error');
+  $('apdEditStartTime')?.focus();
+  return;
+ }
  if(!endTime){
   showToast('Ingresá la hora de finalización.','error');
   $('apdEndTime')?.focus();
   return;
  }
- if(new Date(endTime)<new Date(record.startTime)){
+ if(new Date(endTime)<new Date(startTime)){
   showToast('La finalización no puede ser anterior al inicio.','error');
   $('apdEndTime')?.focus();
   return;
@@ -498,6 +526,7 @@ function finishAPDTreatment(){
   $('apdTotalUf')?.focus();
   return;
  }
+ if(editing)record.startTime=startTime;
  record.status='completed';
  record.endTime=endTime;
  record.totalUf=totalUf;
@@ -507,31 +536,35 @@ function finishAPDTreatment(){
  record.temp=optionalNumber('apdTemp');
  record.urine=optionalNumber('apdUrine');
  record.notes=value('apdNotes');
- const needsLastFillDrain=currentMode()==='mixed'&&hasAPDLastFill(record);
- record.lastFillDrain=needsLastFillDrain
-  ? {
-     required:true,
-     status:'pending',
-     linkedTreatmentId:record.id,
-     expectedVolume:APDLastFillVolume(record),
-     drainTime:null,
-     emptyDrain:null,
-     fullDrain:null,
-     drained:null,
-     balance:null,
-     appearance:'',
-     notes:'',
-     completedAt:null
-    }
-  : {required:false,status:'not-required',linkedTreatmentId:record.id};
- record.cavityFluidPresent=needsLastFillDrain;
+ let needsLastFillDrain=false;
+ if(!editing){
+  needsLastFillDrain=currentMode()==='mixed'&&hasAPDLastFill(record);
+  record.lastFillDrain=needsLastFillDrain
+   ? {
+      required:true,
+      status:'pending',
+      linkedTreatmentId:record.id,
+      expectedVolume:APDLastFillVolume(record),
+      drainTime:null,
+      emptyDrain:null,
+      fullDrain:null,
+      drained:null,
+      balance:null,
+      appearance:'',
+      notes:'',
+      completedAt:null
+     }
+   : {required:false,status:'not-required',linkedTreatmentId:record.id};
+  record.cavityFluidPresent=needsLastFillDrain;
+ }
  record.updatedAt=new Date().toISOString();
+ editingAPDTreatmentId=null;
  persist();
  renderAll();
  showScreen('history');
  $('historyDate').value=dateKey(record.startTime);
  renderHistory();
- showToast(needsLastFillDrain?'Tratamiento APD finalizado. Quedó pendiente drenar el último llenado.':'Tratamiento APD finalizado y guardado.','success');
+ showToast(editing?'Cambios del tratamiento APD guardados.':(needsLastFillDrain?'Tratamiento APD finalizado. Quedó pendiente drenar el último llenado.':'Tratamiento APD finalizado y guardado.'),'success');
 }
 
 function calculateAPDLastFillDrain(){
@@ -619,14 +652,36 @@ function saveAPDLastFillDrain(){
  showToast('Drenaje del último llenado APD guardado. Ya podés iniciar un nuevo intercambio manual.','success');
 }
 
+function editAPDTreatment(id){
+ const record=findAPDTreatment(id);
+ if(!record||record.status!=='completed'){
+  showToast('Solo se pueden editar tratamientos APD finalizados.','error');
+  return;
+ }
+ editingAPDTreatmentId=record.id;
+ showScreen('apd-treatment');
+ renderAPDTreatmentScreen();
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function cancelAPDTreatmentEdit(){
+ editingAPDTreatmentId=null;
+ clearAPDResultFields();
+ showScreen('history');
+ renderHistory();
+}
+
 function deleteAPDTreatment(id){
- const record=apdTreatments().find(item=>item.id===id);
+ const record=findAPDTreatment(id);
  if(!record)return;
- const description=record.status==='active'?'tratamiento APD en curso':'registro APD';
- if(!confirm(`¿Eliminar este ${description}?`))return;
- data.apdTreatments=data.apdTreatments.filter(item=>item.id!==id);
+ const description=record.status==='active'?'tratamiento APD en curso':'tratamiento APD finalizado';
+ const pendingWarning=record.lastFillDrain?.status==='pending'?' También se eliminará el drenaje pendiente del último llenado.':'';
+ if(!confirm(`¿Eliminar este ${description}?${pendingWarning}`))return;
+ data.apdTreatments=data.apdTreatments.filter(item=>String(item.id)!==String(record.id));
+ if(String(editingAPDTreatmentId)===String(record.id))editingAPDTreatmentId=null;
  persist();
  renderAll();
+ renderHistory();
  showToast('Registro APD eliminado.','success');
 }
 
@@ -641,16 +696,43 @@ function renderAPDTodayList(){
   target.innerHTML='<div class="prescription-empty">No hay tratamientos APD registrados hoy.</div>';
   return;
  }
- target.innerHTML=list.map(record=>`
-  <article class="apd-mini-record">
+ target.innerHTML=list.map(record=>{
+  const completed=record.status==='completed';
+  const treatment=record.prescriptionSnapshot?.treatment||{};
+  const pressure=record.sys!=null||record.dia!=null?`${record.sys??'—'} / ${record.dia??'—'} mmHg`:'—';
+  const lastFill=treatment.lastFill
+   ? `${treatment.lastFillVolume??'—'} mL`
+   : 'No';
+  const pendingLastFill=record.lastFillDrain?.status==='pending';
+  return `<article class="apd-mini-record apd-day-record-detail">
    <div class="apd-mini-record-head">
     <div>
      <h4>${text(record.programName||'Tratamiento APD')}</h4>
-     <p>${fmtTime(record.startTime)}${record.endTime?' – '+fmtTime(record.endTime):' · En curso'}</p>
+     <p>${fmtDate(record.startTime)} · ${fmtTime(record.startTime)}${record.endTime?' – '+fmtTime(record.endTime):' · En curso'}</p>
     </div>
-    <span class="program-status ${record.status==='completed'?'active':''}">${record.status==='completed'?'Finalizado':'Activo'}</span>
+    <span class="program-status ${completed?'active':''}">${completed?'Finalizado':'Activo'}</span>
    </div>
-  </article>`).join('');
+   <div class="apd-day-record-values">
+    <div><span>UF total</span><strong>${record.totalUf!=null?text(record.totalUf)+' mL':'Pendiente'}</strong></div>
+    <div><span>Duración indicada</span><strong>${treatment.durationHours!=null?text(treatment.durationHours)+' h':'—'}</strong></div>
+    <div><span>Ciclos</span><strong>${treatment.cycles!=null?text(treatment.cycles):'—'}</strong></div>
+    <div><span>Volumen por ciclo</span><strong>${treatment.cycleVolume!=null?text(treatment.cycleVolume)+' mL':'—'}</strong></div>
+    <div><span>Último llenado</span><strong>${text(lastFill)}</strong></div>
+    <div><span>Peso</span><strong>${record.weight!=null?text(record.weight)+' kg':'—'}</strong></div>
+    <div><span>Presión arterial</span><strong>${text(pressure)}</strong></div>
+    <div><span>Temperatura</span><strong>${record.temp!=null?text(record.temp)+' °C':'—'}</strong></div>
+    <div><span>Diuresis</span><strong>${record.urine!=null?text(record.urine)+' mL':'—'}</strong></div>
+   </div>
+   ${pendingLastFill?'<div class="apd-day-last-fill-warning">Drenaje pendiente del último llenado APD</div>':''}
+   ${record.notes?`<div class="apd-card-notes">${text(record.notes)}</div>`:''}
+   <div class="apd-history-actions no-print">
+    ${completed
+      ? `<button class="btn btn-secondary" onclick="editAPDTreatment('${text(record.id)}')">Editar</button>`
+      : '<button class="btn btn-secondary" onclick="openAPDTreatment()">Completar tratamiento</button>'}
+    <button class="btn btn-danger" onclick="deleteAPDTreatment('${text(record.id)}')">Eliminar</button>
+   </div>
+  </article>`;
+ }).join('');
 }
 
 function renderAPDTreatmentScreen(){
@@ -661,6 +743,7 @@ function renderAPDTreatmentScreen(){
  const startCard=$('apdStartCard');
  const finishCard=$('apdFinishCard');
  const current=activeAPDTreatment();
+ const editing=editingAPDTreatmentId?findAPDTreatment(editingAPDTreatmentId):null;
  if(notice)notice.classList.toggle('hidden',allowed);
 
  if(!allowed){
@@ -670,9 +753,29 @@ function renderAPDTreatmentScreen(){
   return;
  }
 
- if(current){
+ if(editing&&editing.status==='completed'){
   if(startCard)startCard.classList.add('hidden');
   if(finishCard)finishCard.classList.remove('hidden');
+  if($('apdFinishBannerLabel'))$('apdFinishBannerLabel').textContent='Editando tratamiento APD finalizado';
+  if($('apdActiveProgramName'))$('apdActiveProgramName').textContent=editing.programName||'Tratamiento APD';
+  if($('apdActiveTiming'))$('apdActiveTiming').textContent=`Registrado: ${fmtDate(editing.startTime)} · ${fmtTime(editing.startTime)} a ${fmtTime(editing.endTime)}`;
+  if($('apdFinishEyebrow'))$('apdFinishEyebrow').textContent='Edición';
+  if($('apdFinishHeading'))$('apdFinishHeading').textContent='Modificar tratamiento finalizado';
+  if($('apdFinishHelp'))$('apdFinishHelp').textContent='Corregí los datos registrados. La prescripción médica y el drenaje del último llenado se conservarán.';
+  $('apdEditStartTimeWrap')?.classList.remove('hidden');
+  $('apdCancelEditBtn')?.classList.remove('hidden');
+  if($('apdFinishPrimaryBtn'))$('apdFinishPrimaryBtn').textContent='Guardar cambios';
+  setAPDResultFields(editing,true);
+ }else if(current){
+  if(startCard)startCard.classList.add('hidden');
+  if(finishCard)finishCard.classList.remove('hidden');
+  if($('apdFinishBannerLabel'))$('apdFinishBannerLabel').textContent='Tratamiento APD en curso';
+  if($('apdFinishEyebrow'))$('apdFinishEyebrow').textContent='Finalización';
+  if($('apdFinishHeading'))$('apdFinishHeading').textContent='Completar tratamiento';
+  if($('apdFinishHelp'))$('apdFinishHelp').textContent='Registrá solamente los resultados finales informados por la cicladora.';
+  $('apdEditStartTimeWrap')?.classList.add('hidden');
+  $('apdCancelEditBtn')?.classList.add('hidden');
+  if($('apdFinishPrimaryBtn'))$('apdFinishPrimaryBtn').textContent='Guardar y finalizar tratamiento';
   const title=$('apdActiveProgramName');
   const timing=$('apdActiveTiming');
   if(title)title.textContent=current.programName||'Tratamiento APD';
@@ -681,6 +784,9 @@ function renderAPDTreatmentScreen(){
  }else{
   if(finishCard)finishCard.classList.add('hidden');
   if(startCard)startCard.classList.remove('hidden');
+  $('apdEditStartTimeWrap')?.classList.add('hidden');
+  $('apdCancelEditBtn')?.classList.add('hidden');
+  if($('apdFinishPrimaryBtn'))$('apdFinishPrimaryBtn').textContent='Guardar y finalizar tratamiento';
   const select=$('apdProgramSelect');
   const active=activeAPDPrescriptions();
   if(select){
@@ -744,7 +850,9 @@ function renderAPDHistoryCards(records){
     ${lastFillBlock}
     ${record.notes?`<div class="apd-card-notes">${text(record.notes)}</div>`:''}
     <div class="apd-history-actions no-print">
-     ${completed?'':`<button class="btn btn-secondary" onclick="openAPDTreatment()">Completar tratamiento</button>`}
+     ${completed
+       ? `<button class="btn btn-secondary" onclick="editAPDTreatment('${text(record.id)}')">Editar</button>`
+       : `<button class="btn btn-secondary" onclick="openAPDTreatment()">Completar tratamiento</button>`}
      <button class="btn btn-danger" onclick="deleteAPDTreatment('${text(record.id)}')">Eliminar</button>
     </div>
    </article>`;
@@ -837,6 +945,7 @@ function updateAPDHome(){
 }
 
 function openAPDTreatment(){
+ editingAPDTreatmentId=null;
  renderAPDTreatmentScreen();
  showScreen('apd-treatment');
 }
@@ -850,6 +959,7 @@ renderHome=function(){
 
 const coreShowScreen=showScreen;
 showScreen=function(name,button){
+ if(name!=='apd-treatment')editingAPDTreatmentId=null;
  const moduleNames=['prescriptions','apd-treatment'];
  document.querySelectorAll('.module-screen-host').forEach(screen=>screen.classList.add('hidden'));
  if(moduleNames.includes(name)){
@@ -888,6 +998,8 @@ window.renderAPDProgramPreview=renderAPDProgramPreview;
 window.openAPDTreatment=openAPDTreatment;
 window.startAPDTreatment=startAPDTreatment;
 window.finishAPDTreatment=finishAPDTreatment;
+window.editAPDTreatment=editAPDTreatment;
+window.cancelAPDTreatmentEdit=cancelAPDTreatmentEdit;
 window.deleteAPDTreatment=deleteAPDTreatment;
 window.renderAPDHistoryCards=renderAPDHistoryCards;
 window.getPendingAPDLastFillDrain=pendingAPDLastFillDrain;

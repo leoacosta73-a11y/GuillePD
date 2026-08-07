@@ -313,7 +313,7 @@
     'Temperatura (°C)':'Temperature (°C)','Diuresis (mL)':'Urine output (mL)',
     'Observaciones del tratamiento nocturno.':'Overnight treatment notes.','Completar tratamiento':'Complete treatment',
     'Guardar y finalizar tratamiento':'Save and complete treatment','Registrá solamente los resultados finales informados por la cicladora.':'Record only the final results reported by the cycler.',
-    'Tratamientos APD del día':'APD treatments for the day','UF total':'Total UF','Presión arterial':'Blood pressure',
+    'Tratamientos APD del día':'APD treatments for the day','UF total':'Total UF','Duración indicada':'Prescribed duration','Volumen por ciclo':'Volume per cycle','Presión arterial':'Blood pressure',
     'Prescripción':'Prescription','Duración':'Duration','Ciclos':'Cycles','Volumen/ciclo':'Volume/cycle',
     'Vigencia:':'Effective period:','Desde':'From','Activo':'Active','Inactivo':'Inactive',
 
@@ -477,6 +477,14 @@
     ,'Completá la fecha y los pesos de la bolsa de drenaje.':'Enter the date and both drain bag weights.'
     ,'El peso de la bolsa llena no puede ser menor que el de la bolsa vacía.':'The full bag weight cannot be less than the empty bag weight.'
     ,'Drenaje del último llenado APD guardado. Ya podés iniciar un nuevo intercambio manual.':'APD last fill drain saved. You can now start a new manual exchange.'
+    ,'Editando tratamiento APD finalizado':'Editing completed APD treatment'
+    ,'Edición':'Edit'
+    ,'Modificar tratamiento finalizado':'Edit completed treatment'
+    ,'Corregí los datos registrados. La prescripción médica y el drenaje del último llenado se conservarán.':'Correct the recorded data. The medical prescription and last fill drain will be preserved.'
+    ,'Guardar cambios':'Save changes'
+    ,'Cancelar edición':'Cancel editing'
+    ,'Solo se pueden editar tratamientos APD finalizados.':'Only completed APD treatments can be edited.'
+    ,'Cambios del tratamiento APD guardados.':'APD treatment changes saved.'
     ,'Registro APD eliminado.':'APD record deleted.'
     ,'Seleccioná Cicladora (APD) o Mixto en Ajustes.':'Select Cycler (APD) or Mixed in Settings.'
     ,'Indicación manual actual':'Current manual prescription'
@@ -580,6 +588,11 @@
     if((match=trimmed.match(/^No hay datos registrados para (.+)\.$/)))return `No data was recorded for ${match[1]}.`;
     if((match=trimmed.match(/^¿Eliminar a (.+) y todos sus registros\?$/)))return `Delete ${match[1]} and all records?`;
     if((match=trimmed.match(/^Modalidad (.+) seleccionada\.$/)))return `${EN[match[1]]||match[1]} modality selected.`;
+    if((match=trimmed.match(/^¿Eliminar este tratamiento APD (en curso|finalizado)\?(.*)$/))){
+      const state=match[1]==='en curso'?'in progress':'completed';
+      const warning=match[2]?' The pending last fill drain will also be deleted.':'';
+      return `Delete this ${state} APD treatment?${warning}`;
+    }
     if((match=trimmed.match(/^Programa APD N\.º (\d+)$/)))return `APD Program No. ${match[1]}`;
     if((match=trimmed.match(/^El intercambio (.+) ya alcanzó el horario previsto de drenaje\.$/)))return `Exchange ${match[1]} has reached its scheduled drain time.`;
     if((match=trimmed.match(/^Inicio: (.+) · (.+)$/)))return `Start: ${match[1]} · ${match[2]}`;
