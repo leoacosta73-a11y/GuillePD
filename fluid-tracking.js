@@ -69,14 +69,29 @@
   const urine=Math.round(dayEntries.filter(item=>item.type==='urine').reduce((sum,item)=>sum+number(item.amount),0));
   const washes=(typeof data!=='undefined'&&Array.isArray(data?.washes)?data.washes:[])
    .filter(wash=>localDateKey(wash.datetime)===day&&isCompletedManualWash(wash));
-  const infused=Math.round(washes.reduce((sum,wash)=>sum+number(wash.actualIn),0));
-  const drained=Math.round(washes.reduce((sum,wash)=>sum+number(wash.drained),0));
-  const apdUf=Math.round(patientAPDTreatments()
+  const manualInfused=Math.round(washes.reduce((sum,wash)=>sum+number(wash.actualIn),0));
+  const manualDrained=Math.round(washes.reduce((sum,wash)=>sum+number(wash.drained),0));
+  const apdTreatments=patientAPDTreatments();
+  const completedLastFillDrains=apdTreatments.filter(record=>
+   record.status==='completed'&&
+   record.lastFillDrain?.status==='completed'&&
+   localDateKey(record.lastFillDrain?.drainTime)===day
+  );
+  const lastFillInfused=Math.round(completedLastFillDrains
+   .reduce((sum,record)=>sum+number(record.lastFillDrain?.expectedVolume),0));
+  const lastFillDrained=Math.round(completedLastFillDrains
+   .reduce((sum,record)=>sum+number(record.lastFillDrain?.drained),0));
+  const infused=Math.round(manualInfused+lastFillInfused);
+  const drained=Math.round(manualDrained+lastFillDrained);
+  const apdUf=Math.round(apdTreatments
    .filter(record=>record.status==='completed'&&localDateKey(record.startTime)===day)
    .reduce((sum,record)=>sum+number(record.totalUf),0));
   const oralBalance=Math.round(intake-urine);
   const total=Math.round(intake+infused-urine-drained-apdUf);
-  return {day,intake,urine,oralBalance,infused,drained,apdUf,total,entries:dayEntries};
+  return {
+   day,intake,urine,oralBalance,infused,drained,apdUf,total,entries:dayEntries,
+   manualInfused,manualDrained,lastFillInfused,lastFillDrained
+  };
  }
  function signed(value){return `${value>0?'+':''}${Math.round(value)} mL`}
  function setText(id,value){const el=document.getElementById(id);if(el)el.textContent=value}
