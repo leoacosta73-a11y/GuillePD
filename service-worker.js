@@ -1,4 +1,4 @@
-const CACHE_NAME = 'guillepd-pwa-v16';
+const CACHE_NAME = 'guillepd-pwa-v18';
 const SUPABASE_LIBRARY = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
 const APP_SHELL = [
   './',
@@ -82,15 +82,18 @@ self.addEventListener('message', event => {
 self.addEventListener('notificationclick', event => {
   event.notification.close();
   const target=(event.notification.data&&event.notification.data.url)||'./';
+  const action=event.action||'';
+  const actionTarget=action?`./?notificationAction=${encodeURIComponent(action)}`:target;
   event.waitUntil(
     clients.matchAll({type:'window',includeUncontrolled:true}).then(openClients=>{
       for(const client of openClients){
         if('focus' in client){
-          client.navigate(target).catch(()=>null);
+          if(action)client.postMessage({type:'NOTIFICATION_ACTION',action});
+          else client.navigate(target).catch(()=>null);
           return client.focus();
         }
       }
-      return clients.openWindow?clients.openWindow(target):null;
+      return clients.openWindow?clients.openWindow(actionTarget):null;
     })
   );
 });

@@ -1356,7 +1356,7 @@ body.legal-open{overflow:hidden}
         <div>
           <span class="eyebrow">Acompañamiento</span>
           <h3 data-i18n="notifications.title">Notificaciones</h3>
-          <p data-i18n="notifications.subtitle">Recordatorios del horario previsto de drenaje.</p>
+          <p data-i18n="notifications.subtitle">Avisos durante la infusión y al finalizar la permanencia.</p>
         </div>
         <div class="smart-settings-icon" aria-hidden="true">🔔</div>
       </div>
@@ -1364,7 +1364,7 @@ body.legal-open{overflow:hidden}
       <div class="notification-master">
         <div>
           <strong data-i18n="notifications.enable">Activar recordatorios</strong>
-          <small data-i18n="notifications.enableHelp">GuillePD avisará cuando finalice la permanencia.</small>
+          <small data-i18n="notifications.enableHelp">GuillePD puede avisarte durante la infusión y cuando corresponda drenar.</small>
         </div>
         <label class="switch-control" for="notificationsEnabled">
           <input id="notificationsEnabled" type="checkbox" onchange="toggleNotificationControls()">
@@ -1373,15 +1373,43 @@ body.legal-open{overflow:hidden}
       </div>
 
       <div id="notificationOptions" class="notification-options">
-        <div class="field">
-          <label for="notificationRepeat" data-i18n="notifications.repeat">Repetición automática</label>
-          <select id="notificationRepeat">
-            <option value="0" data-i18n="notifications.noRepeat">No repetir</option>
-            <option value="5" data-i18n="notifications.every5">Cada 5 minutos</option>
-            <option value="10" data-i18n="notifications.every10">Cada 10 minutos</option>
-            <option value="15" data-i18n="notifications.every15">Cada 15 minutos</option>
-            <option value="30" data-i18n="notifications.every30">Cada 30 minutos</option>
-          </select>
+        <div class="notification-timing-card">
+          <strong data-i18n="notifications.drainSection">Al finalizar la permanencia</strong>
+          <div class="field">
+            <label for="notificationRepeat" data-i18n="notifications.repeat">Repetición automática</label>
+            <select id="notificationRepeat">
+              <option value="0" data-i18n="notifications.noRepeat">No repetir</option>
+              <option value="5" data-i18n="notifications.every5">Cada 5 minutos</option>
+              <option value="10" data-i18n="notifications.every10">Cada 10 minutos</option>
+              <option value="15" data-i18n="notifications.every15">Cada 15 minutos</option>
+              <option value="30" data-i18n="notifications.every30">Cada 30 minutos</option>
+            </select>
+          </div>
+        </div>
+        <div class="notification-timing-card notification-infusion-card">
+          <label class="notification-choice notification-choice-primary">
+            <input id="notificationInfusionEnabled" type="checkbox">
+            <span data-i18n="notifications.infusionEnable">Recordar mientras se está infundiendo</span>
+          </label>
+          <div class="notification-time-grid">
+            <div class="field">
+              <label for="notificationInfusionFirst" data-i18n="notifications.infusionFirst">Primer aviso</label>
+              <select id="notificationInfusionFirst">
+                <option value="2" data-i18n="notifications.after2">A los 2 minutos</option>
+                <option value="5" data-i18n="notifications.after5">A los 5 minutos</option>
+                <option value="10" data-i18n="notifications.after10">A los 10 minutos</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="notificationInfusionRepeat" data-i18n="notifications.infusionRepeat">Avisos siguientes</label>
+              <select id="notificationInfusionRepeat">
+                <option value="0" data-i18n="notifications.noRepeat">No repetir</option>
+                <option value="2" data-i18n="notifications.every2">Cada 2 minutos</option>
+                <option value="5" data-i18n="notifications.every5">Cada 5 minutos</option>
+              </select>
+            </div>
+          </div>
+          <small data-i18n="notifications.infusionHelp">El recordatorio comienza al guardar la infusión y se detiene al confirmar que finalizó o al abrir el drenaje.</small>
         </div>
         <label class="notification-choice"><input id="notificationSound" type="checkbox"><span data-i18n="notifications.sound">Sonido</span></label>
         <label class="notification-choice"><input id="notificationVibration" type="checkbox"><span data-i18n="notifications.vibration">Vibración</span></label>
@@ -1393,7 +1421,7 @@ body.legal-open{overflow:hidden}
         <button id="notificationPermissionButton" class="btn btn-secondary" type="button" onclick="requestNotificationPermission()" data-i18n="notifications.enableButton">Activar notificaciones en este dispositivo</button>
         <p id="notificationPermissionStatus" class="notification-status"></p>
       </div>
-      <p class="notification-compatibility" data-i18n="notifications.compatibility">El horario queda guardado aunque cierres GuillePD. La entrega con la aplicación totalmente cerrada depende de las reglas de iOS, Android, Windows y del navegador; al volver a abrirla se recuperan los avisos vencidos.</p>
+      <p class="notification-compatibility" data-i18n="notifications.compatibility">Los horarios quedan guardados. El sonido y la vibración dependen de los permisos, del volumen y del modo de concentración o silencio del dispositivo. Con la aplicación totalmente cerrada, la entrega también depende de iOS, Android, Windows y del navegador.</p>
     </div>
 
     <div class="settings-save-card card">
@@ -1875,7 +1903,7 @@ const cloudState={
  reconciledUserId:null,reconcilePromise:null,recovery:false
 };
 const defaultPatient=(name='Guillermina')=>({id:'p_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),settings:{patient:name,planned:4,hc:'',dni:'',birthDate:'',diagnosis:'',hospital:'',nephrologist:'',dryWeight:'',usualVolume:'',ufTarget:'',solutions:'',contactName:'',contactPhone:'',fluidTrackingEnabled:false},washes:[],daily:{},fluidEntries:[]});
-const defaultNotificationPreferences=()=>({enabled:false,repeatMinutes:0,sound:true,vibration:true,showWhenClosed:true,background:true});
+const defaultNotificationPreferences=()=>({enabled:false,repeatMinutes:0,infusionEnabled:true,infusionFirstMinutes:5,infusionRepeatMinutes:2,sound:true,vibration:true,showWhenClosed:true,background:true});
 const defaultProfile=()=>({userId:null,welcomeSeen:false,welcomeSeenAt:null,legalAcceptedVersion:null,legalAcceptedAt:null,legalAcceptedUserId:null,language:'es',notificationPreferences:defaultNotificationPreferences()});
 const defaultRoot=()=>{const p=defaultPatient();return {activePatientId:p.id,patients:[p],profile:defaultProfile()}};
 function safeParse(v,fallback=null){try{return v?JSON.parse(v):fallback}catch(e){return fallback}}
@@ -1913,6 +1941,9 @@ function normalizeRoot(v){
   v.profile.notificationPreferences={
    enabled:notificationSource.enabled===true,
    repeatMinutes:[0,5,10,15,30].includes(Number(notificationSource.repeatMinutes))?Number(notificationSource.repeatMinutes):0,
+   infusionEnabled:notificationSource.infusionEnabled!==false,
+   infusionFirstMinutes:[2,5,10].includes(Number(notificationSource.infusionFirstMinutes))?Number(notificationSource.infusionFirstMinutes):5,
+   infusionRepeatMinutes:[0,2,5].includes(Number(notificationSource.infusionRepeatMinutes))?Number(notificationSource.infusionRepeatMinutes):2,
    sound:notificationSource.sound!==false,
    vibration:notificationSource.vibration!==false,
    showWhenClosed:notificationSource.showWhenClosed!==false,
@@ -2552,6 +2583,10 @@ function closeModal(){
 
 function goStep(n){
  if(n===2&&!savePreDialysisForWash())return;
+ // Abrir el drenaje confirma que la etapa de infusión ya terminó.
+ if(n===3&&window.GuillePDNotifications){
+  window.GuillePDNotifications.cancelInfusionReminder();
+ }
  for(let i=1;i<=4;i++){
   $('step'+i).classList.toggle('hidden',i!==n);
   document.querySelectorAll('.stepdot')[i-1].classList.toggle('on',i<=n);
@@ -2598,13 +2633,22 @@ function savePartialWash(){
  else data.washes.push(record);
  editingId=null;
  persist();
- if(window.GuillePDNotifications)window.GuillePDNotifications.scheduleManualDrain(record);
+ if(window.GuillePDNotifications){
+  window.GuillePDNotifications.scheduleManualDrain(record);
+  // El aviso comienza después de guardar, porque el guardado no implica que
+  // la infusión física haya finalizado.
+  window.GuillePDNotifications.startInfusionReminder({
+   targetWeight:record.target,
+   prescribedVolume:record.prescribed
+  });
+ }
  closeModal();
  renderAll();
  alert('Infusión guardada. Después entrá a Historial y tocá “Cargar drenaje”.');
 }
 
 function saveEmptyDrainOnly(){
+ if(window.GuillePDNotifications)window.GuillePDNotifications.cancelInfusionReminder();
  const dt=$('dt').value;
  const full=num('fullBag'),pres=num('prescribed'),after=num('afterFill');
  const empty=num('emptyDrain');
@@ -2680,6 +2724,7 @@ function editWash(id){
 }
 
 function saveWash(){
+ if(window.GuillePDNotifications)window.GuillePDNotifications.cancelInfusionReminder();
  const dt=$('dt').value;
  const full=num('fullBag'),pres=num('prescribed'),after=num('afterFill');
  const empty=num('emptyDrain'),fd=num('fullDrain');
@@ -4226,7 +4271,7 @@ document.addEventListener('input',function(e){
 
 
 window.addEventListener('load',()=>{
-  console.log('GuillePD v3.6.8 cargada');
+  console.log('GuillePD v3.6.10 cargada');
  runFunctionalCheck();
 });
 
@@ -4326,7 +4371,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 <script src="./fluid-tracking.js"></script>
 <div id="toastHost" class="toast-host" aria-live="polite" aria-atomic="true"></div>
 <footer class="release-footer">
-  <span>GuillePD v3.6.8</span>
+  <span>GuillePD v3.6.10</span>
   <small>Manual (CAPD) · Cicladora (APD) · Mixto</small>
   <small><button class="legal-inline-link" type="button" onclick="openLegalDocument('terms')">Términos</button> · <button class="legal-inline-link" type="button" onclick="openLegalDocument('privacy')">Privacidad</button></small>
 </footer>
