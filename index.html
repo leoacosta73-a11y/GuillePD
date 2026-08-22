@@ -1485,9 +1485,9 @@ body.legal-open{overflow:hidden}
       <div id="prescription-apd" class="prescription-panel">
         <div class="module-card-head">
           <div>
-            <span class="eyebrow">Nueva indicación</span>
+            <span id="apdPrescriptionFormEyebrow" class="eyebrow">Nueva indicación</span>
             <h3>Prescripción APD</h3>
-            <p>Cada guardado crea una prescripción nueva. Las anteriores permanecen en el historial.</p>
+            <p>Creá una nueva prescripción o corregí una existente. Los tratamientos realizados conservan su copia histórica.</p>
           </div>
           <div class="module-card-icon" aria-hidden="true">🌙</div>
         </div>
@@ -1605,8 +1605,8 @@ body.legal-open{overflow:hidden}
         </div>
 
         <div class="form-actions">
-          <button class="btn btn-secondary" onclick="clearAPDPrescriptionForm()">Limpiar</button>
-          <button class="btn btn-primary" onclick="saveAPDPrescription()">Guardar como nueva prescripción</button>
+          <button id="apdPrescriptionClearButton" class="btn btn-secondary" onclick="clearAPDPrescriptionForm()">Limpiar</button>
+          <button id="apdPrescriptionSaveButton" class="btn btn-primary" onclick="saveAPDPrescription()">Guardar como nueva prescripción</button>
         </div>
 
         <div class="form-section">
@@ -4271,7 +4271,7 @@ document.addEventListener('input',function(e){
 
 
 window.addEventListener('load',()=>{
-  console.log('GuillePD v3.6.10 cargada');
+  console.log('GuillePD v3.6.11 cargada');
  runFunctionalCheck();
 });
 
@@ -4371,7 +4371,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 <script src="./fluid-tracking.js"></script>
 <div id="toastHost" class="toast-host" aria-live="polite" aria-atomic="true"></div>
 <footer class="release-footer">
-  <span>GuillePD v3.6.10</span>
+  <span>GuillePD v3.6.11</span>
   <small>Manual (CAPD) · Cicladora (APD) · Mixto</small>
   <small><button class="legal-inline-link" type="button" onclick="openLegalDocument('terms')">Términos</button> · <button class="legal-inline-link" type="button" onclick="openLegalDocument('privacy')">Privacidad</button></small>
 </footer>

@@ -76,6 +76,8 @@
 .prescription-record-values div{padding:8px;border-radius:10px;background:#fff;border:1px solid #e3ecee}
 .prescription-record-values span{display:block;color:var(--muted);font-size:7px;margin-bottom:3px}
 .prescription-record-values strong{font-size:10px;color:var(--ink)}
+.prescription-record-actions{display:flex;gap:8px;margin-top:11px}
+.prescription-record-actions .btn{padding:9px 10px;font-size:10px;flex:1}
 .prescription-empty{padding:18px;text-align:center;border:1px dashed #cddde1;border-radius:15px;color:var(--muted);font-size:11px}
 
 .apd-program-preview{padding:13px;border:1px solid #cfe2e6;border-radius:15px;background:linear-gradient(145deg,#f7fbff,#eef9f7);margin:10px 0 14px}

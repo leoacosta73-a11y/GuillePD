@@ -1,4 +1,4 @@
-/* GuillePD v3.6.8
+/* GuillePD v3.6.11
  * Módulo aislado de modalidades CAPD/APD/Mixta.
  * No modifica cálculos, balances ni generación de informes del modo Manual.
  */
@@ -28,6 +28,7 @@ let prescriptionTab='manual';
 let apdModuleReady=false;
 let activeLastFillDrainTreatmentId=null;
 let editingAPDTreatmentId=null;
+let editingAPDPrescriptionId=null;
 
 function text(value){
  return String(value??'')
@@ -233,6 +234,7 @@ function openPrescriptions(){
 }
 
 function clearAPDPrescriptionForm(){
+ editingAPDPrescriptionId=null;
  const ids=[
   'apdProgramName','apdValidTo','apdEquipmentOther','apdDurationHours',
   'apdCycles','apdCycleVolume','apdLastFillVolume','apdSolutionOther',
@@ -249,6 +251,69 @@ function clearAPDPrescriptionForm(){
   if($(id))$(id).checked=false;
  });
  toggleAPDFields();
+ renderAPDPrescriptionFormMode();
+}
+
+function renderAPDPrescriptionFormMode(){
+ const editing=!!editingAPDPrescriptionId;
+ const eyebrow=$('apdPrescriptionFormEyebrow');
+ const clearButton=$('apdPrescriptionClearButton');
+ const saveButton=$('apdPrescriptionSaveButton');
+ if(eyebrow)eyebrow.textContent=editing?'Editando indicación':'Nueva indicación';
+ if(clearButton)clearButton.textContent=editing?'Cancelar edición':'Limpiar';
+ if(saveButton)saveButton.textContent=editing?'Guardar cambios':'Guardar como nueva prescripción';
+}
+
+function editAPDPrescription(id){
+ const prescription=apdPrescriptions().find(item=>String(item.id)===String(id));
+ if(!prescription){
+  showToast('No se encontró la prescripción APD.','error');
+  return;
+ }
+ editingAPDPrescriptionId=prescription.id;
+ if($('apdProgramName'))$('apdProgramName').value=prescription.name||'';
+ if($('apdProgramActive'))$('apdProgramActive').checked=!!prescription.active;
+ if($('apdValidFrom'))$('apdValidFrom').value=prescription.validFrom||'';
+ if($('apdValidTo'))$('apdValidTo').value=prescription.validTo||'';
+ if($('apdEquipment'))$('apdEquipment').value=prescription.equipment?.type||'other';
+ if($('apdEquipmentOther'))$('apdEquipmentOther').value=prescription.equipment?.other||'';
+ if($('apdDurationHours'))$('apdDurationHours').value=prescription.treatment?.durationHours??'';
+ if($('apdCycles'))$('apdCycles').value=prescription.treatment?.cycles??'';
+ if($('apdCycleVolume'))$('apdCycleVolume').value=prescription.treatment?.cycleVolume??'';
+ if($('apdLastFill'))$('apdLastFill').value=prescription.treatment?.lastFill?'yes':'no';
+ if($('apdLastFillVolume'))$('apdLastFillVolume').value=prescription.treatment?.lastFillVolume??'';
+ if($('apdDaytimeDwell'))$('apdDaytimeDwell').value=prescription.treatment?.daytimeDwell?'yes':'no';
+ if($('apdSolution'))$('apdSolution').value=prescription.treatment?.solution||'other';
+ if($('apdSolutionOther'))$('apdSolutionOther').value=prescription.treatment?.solutionOther||'';
+ if($('apdAdditiveHeparin'))$('apdAdditiveHeparin').checked=!!prescription.treatment?.additives?.heparin;
+ if($('apdAdditiveAntibiotics'))$('apdAdditiveAntibiotics').checked=!!prescription.treatment?.additives?.antibiotics;
+ if($('apdAdditiveOtherEnabled'))$('apdAdditiveOtherEnabled').checked=!!prescription.treatment?.additives?.other;
+ if($('apdAdditiveOther'))$('apdAdditiveOther').value=prescription.treatment?.additives?.otherText||'';
+ if($('apdPrescriptionNotes'))$('apdPrescriptionNotes').value=prescription.notes||'';
+ toggleAPDFields();
+ renderAPDPrescriptionFormMode();
+ $('apdProgramName')?.scrollIntoView?.({behavior:'smooth',block:'center'});
+ showToast('Prescripción cargada para editar.','success');
+}
+
+function deleteAPDPrescription(id){
+ const list=apdPrescriptions();
+ const prescription=list.find(item=>String(item.id)===String(id));
+ if(!prescription){
+  showToast('No se encontró la prescripción APD.','error');
+  return;
+ }
+ const linked=apdTreatments().filter(record=>String(record.prescriptionId)===String(prescription.id));
+ const linkedMessage=linked.length
+  ? `\n\nHay ${linked.length} tratamiento${linked.length===1?'':'s'} registrado${linked.length===1?'':'s'} con esta prescripción. Esos registros conservarán su copia histórica y no serán eliminados.`
+  : '';
+ if(!confirm(`¿Eliminar “${prescriptionName(prescription)}” de las prescripciones disponibles?${linkedMessage}`))return;
+ data.prescriptions.apd=list.filter(item=>String(item.id)!==String(prescription.id));
+ if(String(editingAPDPrescriptionId)===String(prescription.id))clearAPDPrescriptionForm();
+ persist();
+ renderPrescriptionPanels();
+ renderAPDTreatmentScreen();
+ showToast('Prescripción APD eliminada. Los tratamientos anteriores se conservaron.','success');
 }
 
 function toggleAPDFields(){
@@ -304,12 +369,16 @@ function saveAPDPrescription(){
  }
 
  const list=apdPrescriptions();
+ const existing=editingAPDPrescriptionId
+  ? list.find(item=>String(item.id)===String(editingAPDPrescriptionId))
+  : null;
  const isActive=checked('apdProgramActive');
- if(isActive)list.forEach(p=>{p.active=false});
+ if(isActive)list.forEach(p=>{if(!existing||String(p.id)!==String(existing.id))p.active=false});
+ const now=new Date().toISOString();
  const record={
-  id:uid('rx_apd'),
+  id:existing?.id||uid('rx_apd'),
   type:'apd',
-  number:list.length+1,
+  number:existing?.number||list.length+1,
   name:value('apdProgramName'),
   active:isActive,
   validFrom,
@@ -335,14 +404,21 @@ function saveAPDPrescription(){
    }
   },
   notes:value('apdPrescriptionNotes'),
-  createdAt:new Date().toISOString()
+  createdAt:existing?.createdAt||now,
+  updatedAt:existing?now:null
  };
- list.push(record);
+ if(existing){
+  const index=list.findIndex(item=>String(item.id)===String(existing.id));
+  list[index]=record;
+ }else{
+  list.push(record);
+ }
+ const wasEditing=!!existing;
  persist();
  clearAPDPrescriptionForm();
  renderPrescriptionPanels();
  renderAPDTreatmentScreen();
- showToast('Nueva prescripción APD guardada.','success');
+ showToast(wasEditing?'Cambios de la prescripción APD guardados.':'Nueva prescripción APD guardada.','success');
 }
 
 function renderManualPrescriptionPanel(){
@@ -412,6 +488,10 @@ function renderAPDPrescriptionHistory(){
     <div><span>Aditivos</span><strong>${text(additives.join(', ')||'Ninguno')}</strong></div>
    </div>
    ${p.notes?`<p class="mode-note">${text(p.notes)}</p>`:''}
+   <div class="prescription-record-actions">
+    <button class="btn btn-secondary" onclick="editAPDPrescription('${text(p.id)}')">Editar</button>
+    <button class="btn btn-danger" onclick="deleteAPDPrescription('${text(p.id)}')">Eliminar</button>
+   </div>
   </article>`;
  }).join('');
 }
@@ -993,6 +1073,8 @@ window.openPrescriptions=openPrescriptions;
 window.showPrescriptionTab=showPrescriptionTab;
 window.toggleAPDFields=toggleAPDFields;
 window.saveAPDPrescription=saveAPDPrescription;
+window.editAPDPrescription=editAPDPrescription;
+window.deleteAPDPrescription=deleteAPDPrescription;
 window.clearAPDPrescriptionForm=clearAPDPrescriptionForm;
 window.renderAPDProgramPreview=renderAPDProgramPreview;
 window.openAPDTreatment=openAPDTreatment;
