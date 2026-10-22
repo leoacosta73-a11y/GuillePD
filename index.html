@@ -1893,6 +1893,9 @@ const GUILLEPD_SITE_URL='https://app-guillepd.patyapps.com';
 const LEGAL_VERSION='1.0';
 const LEGAL_UPDATED_AT='2026-08-01';
 const cloudMetaKey='guilledp_cloud_meta_v1';
+// Capture recovery intent before Supabase consumes the URL fragment.
+const cloudRecoveryRequested=new URLSearchParams(window.location.hash.slice(1)).get('type')==='recovery';
+const cloudAuthLinkError=new URLSearchParams(window.location.hash.slice(1)).has('error');
 const cloudClient=window.supabase&&typeof window.supabase.createClient==='function'
  ? window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,{
     auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}
@@ -1900,7 +1903,7 @@ const cloudClient=window.supabase&&typeof window.supabase.createClient==='functi
  : null;
 const cloudState={
  session:null,user:null,syncing:false,applying:false,timer:null,
- reconciledUserId:null,reconcilePromise:null,recovery:false
+ reconciledUserId:null,reconcilePromise:null,recovery:cloudRecoveryRequested
 };
 const defaultPatient=(name='Guillermina')=>({id:'p_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),settings:{patient:name,planned:4,hc:'',dni:'',birthDate:'',diagnosis:'',hospital:'',nephrologist:'',dryWeight:'',usualVolume:'',ufTarget:'',solutions:'',contactName:'',contactPhone:'',fluidTrackingEnabled:false},washes:[],daily:{},fluidEntries:[]});
 const defaultNotificationPreferences=()=>({enabled:false,repeatMinutes:0,infusionEnabled:true,infusionFirstMinutes:5,infusionRepeatMinutes:2,sound:true,vibration:true,showWhenClosed:true,background:true});
@@ -2300,11 +2303,20 @@ function maybeShowWelcome(){
  const profile=ensureWelcomeProfile();
  if(profile&&profile.welcomeSeen!==true)openWelcome(false);
 }
+function showCloudRecovery(){
+ closeLegal();
+ closeWelcome();
+ showScreen('settings');
+ renderCloudAccount();
+ setCloudStatus('Nueva contraseña','syncing');
+ const input=$('cloudNewPassword');
+ if(input)input.focus();
+}
 async function activateCloudSession(session){
  if(!session||!session.user)return;
  cloudState.session=session;
  cloudState.user=session.user;
- cloudState.recovery=false;
+ if(cloudState.recovery){showCloudRecovery();return;}
  renderCloudAccount();
  setCloudStatus(navigator.onLine?'Conectando…':'Sin conexión',navigator.onLine?'syncing':'offline');
  await reconcileCloudData();
@@ -2366,8 +2378,8 @@ async function cloudUpdatePassword(){
  $('cloudNewPassword').value='';
  cloudState.recovery=false;
  renderCloudAccount();
- setCloudStatus('Sincronizado','synced');
  showToast('Contraseña actualizada correctamente.','success');
+ await activateCloudSession(cloudState.session);
 }
 async function cloudSignOut(){
  if(!cloudClient)return;
@@ -2394,9 +2406,8 @@ async function handleCloudAuthEvent(event,session){
  cloudState.user=session.user;
  if(event==='PASSWORD_RECOVERY'){
   cloudState.recovery=true;
-  renderCloudAccount();
-  return;
  }
+ if(cloudState.recovery){showCloudRecovery();return;}
  renderCloudAccount();
  if(event==='SIGNED_IN'||event==='INITIAL_SESSION'||cloudState.reconciledUserId!==session.user.id){
   cloudState.reconciledUserId=session.user.id;
@@ -2412,14 +2423,21 @@ async function initializeCloudSync(){
   return;
  }
  cloudClient.auth.onAuthStateChange((event,session)=>{
+  // Preserve this event before getSession() can activate a normal session.
+  if(event==='PASSWORD_RECOVERY')cloudState.recovery=true;
   setTimeout(()=>handleCloudAuthEvent(event,session),0);
  });
  const {data:sessionData,error}=await cloudClient.auth.getSession();
- if(error){
-  setCloudStatus('Modo local','offline');
+ if(error||cloudAuthLinkError||!(sessionData&&sessionData.session)){
+  cloudState.recovery=false;
+  renderCloudAccount();
+  if(cloudRecoveryRequested||cloudAuthLinkError){
+   showScreen('settings');
+   setCloudMessage('cloudAuthMessage','El enlace de recuperación no es válido o venció. Solicitá uno nuevo con “Olvidé mi contraseña”.','error');
+  }else if(error)setCloudStatus('Modo local','offline');
   return;
  }
- if(sessionData&&sessionData.session)await activateCloudSession(sessionData.session);
+ await activateCloudSession(sessionData.session);
 }
 
 function num(id){
